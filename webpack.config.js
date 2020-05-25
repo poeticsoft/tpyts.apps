@@ -20,8 +20,7 @@ module.exports = env => {
   return {
     context: __dirname,
     mode: mode == 'prod' ? 'production' : 'development',
-    // devtool: mode == 'prod' ? 'none' : app != 'theme' ? 'source-map' : 'none',
-    devtool: 'none',
+    devtool: mode == 'prod' ? 'none' : app != 'theme' ? 'source-map' : 'none',
     entry: {
       ['main']: `webpack-polyfill-injector?${JSON.stringify({
         modules: [
@@ -116,7 +115,7 @@ module.exports = env => {
       new LiveReloadPlugin({
         protocol: 'http',
         hostname: 'localhost',
-        delay: 2000,
+        delay: 1000,
         appendScriptTag: true
       }),
       new EventHooksPlugin({
@@ -145,8 +144,8 @@ module.exports = env => {
         assets: path.join(__dirname, 'assets'),
         fonts: path.join(__dirname, 'fonts'),
         utils: path.join(__dirname, 'utils'),
-        config: path.join(__dirname, 'config'),
         common: path.join(__dirname, 'src', 'common'),
+        config: path.join(__dirname, 'src', app, 'config'),
         rdx: path.join(__dirname, 'src', app, 'redux'),
         comps: path.join(__dirname, 'src', app, 'components')
       },

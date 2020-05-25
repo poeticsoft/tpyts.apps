@@ -17,3 +17,74 @@
   overflow: hidden;
   bottom: 36px;
 }
+
+$sizemenu: $space * 6;
+
+.AdminMenu, 
+.AdminFront { 
+
+  @include absolutebox();
+}
+
+.AdminMenu { 
+
+  bottom: auto;
+  height: $sizemenu;  
+}
+
+.AdminFront {
+
+  top: $sizemenu;
+
+  .Front {
+
+    @include absolutebox(
+      $space * 1.5,
+      $space * 1.5,
+      $space * 1.5,
+      $space * 1.5
+    );
+
+    .Table {      
+
+      @include absolutebox();
+    }
+
+    &.WithTools {
+
+      .Table {      
+  
+        top: $space * 5;
+      }
+    }  
+    
+    .Tools {
+
+      text-align: right;
+    }
+
+    .ant-table-wrapper {
+
+      @include absolutebox();
+
+      .ant-spin-nested-loading,
+      .ant-spin-container {
+
+        @include absolutebox();
+      }º
+
+      .ant-table,
+      .ant-table-container {
+
+        height: 100%;
+      }
+
+      .ant-table-body {
+        
+        height: calc(100% - 38px);
+        border: solid $color-borders-light;
+        border-width: 0 0 1px 0;
+      }
+    }
+  }
+}

@@ -1,16 +1,17 @@
 import immutableUpdate from 'immutable-update'
-import * as actions from './actions'
+import * as Actions from './actions'
 
 const initialState = {
   message: {
     type: 'info',
     text: 'Loading...'
-  }
+  },
+  adminmenuoptionselected: null
 } 
 
 const reducers = { 
   
-  [actions.UI_SET_MESSAGE]: (state, action) => {
+  [Actions.UI_SHOW_MESSAGE]: (state, action) => {
 
     let newMessage = action.payload.message
     newMessage.type = newMessage.type || 'info'
@@ -23,10 +24,30 @@ const reducers = {
     )
   },
   
-  [actions.UI_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
+  [Actions.UI_HIDE_MESSAGE]: (state, action) => {
+    
+    return immutableUpdate(
+      state,
+      {
+        message: null
+      }
+    )
+  },
+  
+  [Actions.UI_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
     state,
     action.payload.state
-  )
+  ),
+  
+  [Actions.UI_SELECT_ADMIN_MENU_OPTION]: (state, action) => {
+    
+    return immutableUpdate(
+      state,
+      {
+        adminmenuoptionselected: action.payload.option
+      }
+    )
+  },
 } 
 
 const reducer = (state = initialState, action) => reducers[action.type] ? 

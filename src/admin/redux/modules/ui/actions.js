@@ -1,7 +1,29 @@
+import * as Actions from 'rdx/actions'
 
-export const UI_SET_MESSAGE = 'UI_SET_MESSAGE'
-export const uiSetMessage = message => ({
-  type: UI_SET_MESSAGE,
+export const uiSetMessage = data => (dispatch, getState) => { 
+
+  dispatch(Actions.uiShowMessage(data))
+
+  if(!data.hold) {
+
+    setTimeout(() => {
+
+      dispatch(Actions.uiHideMessage(data))
+    }, 2000)
+  }
+}
+
+export const UI_SHOW_MESSAGE = 'UI_SHOW_MESSAGE'
+export const uiShowMessage = message => ({
+  type: UI_SHOW_MESSAGE,
+  payload: {
+    message: message
+  }
+})
+
+export const UI_HIDE_MESSAGE = 'UI_HIDE_MESSAGE'
+export const uiHideMessage = message => ({
+  type: UI_HIDE_MESSAGE,
   payload: {
     message: message
   }
@@ -12,5 +34,13 @@ export const uiSetInitialState = data => ({
   type: UI_SET_INITIAL_STATE,
   payload: {
     data: data
+  }
+})
+
+export const UI_SELECT_ADMIN_MENU_OPTION = 'UI_SELECT_ADMIN_MENU_OPTION'
+export const uiSelectAdminMenuOption = option => ({
+  type: UI_SELECT_ADMIN_MENU_OPTION,
+  payload: {
+    option: option
   }
 })

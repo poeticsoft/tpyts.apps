@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 
 import ui from './modules/ui/reducer'
 import fb from './modules/fb/reducer'
-import data from './modules/data/reducer'
+import wp from './modules/wp/reducer'
 
 const reducers = combineReducers({
   ui,
   fb,
-  data
+  wp
 });
 
 export default reducers;

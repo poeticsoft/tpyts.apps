@@ -1,15 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const Map = connect(
+const Message = connect(
   state => ({  
     message: state.ui.message
   })
-)(props => {
+)(props => {  
 
-  
-
-  return <div 
+  return props.message &&
+  <div 
     className= {`
       Message
       ${ props.message.type }  
@@ -19,4 +18,4 @@ const Map = connect(
   </div>
 })
 
-export default Map;
+export default Message;

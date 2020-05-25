@@ -46,9 +46,43 @@
     }
   },
   "dealers": {
-    "name": "Dealer 000",
-    "wpid": 144,
-    "type": "permanent"
+    "000": {      
+      "name": "Dealer 000",
+      "wpid": 144,
+      "type": "permanent",
+      "geoposition": {
+        "latitude": 0.0000,
+        "longitude": 0.000
+      },
+      "status": "active"
+    }
+  },
+  "orders": {
+    "000": {
+      "name": "Order 000",
+      "status": "CONFIRMED",
+      "confirmeddate": 0,
+      "provideddate": 0,
+      "services": {
+        "000": {
+          "quantity": 1
+        },
+        "001": {
+          "quantity": 3
+        }
+      },
+      "destiny": {
+        "name": "user name",
+        "address": "street number floor door",
+        "phone": "000 00 00 00",
+        "geoposition": {
+          "latitude": 0.0000,
+          "longitude": 0.000
+        }
+      },
+      "comments": "Comments",
+      "assigneddealer": "000"
+    }
   },
   "dealertypes": {
     "permanent": {
