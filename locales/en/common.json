@@ -1,0 +1,13 @@
+{
+  "Common": "Common Elements",
+  "Exit tools": "Back to wordpress",
+  "es": "Spanish",
+  "en": "English",
+  "header": {
+    "prototype": "Prototype"
+  },
+  "form": {
+    "confirmClose": "If you close, you lost data.\nClose?",
+    "new"    : "EN INGLES"
+  }
+}

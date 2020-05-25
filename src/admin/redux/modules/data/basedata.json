@@ -1,0 +1,61 @@
+{
+  "providers": {
+    "000": {
+      "name": "Provider 000",
+      "wpid": 129,
+      "shops":[
+        "000",
+        "001"
+      ]
+    }
+  },
+  "shops": {
+    "000": {
+      "name": "Shop 000",
+      "wpid": 131,
+      "services": [
+        "000",
+        "001"
+      ]
+    },
+    "001": {
+      "name": "Shop 001",
+      "wpid": 133,
+      "services": [
+        "002",
+        "003"
+      ]
+    }
+  },
+  "services": {
+    "000": {
+      "name": "Service 000",
+      "wpid": 139
+    },
+    "001": {
+      "name": "Service 001",
+      "wpid": 138
+    },
+    "002": {
+      "name": "Service 002",
+      "wpid": 137
+    },
+    "003": {
+      "name": "Service 003",
+      "wpid": 135
+    }
+  },
+  "dealers": {
+    "name": "Dealer 000",
+    "wpid": 144,
+    "type": "permanent"
+  },
+  "dealertypes": {
+    "permanent": {
+      "name": "Fijo"
+    },
+    "temporal": {
+      "name": "Temporal"
+    }
+  }
+}

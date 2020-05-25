@@ -1,0 +1,46 @@
+#Navigation {
+
+  .menu-menu-principal-container {
+
+    padding: $space / 2 $space * 2 0;
+
+    .menu {
+
+      list-style: none;
+      margin: $space 0;
+      padding: 0;
+      text-align: right;
+
+      li,
+      a {
+
+        display: inline-block;
+      }
+
+      li {
+
+        &.current-menu-item {
+
+          a {
+
+            font-family: "Roboto Condensed Light";
+            color: $color-links-selected;
+          }
+        }
+      }
+
+      li + li {
+
+        margin: 0 0 0 $space;
+      }
+
+      a {
+
+        text-transform: uppercase;
+        text-decoration: none;
+        color: $color-links;
+        font-family: "Roboto Condensed Bold";
+      }
+    }
+  }
+}

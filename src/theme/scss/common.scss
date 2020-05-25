@@ -1,0 +1,32 @@
+html,
+body {
+
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Roboto Condensed Regular";
+}
+
+$navigationsize: $space * 5;
+
+#Navigation,
+#TPYTS {
+
+  @include absolutebox();
+}
+
+#Navigation {
+
+  bottom: auto;
+  height: $navigationsize;
+  z-index: 1;
+  @include boxshadow();
+}
+
+#TPYTS {
+
+  top: $navigationsize;
+  overflow: auto;
+  z-index: 0;
+}

@@ -1,0 +1,19 @@
+#wpwrap,
+#wpcontent,
+#wpbody {
+
+  height: 100%;
+}
+
+#wpbody-content {
+
+  height: calc(100% - 70px);
+}
+
+#TPYTSAdmin {
+
+  @include absolutebox();  
+  top: 20px;
+  overflow: hidden;
+  bottom: 36px;
+}

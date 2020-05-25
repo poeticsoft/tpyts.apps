@@ -1,0 +1,23 @@
+{
+  "Common": "Elementos comunes",
+  "Exit tools": "Volver a Wordpress",
+  "es": "Castellano",
+  "en": "Inglés",  
+  "header": {
+    "prototype": "Prototipo"
+  },
+  "no": "No",
+  "yes": "Si",
+  "form": {
+    "confirmClose": "Si cierras el formulario se perderán los cambios.\nDeseas cerrarlo?",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "new": "Nuevo",
+    "add": "Añadir",
+    "edit": "Editar",
+    "close": "Cerrar"
+  },
+  "search": "Buscar",
+  "pleaseSelect": "Seleccione una opción"
+}

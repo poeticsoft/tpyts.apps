@@ -1,0 +1,12 @@
+
+.Message {
+
+  @include absolutebox();
+  top: auto;
+  padding: $space * 2 $space * 4;
+  background-color: #ccc;
+  text-align: right;
+
+  &.info { background-color: #0f0; }
+  &.fail { background-color: #f00; }
+}
