@@ -1,0 +1,72 @@
+
+#Menu {
+
+  @include absolutebox();
+  overflow: hidden;
+
+  .List {
+
+    @include absolutebox();
+    padding: $space / 2;
+
+    .Service {
+
+      margin: 0 0 0;
+      padding: $space / 2 $space;
+      border: dotted $color-borders-light;
+      border-width: 0 0 1px 0;
+
+      .ServiceImage,
+      .Name,
+      .Tools {
+
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .ServiceImage {
+
+        width: 50px;
+
+        img {
+
+          display: block;
+          width: 100%;
+        }
+      }
+
+      .Name {
+
+        width: calc(100% - 150px);
+        padding: 0 $space;
+        font-family: "Roboto Condensed Bold";
+
+      }
+
+      .Tools {
+
+        width: 100px;
+
+        .Count,
+        button {
+
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+        .Count {
+
+          width: 40px;
+          margin: -1px 0 0;
+        }
+
+        button {
+
+          margin: 0 0 0 $space / 2;
+          padding: 1px 4px;
+        }
+      }
+
+    }
+  }
+}

@@ -7,12 +7,13 @@ const EventHooksPlugin = require('event-hooks-webpack-plugin');
 
 module.exports = env => {
 
-  // app = client, provider, dealer, theme
+  // env = admin, client, provider, dealer, theme
 
   const mode = 'dev'
   const app = env ? env : 'theme'
   const destpath = path.join(
     'C:\\trabajo\\manperez\\tpyts\\wp-content\\themes\\tpyts\\',
+    // app == 'theme' ? '' : '\\apps'
     app == 'theme' ? '' : '\\apps'
   )
   const themepath = '/wp-content/themes/tpyts/'
@@ -87,7 +88,8 @@ module.exports = env => {
             esModule: false,
             name: '[name].[ext]',
             outputPath: app != 'theme' ? '../assets/' : 'assets',
-            publicPath: app != 'theme' ? themepath + 'assets' : 'assets'
+            // publicPath: app != 'theme' ? themepath + 'assets' : 'assets'
+            publicPath: app != 'theme' ? '../assets/' : 'assets'
           }
         }
       ]

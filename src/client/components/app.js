@@ -5,8 +5,9 @@ import {  Provider } from 'react-redux'
 import store from 'rdx/store'
 import * as Actions from 'rdx/actions'
 import { initUISavedState } from 'utils/localstorage'
-import Manage from 'common/components/manage'
 import Message from 'common/components/message'
+import { Shops } from './shops/shops'
+import 'antd/dist/antd.css'
 
 const App = props => {
 
@@ -20,7 +21,7 @@ const App = props => {
   }, [])
   
   return <Provider store={ store }>
-    <Manage />
+    <Shops />
     <Message />
   </Provider>
 }

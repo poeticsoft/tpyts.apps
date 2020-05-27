@@ -6,7 +6,7 @@ import App from 'comps/app'
 
 const render = () => ReactDOM.render(
   <App />, 
-  document.getElementById('TPYTS')
+  document.getElementById('TPYTSClient')
 )
 
 if (document.readyState === 'loading') {
