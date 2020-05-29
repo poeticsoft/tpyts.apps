@@ -1,13 +1,15 @@
 import React, {
   useEffect
 } from 'react'
-import {  Provider } from 'react-redux'
+import { Provider } from 'react-redux'
 import store from 'rdx/store'
 import * as Actions from 'rdx/actions'
 import { initUISavedState } from 'utils/localstorage'
 import Message from 'common/components/message'
-import { Shops } from './shops/shops'
 import 'antd/dist/antd.css'
+import Shops from './showcases/shops'
+import Categories from './showcases/categories'
+import Search from './showcases/search'
 
 const App = props => {
 
@@ -21,7 +23,11 @@ const App = props => {
   }, [])
   
   return <Provider store={ store }>
-    <Shops />
+    <div className="Showcases">
+      <Shops />
+      <Categories />
+      <Search />
+    </div>
     <Message />
   </Provider>
 }

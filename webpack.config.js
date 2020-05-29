@@ -5,35 +5,162 @@ const LiveReloadPlugin = require('webpack-livereload-plugin');
 const PolyfillInjectorPlugin = require('webpack-polyfill-injector');
 const EventHooksPlugin = require('event-hooks-webpack-plugin');
 
+let mode, app, block
+
 module.exports = env => {
 
-  // env = admin, client, provider, dealer, theme
+  // env = [admin|client|provider|dealer|theme|block]-[mode]-[block] 
+  const input = env || ''
+  const params = input.split('-')
+  const app = params[0] || 'theme'
+  const mode = params[1] || 'dev'
+  const block = params[2] || 'app'
+  const externals = {
+    'react': 'React',
+    'react-dom': 'ReactDOM',
+    '@wordpress/components': 'wp.components'
+  }
 
-  const mode = 'dev'
-  const app = env ? env : 'theme'
-  const destpath = path.join(
-    'C:\\trabajo\\manperez\\tpyts\\wp-content\\themes\\tpyts\\',
-    // app == 'theme' ? '' : '\\apps'
-    app == 'theme' ? '' : '\\apps'
-  )
+  let wmode
+  switch(mode) {
+
+    case 'prod':
+
+      wmode = 'production';
+      wexternals = externals;
+
+      break;
+
+    case 'wpdev':
+      
+      wmode = 'development';
+      wexternals = externals;  
+
+      break; 
+    
+    case 'dev':
+    default:
+      
+      wmode = 'development';
+      wexternals = {};  
+
+      break;     
+  }
+
+  const devtool = wmode == 'prod' ?
+    'none'
+    :
+    (
+      app != 'theme'
+      &&
+      app != 'block'
+    ) ? 
+      'source-map' 
+      : 
+      'none'
+  
+  const rootdestpath = 'C:\\trabajo\\manperez\\tpyts\\wp-content\\themes\\tpyts\\'
+  const apppath = app == 'theme' ?
+      ''
+      :
+      (app == 'block') ?
+        'plugin\\blocks\\' + block
+        :
+        'apps'  
+  const destpath = path.join(rootdestpath, apppath)
+  const srcpath = app == 'block' ?
+    'blocks/' + block
+    :
+    app 
+
   const themepath = '/wp-content/themes/tpyts/'
+
+  let plugins = [
+    new MiniCssExtractPlugin({
+      filename: app == 'theme' ? 
+        'style.css'
+        :
+        app == 'block' ?
+          'main.css'
+          :
+          `${ app }.css`
+    }),
+    new LiveReloadPlugin({
+      protocol: 'http',
+      hostname: 'localhost',
+      delay: app == 'block' ? 10000 : 1000,
+      appendScriptTag: true
+    }),
+    new EventHooksPlugin({
+      'done': () => {  
+
+        if(app != 'block') {
+
+          const jsfile = path.join(destpath, `${ app }.js`)
+
+          if(app != 'theme') { 
+
+            fs.readFile(jsfile, (error, data) => {
+
+              if(error) { return console.log(error) }
+              
+              const js = (data + '')
+              const polyfillsrelative = js.replace('/polyfills.js', 'polyfills.js')
+              fs.writeFileSync(jsfile, polyfillsrelative)
+            })
+          } else {
+
+            if(fs.existsSync(jsfile)) fs.unlinkSync(jsfile)
+          }  
+        }          
+      }
+    })
+  ]  
+  app != 'block' &&
+  plugins.push(new PolyfillInjectorPlugin({
+    singleFile: true,
+    polyfills: [
+      'Array.prototype.fill',
+      'Array.prototype.find',
+      'Array.prototype.findIndex',
+      'String.prototype.startsWith',
+      'String.prototype.includes',
+      'Array.from',
+      'Object.entries',
+      'Object.values',
+      'Object.assign', 
+      'fetch',
+      'Promise',
+    ]
+  }))
 
   return {
     context: __dirname,
-    mode: mode == 'prod' ? 'production' : 'development',
-    devtool: mode == 'prod' ? 'none' : app != 'theme' ? 'source-map' : 'none',
-    entry: {
+    mode: wmode,
+    devtool: devtool,
+    entry: (
+      app == 'block'
+      ||
+      app == 'theme'
+    ) ? {
+      main: [
+        `./src/${ srcpath }/main.js`,
+        `./src/${ srcpath }/main.scss`,
+      ]
+    }
+    :
+    {
       ['main']: `webpack-polyfill-injector?${JSON.stringify({
         modules: [
-          `./src/${ app }/main.js`,
-          `./src/${ app }/main.scss`
+          `./src/${ srcpath }/main.js`,
+          `./src/${ srcpath }/main.scss`
         ]
       })}!`
     },
     output: {
       path: destpath,
       publicPath: '/',
-      filename: `${ app }.js`
+      filename: app == 'block' ? 'main.js' : `${ app }.js`
     },
     module: {
       rules: [
@@ -88,59 +215,12 @@ module.exports = env => {
             esModule: false,
             name: '[name].[ext]',
             outputPath: app != 'theme' ? '../assets/' : 'assets',
-            // publicPath: app != 'theme' ? themepath + 'assets' : 'assets'
             publicPath: app != 'theme' ? '../assets/' : 'assets'
           }
         }
       ]
     },
-    plugins: [
-      new PolyfillInjectorPlugin({
-        singleFile: true,
-        polyfills: [
-          'Array.prototype.fill',
-          'Array.prototype.find',
-          'Array.prototype.findIndex',
-          'String.prototype.startsWith',
-          'String.prototype.includes',
-          'Array.from',
-          'Object.entries',
-          'Object.values',
-          'Object.assign', 
-          'fetch',
-          'Promise',
-        ]
-      }),
-      new MiniCssExtractPlugin({
-        filename: app == 'theme' ? 'style.css' : `${ app }.css`
-      }),
-      new LiveReloadPlugin({
-        protocol: 'http',
-        hostname: 'localhost',
-        delay: 1000,
-        appendScriptTag: true
-      }),
-      new EventHooksPlugin({
-        'done': () => {           
-
-          const jsfile = path.join(destpath, `${ app }.js`)
-
-          if(app != 'theme') { 
-            fs.readFile(jsfile, (error, data) => {
-
-              if(error) { return console.log(error) }
-              
-              const js = (data + '')
-              const polyfillsrelative = js.replace('/polyfills.js', 'polyfills.js')
-              fs.writeFileSync(jsfile, polyfillsrelative)
-            })
-          } else {
-
-            if(fs.existsSync(jsfile)) fs.unlinkSync(jsfile)
-          }
-        }
-      })
-    ],
+    plugins: plugins,
     resolve: {
       alias: {
         assets: path.join(__dirname, 'assets'),

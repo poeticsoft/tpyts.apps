@@ -1,4 +1,3 @@
-
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 const { select } = wp.data
@@ -7,9 +6,9 @@ const { useEffect, useState } = wp.element
 
 const Edit = ({attributes, setAttributes}) => {
 
-  return (<div className="BlockApp">
+  return <div className="BlockApp">
     APP                                                     
-  </div>)
+  </div>
 }
 
 registerBlockType(

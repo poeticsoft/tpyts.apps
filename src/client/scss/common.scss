@@ -1,0 +1,5 @@
+.Showcase {
+
+  @include absolutebox();
+  background-color: $color-background;
+}

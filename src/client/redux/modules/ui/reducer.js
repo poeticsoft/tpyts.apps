@@ -5,9 +5,7 @@ const initialState = {
   message: {
     type: 'info',
     text: 'Loading...'
-  },
-  shopactive: null,
-  serviceactive: null
+  }
 }
 
 const reducers = { 
