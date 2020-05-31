@@ -5,6 +5,22 @@ const initialState = {
   message: {
     type: 'info',
     text: 'Loading...'
+  },
+  map: {
+    active: false,
+    location:{
+      lat: 0,
+      lng: 0
+    },
+    zoom: 6,
+    data: {}
+  },
+  gallery: {
+    active: true,
+    slides: [],
+    data: {
+      title: 'gallery'
+    }
   }
 }
 
@@ -39,7 +55,21 @@ const reducers = {
   [Actions.UI_SET_SERVICE_ACTIVE]: (state, action) => immutableUpdate(
     state,
     { serviceactive: action.payload.serviceid }
-  )
+  ),
+
+  [Actions.UI_SET_MAP_STATE]: (state, action) => immutableUpdate(
+    state,
+    { 
+      map: action.payload.data
+    }
+  ),
+
+  [Actions.UI_SET_GALLERY_STATE]: (state, action) => immutableUpdate(
+    state,
+    { 
+      gallery: action.payload.data
+    }
+  ),
 } 
 
 const reducer = (state = initialState, action) => reducers[action.type] ? 

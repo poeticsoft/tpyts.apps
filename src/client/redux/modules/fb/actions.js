@@ -7,7 +7,7 @@ import * as Actions from 'rdx/actions'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
-import basedata from './basedata.json'
+// import basedata from './basedata.json'
 
 const fbConfig = {
   apiKey: 'AIzaSyCoreTl2luCABh07LNLd_2uET-94fRbZdU',
@@ -30,7 +30,7 @@ const fbSlots = {
 
 export const fbInit = () => (dispatch, getState) => {
 
-  dispatch(Actions.fbSetBaseData(basedata))
+  // dispatch(Actions.fbSetBaseData(basedata))
 
   /*
 

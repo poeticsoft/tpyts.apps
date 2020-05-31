@@ -1,0 +1,41 @@
+.Map {
+
+  border: solid 1px $color-border-medium;
+  @include boxshadow(); 
+  
+  $headerheight: $space * 6;
+
+  .Header {
+
+    @include absolutebox();
+
+    padding: $space;
+    bottom: auto;
+    height: $headerheight;
+
+    .Text {
+
+      font-family: "Roboto Condensed Bold";
+      float: left;
+      line-height: 250%;
+      padding: 0 0 0 $space;
+    }
+
+    .Tools {
+
+      float: right;
+    }
+  }
+
+  .Google {
+
+    @include absolutebox();
+    top: $headerheight;
+  }
+
+  .Target{
+
+    font-size: 200%;
+    color: $color-tpyts-green;
+  }
+}

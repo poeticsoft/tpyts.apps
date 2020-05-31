@@ -1,0 +1,32 @@
+{  
+  "orders": {
+    "000": {
+      "name": "Order 000",
+      "status": "CONFIRMED",
+      "paiddate": 0,
+      "accepteddate": 0,
+      "cookeddate": 0,
+      "pickupdate": 0,
+      "delivereddate": 0,
+      "services": {
+        "000": {
+          "quantity": 1
+        },
+        "001": {
+          "quantity": 3
+        }
+      },
+      "destiny": {
+        "name": "user name",
+        "address": "street number floor door",
+        "phone": "000 00 00 00",
+        "geoposition": {
+          "latitude": 0.0000,
+          "longitude": 0.000
+        }
+      },
+      "comments": "Comments",
+      "assigneddealer": "000"
+    }
+  }
+}

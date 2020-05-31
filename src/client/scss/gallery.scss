@@ -1,0 +1,95 @@
+.Gallery {
+
+  text-align: center;
+
+  &:before,
+  .Wrapper {
+
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &:before {
+    
+    content: "";
+    width: 0;
+    height: 100%;
+  }
+
+  .Wrapper {    
+
+    width: 90%;
+  
+    $headerheight: $space * 6;
+
+    .Header {
+  
+      padding: $space;
+      bottom: auto;
+      height: $headerheight;
+      background-color: $color-background-light;
+  
+      .Text {
+  
+        font-family: "Roboto Condensed Bold";
+        float: left;
+        line-height: 250%;
+        padding: 0 0 0 $space;
+      }
+  
+      .Tools {
+  
+        float: right;
+      }
+    }
+
+    .Carousel {
+
+      width: 100%;
+      padding: 0 0 100% 0;
+      position: relative;
+      background-color: $color-background-dark;
+
+      .ant-carousel {
+
+        @include absolutebox();
+
+        .slick-slider,
+        .slick-list,
+        .slick-track,
+        .slick-slide {
+
+          height: 100%;
+        }
+
+        .slick-slide {
+
+          position: relative;
+
+          > div,
+          .Slide {
+
+            @include absolutebox();
+          }
+
+          .Slide {
+
+            .Image {
+
+              @include absolutebox();
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center;
+            }
+          }
+        }
+      }
+    }
+
+    .Info {
+
+      padding: $space * 2 $space * 2 $space;
+      background-color: $color-background-light;
+    }
+  }
+}

@@ -27,7 +27,7 @@ module.exports = env => {
     case 'prod':
 
       wmode = 'production';
-      wexternals = externals;
+      wexternals = app == 'block' ? externals : {};
 
       break;
 
@@ -47,7 +47,7 @@ module.exports = env => {
       break;     
   }
 
-  const devtool = wmode == 'prod' ?
+  const devtool = wmode == 'production' ?
     'none'
     :
     (
@@ -88,7 +88,7 @@ module.exports = env => {
     new LiveReloadPlugin({
       protocol: 'http',
       hostname: 'localhost',
-      delay: app == 'block' ? 10000 : 1000,
+      delay: app == 'block' ? 10000 : 500,
       appendScriptTag: true
     }),
     new EventHooksPlugin({
@@ -133,6 +133,11 @@ module.exports = env => {
       'Promise',
     ]
   }))
+
+  console.log(app)
+  console.log(wmode)
+  console.log(wexternals)
+  console.log(devtool)
 
   return {
     context: __dirname,

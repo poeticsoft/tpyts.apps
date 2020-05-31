@@ -49,6 +49,15 @@
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
+    ],
+    "plugins": [
+      [
+        "transform-react-jsx",
+        {
+          "pragma": "wp.element.createElement"
+        }
+      ],
+      "@babel/plugin-proposal-class-properties"
     ]
   }
 }

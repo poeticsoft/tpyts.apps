@@ -53,4 +53,18 @@ export const uiSetServiceActive = serviceid => ({
   }
 })
 
-uiSetShopActive
+export const UI_SET_MAP_STATE = 'UI_SET_MAP_STATE'
+export const uiSetMapState = data => ({
+  type: UI_SET_MAP_STATE,
+  payload: {
+    data: data
+  }
+})
+
+export const UI_SET_GALLERY_STATE = 'UI_SET_GALLERY_STATE'
+export const uiSetGalleryState = data => ({
+  type: UI_SET_GALLERY_STATE,
+  payload: {
+    data: data
+  }
+})

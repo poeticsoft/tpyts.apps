@@ -7,9 +7,11 @@ import * as Actions from 'rdx/actions'
 import { initUISavedState } from 'utils/localstorage'
 import Message from 'common/components/message'
 import 'antd/dist/antd.css'
-import Shops from './showcases/shops'
+import Stores from './showcases/stores'
 import Categories from './showcases/categories'
 import Search from './showcases/search'
+import Map from './map'
+import Gallery from './gallery'
 
 const App = props => {
 
@@ -17,17 +19,18 @@ const App = props => {
 
     store.dispatch(Actions.uiSetMessage({ text: 'Loading...' }))
 
-    initUISavedState() 
+    initUISavedState()
 
-    store.dispatch(Actions.fbInit())
+    store.dispatch(Actions.wpInit())
+
   }, [])
   
   return <Provider store={ store }>
     <div className="Showcases">
-      <Shops />
-      <Categories />
-      <Search />
+      <Stores />
     </div>
+    <Map />
+    <Gallery />
     <Message />
   </Provider>
 }

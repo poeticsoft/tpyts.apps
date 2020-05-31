@@ -1,5 +1,39 @@
-.Showcase {
+html,
+body {
+
+  padding: 0;
+}
+
+#TPYTSClient {
 
   @include absolutebox();
-  background-color: $color-background;
+
+  .Showcase {
+
+    @include absolutebox();
+    background-color: $color-background-light;
+    padding: $space * 2;
+    z-index: 0;
+    overflow-y: auto;
+  }
+
+  .Map {
+
+    background-color: #fff;
+
+    @include absolutebox(
+      $space * 4,
+      $space * 4,
+      $space * 4,
+      $space * 4
+    );
+    z-index: 1;
+  }
+
+  .Gallery {
+
+    @include absolutebox();
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
 }

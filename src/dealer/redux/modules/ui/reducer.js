@@ -1,31 +1,44 @@
 import immutableUpdate from 'immutable-update'
-import * as actions from './actions'
+import * as Actions from './actions'
 
 const initialState = {
   message: {
     type: 'info',
     text: 'Loading...'
   }
-} 
+}
 
 const reducers = { 
   
-  [actions.UI_SET_MESSAGE]: (state, action) => {
+  [Actions.UI_SHOW_MESSAGE]: (state, action) => {
 
     let newMessage = action.payload.message
     newMessage.type = newMessage.type || 'info'
     
     return immutableUpdate(
       state,
-      {
-        message: newMessage
-      }
+      { message: newMessage }
     )
   },
   
-  [actions.UI_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
+  [Actions.UI_HIDE_MESSAGE]: (state, action) => immutableUpdate(
+    state,
+    { message: null }
+  ),
+  
+  [Actions.UI_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
     state,
     action.payload.state
+  ),
+  
+  [Actions.UI_SET_SHOP_ACTIVE]: (state, action) => immutableUpdate(
+    state,
+    { shopactive: action.payload.shopid }
+  ),  
+  
+  [Actions.UI_SET_SERVICE_ACTIVE]: (state, action) => immutableUpdate(
+    state,
+    { serviceactive: action.payload.serviceid }
   )
 } 
 
