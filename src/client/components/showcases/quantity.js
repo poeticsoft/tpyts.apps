@@ -8,8 +8,7 @@ import {
 import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
 
-const Quantity = connect(state => ({
-}))(props => {  
+const Quantity = props => {  
 
   const [ quantity, setQuantity ] = useState(1)
 
@@ -21,10 +20,19 @@ const Quantity = connect(state => ({
     Q > 0 &&
     setQuantity(quantity + n)
   }
+
+  const addToOrder = (e, n) => {    
+
+    e.stopPropagation()
+
+    props.dispatch(Actions.uiAddServicesToOrder({
+      serviceid: props.serviceid,
+      quantity: quantity
+    }))
+  }
   
   return <div className="Quantity"> 
-    <Button
-      type="primary" 
+    <Button 
       shape="circle"
       onClick={ e => inc(e, -1) }
       className="Down"
@@ -34,8 +42,7 @@ const Quantity = connect(state => ({
       <Icons.DownCircleOutlined />
     </Button>   
     <div className="Number">{ quantity }</div>       
-    <Button
-      type="primary" 
+    <Button 
       shape="circle"
       onClick={ e => inc(e, 1) }
       className="Up"
@@ -44,13 +51,13 @@ const Quantity = connect(state => ({
       <Icons.UpCircleOutlined/>
     </Button>
     <Button
-      type="primary" 
       shape="circle"
       className="Add"
+      onClick={ addToOrder }
     >
       <Icons.PlusCircleOutlined />
     </Button>
   </div>
-})
+}
 
 export default Quantity

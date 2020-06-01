@@ -21,6 +21,9 @@ const initialState = {
     data: {
       title: 'gallery'
     }
+  },
+  order: {
+    services: {}
   }
 }
 
@@ -70,6 +73,23 @@ const reducers = {
       gallery: action.payload.data
     }
   ),
+
+  [Actions.UI_ADD_SERVICES_TO_ORDER]: (state, action) => {
+
+    const serviceQuantity = state.order.services[action.payload.data.serviceid] || 0
+    const newServiceQuantity = serviceQuantity + action.payload.data.quantity
+    
+    return immutableUpdate(
+      state,
+      { 
+        order: {
+          services: {
+            [action.payload.data.serviceid]: newServiceQuantity
+          }
+        }
+      }
+    )
+  }
 } 
 
 const reducer = (state = initialState, action) => reducers[action.type] ? 

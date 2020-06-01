@@ -3,11 +3,11 @@ import * as Actions from 'rdx/actions'
 export const wpInit = () => (dispatch, getState) => {
 
   const requestDatas = Promise.all([
-    fetch('https://tupideyotesirvo.com/wp-json/tpyts/data'),   
-    fetch('https://tupideyotesirvo.com/wp-json/tpyts/stores'),  
-    fetch('https://tupideyotesirvo.com/wp-json/tpyts/services'),  
-    fetch('https://tupideyotesirvo.com/wp-json/tpyts/allergens'),  
-    fetch('https://tupideyotesirvo.com/wp-json/tpyts/terms')
+    fetch('/wp-json/tpyts/data'),   
+    fetch('/wp-json/tpyts/stores'),  
+    fetch('/wp-json/tpyts/services'),  
+    fetch('/wp-json/tpyts/allergens'),  
+    fetch('/wp-json/tpyts/terms')
   ])
   .then(responses => {
 

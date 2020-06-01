@@ -1,17 +1,13 @@
 .Map {
 
   border: solid 1px $color-border-medium;
+  background-color: #fff;
   @include boxshadow(); 
-  
-  $headerheight: $space * 6;
 
   .Header {
 
-    @include absolutebox();
-
     padding: $space;
     bottom: auto;
-    height: $headerheight;
 
     .Text {
 
@@ -25,12 +21,6 @@
 
       float: right;
     }
-  }
-
-  .Google {
-
-    @include absolutebox();
-    top: $headerheight;
   }
 
   .Target{

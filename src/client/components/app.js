@@ -12,6 +12,7 @@ import Categories from './showcases/categories'
 import Search from './showcases/search'
 import Map from './map'
 import Gallery from './gallery'
+import Cart from './cart'
 
 const App = props => {
 
@@ -26,9 +27,8 @@ const App = props => {
   }, [])
   
   return <Provider store={ store }>
-    <div className="Showcases">
-      <Stores />
-    </div>
+    <Stores />
+    <Cart />
     <Map />
     <Gallery />
     <Message />

@@ -1,11 +1,16 @@
 @mixin boxshadow() {
 
-  box-shadow: 0 0 12px $color-shadows; 
+  box-shadow: 0 0 8px $color-shadows; 
+}
+
+@mixin boxinnershadow() {
+
+  box-shadow: 0 0 8px inset $color-shadows; 
 }
 
 @mixin textshadow() {
 
-  box-shadow: 0 0 12px $color-shadows; 
+  box-shadow: 0 0 8px $color-shadows; 
 }
 
 @mixin ellipsis () {

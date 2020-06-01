@@ -9,6 +9,7 @@ const initialState = {
     allergens: [],
     terms: []
   },
+  slotbyid: {},
   status: 'loading' // loading, loaded 
 } 
 
@@ -29,12 +30,30 @@ const reducers = {
     const slot = action.payload.data.slot
     const data = action.payload.data.data
 
+    let slotbyid = {}
+    if(
+      slot == 'services' 
+      ||
+      slot == 'stores'
+    ) {
+
+      slotbyid = {
+        [slot]: data
+        .reduce((list, item) => {
+
+          list[item.ID] = item
+          return list
+        }, {})
+      }
+    }
+
     return immutableUpdate(
       state,
       {
         slot: {
           [slot] : data
-        }
+        },
+        slotbyid: slotbyid
       }
     )
   }

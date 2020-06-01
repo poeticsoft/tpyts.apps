@@ -35,7 +35,6 @@ const Gallery = connect(state => ({
           </div>
           <div className="Tools">
             <Button
-              type="primary"
               shape="circle"
               icon={ <Icons.CheckCircleOutlined /> } 
               onClick={ closeGallery }

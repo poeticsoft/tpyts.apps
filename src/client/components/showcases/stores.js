@@ -60,8 +60,7 @@ const StoreCover = props => {
         <div className="Excerpt">{ props.post_excerpt }</div>
       </div>
       <div className="Address">
-        <Button
-          type="primary" 
+        <Button 
           shape="circle"
           icon={<Icons.EnvironmentOutlined />}
           onClick={ showMap }
@@ -75,7 +74,6 @@ const StoreCover = props => {
     </div>
     <div className="Tools">
       <Button
-        type="primary" 
         shape="round"
         onClick={ showGallery }
       >
@@ -129,7 +127,10 @@ const StoreService = props => {
           <span className="Currency">€</span>
         </div>
       </div>
-      <Quantity />
+      <Quantity 
+        serviceid={ props.ID }
+        dispatch={ props.dispatch }
+      />
     </div>
   </div>
 }
@@ -140,7 +141,7 @@ const Stores = connect(state => ({
   status: state.wp.status
 }))(props => <div className="Showcase Stores">
     <Collapse
-      bordered={ false }
+      bordered={ true }
       expandIconPosition="left"
     >
       {
@@ -160,10 +161,10 @@ const Stores = connect(state => ({
             .filter(service => service.servicebasic.store == store.ID)
             .map(service => <StoreService
               key={ service.ID }
+              dispatch={ props.dispatch }
               { ...service } 
             />)
           }
-
         </Panel>)
       }
     </Collapse>

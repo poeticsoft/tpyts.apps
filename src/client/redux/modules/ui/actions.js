@@ -68,3 +68,11 @@ export const uiSetGalleryState = data => ({
     data: data
   }
 })
+
+export const UI_ADD_SERVICES_TO_ORDER = 'UI_ADD_SERVICES_TO_ORDER'
+export const uiAddServicesToOrder = data => ({
+  type: UI_ADD_SERVICES_TO_ORDER,
+  payload: {
+    data: data
+  }
+})

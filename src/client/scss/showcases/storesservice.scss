@@ -1,17 +1,27 @@
 .Showcase.Stores {
 
+  .ant-collapse > .ant-collapse-item {
+    //border-bottom: none;
+    border-top: solid 8px $color-tpyts-green;
+  }
+
   .ant-collapse-content {
 
     .ant-collapse-content-box {
 
       padding: $space;
+      background-color: $color-tpyts-yellow;
 
       .Service {
 
         display: inline-block;
         vertical-align: top;
-        width: 50%;
         padding: $space;
+        width: 100%;
+
+        @media (min-width: 420px) { width: 50%; }
+        @media (min-width: 600px) { width: 33.33%; }
+        @media (min-width: 900px) { width: 25%; }
         
         .Image {
           
@@ -20,6 +30,8 @@
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center;
+          overflow: hidden;
+          border-radius: 10% 0 0 0;
         }
         
         .Data {
@@ -94,12 +106,12 @@
             .Comments {
 
               font-size: 80%;
-              width: calc(100% - 70px);
+              width: calc(100% - 70px - #{$space / 2});
             }
 
             .NumberCurrency {
 
-              width: calc(100% - 70px - #{$space / 2});
+              width: 70px;
               margin: 0 0 0 $space / 2;
               text-align: right;
               
@@ -121,9 +133,15 @@
           .Quantity {
 
             text-align: right;
-            border: dotted $color-border-medium;
-            border-width:  0 0 1px 0;
-            padding: $space 0;
+            padding: $space 0;            
+            border: solid $color-tpyts-green;
+            border-width:  0 0 2px 0;
+            
+            @media (min-width: 420px) { 
+
+              border: dotted $color-border-medium;
+              border-width:  0 0 1px 0;
+            }
 
             .Text,
             button.Down,

@@ -1,0 +1,77 @@
+.Cart {
+
+  background-color: $color-tpyts-yellow;
+  border: solid $color-tpyts-green;
+  border-width: 0 0 1px 0;
+  @include boxshadow();
+
+  transition-property: bottom;
+  transition-duration: 0.5s;
+
+  .Header {
+
+    padding: $space;
+    text-align: right;
+
+    * {
+
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 100%;
+    }
+
+    .Servicios,
+    .Price,
+    .Tools {
+
+      margin: 0 0 0 $space * 2;
+    }
+    
+    .Servicios {
+      
+      .Count {
+
+        font-family: "Roboto Condensed Bold";
+        font-size: 170%;      
+      }
+      
+      .Text {
+
+        margin: 0 0 0 $space / 2;      
+      }
+    }
+    
+    .Price {    
+      
+      .Number {
+
+        font-family: "Roboto Condensed Bold";
+        font-size: 170%;      
+      }
+      
+      .Currency {
+
+        font-family: "Roboto Condensed Bold";
+        font-size: 100%;
+        margin: 0 0 0 $space / 2;    
+      }
+    }
+    
+    .Tools {
+
+      button {
+
+        &:not(:disabled) {
+
+          @include boxshadow();
+        }
+      }
+    }
+  }
+
+  .CartBody {
+
+    background-color: $color-background-light;
+    @include boxinnershadow();
+  }
+}
