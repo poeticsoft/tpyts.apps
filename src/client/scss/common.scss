@@ -9,12 +9,13 @@ body {
   @include absolutebox();
   overflow: hidden;
 
-  $cartsize: $space * 6;
+  $cartheadersize: $space * 6;
+  $cartstepssize: $space * 6;
 
   .Showcase {
 
     @include absolutebox(
-      $cartsize,
+      $cartheadersize,
       0,
       0,
       0
@@ -25,22 +26,28 @@ body {
   .Cart {
 
     @include absolutebox();
-    bottom: calc(100% - #{ $cartsize });
+    bottom: calc(100% - #{ $cartheadersize });
 
     &.Opened {
 
-      bottom: 20%;
+      bottom: $space * 2;
     }
 
     .Header {
 
-      height: $cartsize;
+      height: $cartheadersize;
+    }
+
+    .Steps {
+
+      height: $cartstepssize;
+      margin: 0 $space * 2;
     }
 
     .CartBody {
 
       @include absolutebox(        
-        $cartsize,
+        $cartheadersize + $cartstepssize,
         $space * 2,
         $space * 2,
         $space * 2

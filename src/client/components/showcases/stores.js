@@ -6,7 +6,7 @@ import {
   Button
 } from 'antd'
 import * as Icons from '@ant-design/icons'
-import Quantity from './quantity'
+import Quantity from '../common/quantity'
 
 const { Panel } = Collapse
 

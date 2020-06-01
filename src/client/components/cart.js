@@ -1,22 +1,55 @@
 import React, {
   useEffect,
-  useState
+  useState,
+  createRef
 } from 'react'
 import { connect } from 'react-redux'
 import {
-  Button
+  Button,
+  Carousel,
+  Menu
 } from 'antd'
+import Order from './cart/order'
+import Location from './cart/location'
+import Payment from './cart/payment'
 import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
+import { PresetStatusColorTypes } from 'antd/lib/_util/colors'
+
+// https://parzibyte.me/blog/en/2019/10/13/a-plugin-for-printing-thermal-printers-from-browser/
+
+const steps = {
+  'order': {
+    index: 0,
+    name: 'Pedido',
+    comp: Order,
+    icon: <Icons.UnorderedListOutlined />
+  },
+  'location': {
+    index: 1,
+    name: 'Donde?',
+    comp: Location,
+    icon: <Icons.EnvironmentOutlined />
+  },
+  'payment': {
+    index: 2,
+    name: 'Pago',
+    comp: Payment,
+    icon: <Icons.EuroOutlined />
+  }
+}
 
 const Cart = connect(state => ({
   services: state.wp.slotbyid.services,
   order: state.ui.order
-}))(props => {  
+}))(props => { 
+  
+  const cartBodyRef = createRef()
 
   const [ totalServices, setTotalServices ] = useState(0)
   const [ totalPrice, setTotalPrice ] = useState(0)
   const [ opened, setOpened ] = useState(false)
+  const [ step, setStep ] = useState('order')
 
   useEffect(() => {
 
@@ -41,6 +74,12 @@ const Cart = connect(state => ({
   const openCart = e => {
 
     setOpened(!opened)
+  }
+
+  const selectStep = e => {
+
+    setStep(e.key)
+    cartBodyRef.current.goTo(steps[e.key].index)
   }
   
   return <div
@@ -67,10 +106,45 @@ const Cart = connect(state => ({
         />
       </div>
     </div>
-    <div className="CartBody">
-      
+      {
+        opened &&
+        <>
+          <div className="Steps">
+            <Menu
+              onClick={ selectStep } 
+              selectedKeys={[ step ]}
+              mode="horizontal"
+            >
+              {
+                Object.keys(steps)
+                .map(key => <Menu.Item 
+                  key={ key } 
+                  icon={ steps[key].icon }
+                >
+                  { steps[key].name }
+                </Menu.Item>
+                )
+              }
+            </Menu>
+          </div>  
+          <div className="CartBody">
+        <Carousel
+          ref={ cartBodyRef }
+        >
+          {
+            Object.keys(steps)
+            .map(key => {
+
+              const Comp = steps[key].comp
+
+              return <Comp key={ key } />
+            })
+          }
+        </Carousel>
+      </div>
+        </>
+      }  
     </div>
-  </div>
 })
 
 export default Cart

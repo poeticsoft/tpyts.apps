@@ -69,9 +69,34 @@
     }
   }
 
+  .Steps {
+
+    .ant-menu {
+
+      background: transparent;
+    }
+  }
+
   .CartBody {
 
     background-color: $color-background-light;
-    @include boxinnershadow();
+
+    .slick-slide {
+
+      height: 100%;
+
+      > div {
+
+        height: 100%;
+        position: relative;
+
+        .Step {
+
+          @include absolutebox();
+          padding: $space * 2;
+          overflow-y: auto;
+        }
+      }
+    }
   }
 }
