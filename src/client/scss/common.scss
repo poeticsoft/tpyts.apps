@@ -41,13 +41,13 @@ body {
     .Steps {
 
       height: $cartstepssize;
-      margin: 0 $space * 2;
+      margin: $space $space * 2;
     }
 
     .CartBody {
 
       @include absolutebox(        
-        $cartheadersize + $cartstepssize,
+        $cartheadersize + $cartstepssize + $space,
         $space * 2,
         $space * 2,
         $space * 2

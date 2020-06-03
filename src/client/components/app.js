@@ -6,7 +6,7 @@ import store from 'rdx/store'
 import * as Actions from 'rdx/actions'
 import { initUISavedState } from 'utils/localstorage'
 import Message from 'common/components/message'
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.less'
 import Stores from './showcases/stores'
 import Categories from './showcases/categories'
 import Search from './showcases/search'
@@ -18,10 +18,9 @@ const App = props => {
 
   useEffect(() => {
 
-    store.dispatch(Actions.uiSetMessage({ text: 'Loading...' }))
-
     initUISavedState()
 
+    store.dispatch(Actions.uiSetMessage({ text: 'Loading...' }))
     store.dispatch(Actions.wpInit())
 
   }, [])

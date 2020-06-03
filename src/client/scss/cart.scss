@@ -4,6 +4,7 @@
   border: solid $color-tpyts-green;
   border-width: 0 0 1px 0;
   @include boxshadow();
+  overflow: hidden;
 
   transition-property: bottom;
   transition-duration: 0.5s;
@@ -72,31 +73,20 @@
   .Steps {
 
     .ant-menu {
-
-      background: transparent;
+      border-radius: 0 $space * 2 0 0;
     }
   }
 
   .CartBody {
 
-    background-color: $color-background-light;
+    .Step {
 
-    .slick-slide {
-
-      height: 100%;
-
-      > div {
-
-        height: 100%;
-        position: relative;
-
-        .Step {
-
-          @include absolutebox();
-          padding: $space * 2;
-          overflow-y: auto;
-        }
-      }
+      @include absolutebox();
+      padding: $space * 2;
+      overflow-y: auto;
+      background-color: $color-background-light;
+      
+      border-radius: 0 0 0 $space * 2;
     }
   }
 }

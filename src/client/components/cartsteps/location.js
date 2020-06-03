@@ -5,9 +5,12 @@ import * as Actions from 'rdx/actions'
 const Location = connect(state => ({
 }))(props => {  
   
-  return <div className="Step Location">
-    Location
-  </div>
+  return props.actualstep == props.stepid ?
+    <div className="Step Location">
+      Location
+    </div>
+    :
+    <></>
 })
 
 export default Location

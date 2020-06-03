@@ -30,10 +30,6 @@ const OrderService = connect(state => ({
           <div className="Currency">€</div>
         </div>
         <div className="Igual">=</div>
-        <div className="Total">
-          <div className="Number">{ total }</div>
-          <div className="Currency">€</div>
-        </div>
       </div>      
     </div>
   </div>
@@ -44,16 +40,27 @@ const Order = connect(state => ({
   order: state.ui.order
 }))(props => {  
   
-  return <div className="Step Order">
-    {
-      Object.keys(props.order.services)
-      .map((key, index) => <OrderService
-        key={ key }
-        serviceid={ key }
-        quantity={ props.order.services[key] }
-      />)
-    }
-  </div>
+  return props.actualstep == props.stepid ?
+    <div className="Step Order">
+      <div className="ServicesQuantity">        
+        {
+          Object.keys(props.order.services)
+          .map((key, index) => <OrderService
+            key={ key }
+            serviceid={ key }
+            quantity={ props.order.services[key] }
+          />)
+        }
+      </div>
+      <div className="Total">
+        <div className="Text">
+          Total
+        </div>
+        <div className=""></div>
+      </div>
+    </div>
+    :
+    <></>
 })
 
 export default Order

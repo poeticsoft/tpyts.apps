@@ -9,7 +9,8 @@ const saveState = data => {
   try {
 
     const serializedState = JSON.stringify(data);
-    localStorage.setItem('BracnoriaUlledMemoriesUIState', serializedState);
+
+    localStorage.setItem('TPYTSUIState', serializedState);
 
   } catch(e) {
 
@@ -21,10 +22,11 @@ const loadState = () => {
 
   try {
 
-    const serializedState = localStorage.getItem('BracnoriaUlledMemoriesUIState');    
+    const serializedState = localStorage.getItem('TPYTSUIState'); 
+
     if (serializedState === null) {
       return {};
-    }
+    }   
 
     return JSON.parse(serializedState);
 
@@ -34,27 +36,26 @@ const loadState = () => {
   }
 }
 
-store.subscribe(throttle(() => {
+// store.subscribe(throttle(() => {
+store.subscribe(() => {
 
   const UIState = { ...store.getState().ui }
-  UIState.responsive = {
-    window: {
-      w: 0,
-      h: 0,
-      o: 'none'
-    },
-    device: ''
-  }
+
+  /* Clean state */
+  delete UIState.message
+  delete UIState.map
+  delete UIState.gallery
 
   saveState(UIState);
   
-}, 1000))
+// }, 1000))
+})
 
 export const initUISavedState = () => {  
 
   const savedUIState = loadState()
   if (savedUIState !== null) {
-    
+
     store.dispatch(Actions.uiSetInitialState(savedUIState)) 
   }
 }

@@ -30,10 +30,10 @@ export const uiHideMessage = message => ({
 })
 
 export const UI_SET_INITIAL_STATE = 'UI_SET_INITIAL_STATE'
-export const uiSetInitialState = data => ({
+export const uiSetInitialState = state => ({
   type: UI_SET_INITIAL_STATE,
   payload: {
-    data: data
+    state: state
   }
 })
 

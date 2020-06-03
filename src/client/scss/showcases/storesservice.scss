@@ -26,12 +26,14 @@
         .Image {
           
           width: 100%;
-          padding: 0 0 100%;
+          padding: 0 0 50%;
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center;
           overflow: hidden;
           border-radius: 10% 0 0 0;
+
+          @media (min-width: 420px) { padding: 0 0 100%; }
         }
         
         .Data {

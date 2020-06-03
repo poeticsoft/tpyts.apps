@@ -5,9 +5,12 @@ import * as Actions from 'rdx/actions'
 const Payment = connect(state => ({
 }))(props => {  
   
-  return <div className="Step Payment">
-    Payment
-  </div>
+  return props.actualstep == props.stepid ?
+    <div className="Step Payment">
+      Payment
+    </div>
+    :
+    <></>
 })
 
 export default Payment

@@ -45,10 +45,15 @@ const reducers = {
     { message: null }
   ),
   
-  [Actions.UI_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
-    state,
-    action.payload.state
-  ),
+  [Actions.UI_SET_INITIAL_STATE]: (state, action) => {
+
+    // console.log(action.payload.state)
+
+    return  immutableUpdate(
+      state,
+      action.payload.state
+    )
+  },
   
   [Actions.UI_SET_SHOP_ACTIVE]: (state, action) => immutableUpdate(
     state,

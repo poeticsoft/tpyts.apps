@@ -184,6 +184,27 @@ module.exports = env => {
             }
           ]
         },
+        /* LESS ANTD */
+        {
+          test: /\.less$/,
+          use: [
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+            {
+              loader: 'less-loader', 
+              options: {
+                lessOptions: { 
+                  modifyVars: {
+                    'primary-color': '#008f36',
+                    'link-color': '#008f36',
+                    'border-radius-base': '0'
+                  },
+                  javascriptEnabled: true,
+                }
+              }
+            }
+          ]
+        },
         {
           test: /\.scss$/,
           exclude: /node_modules/,

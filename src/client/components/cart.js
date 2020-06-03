@@ -9,9 +9,9 @@ import {
   Carousel,
   Menu
 } from 'antd'
-import Order from './cart/order'
-import Location from './cart/location'
-import Payment from './cart/payment'
+import Order from './cartsteps/order'
+import Location from './cartsteps/location'
+import Payment from './cartsteps/payment'
 import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
 import { PresetStatusColorTypes } from 'antd/lib/_util/colors'
@@ -48,7 +48,7 @@ const Cart = connect(state => ({
 
   const [ totalServices, setTotalServices ] = useState(0)
   const [ totalPrice, setTotalPrice ] = useState(0)
-  const [ opened, setOpened ] = useState(false)
+  const [ opened, setOpened ] = useState(true)
   const [ step, setStep ] = useState('order')
 
   useEffect(() => {
@@ -58,6 +58,7 @@ const Cart = connect(state => ({
       .reduce((total, value) => (total + value ), 0)
     )
     
+    props.services &&
     setTotalPrice(
       Object.keys(props.order.services)
       .reduce((total, key) => {
@@ -68,6 +69,7 @@ const Cart = connect(state => ({
       }, 0)
     )
   }, [
+    props.services,
     props.order.services
   ])
 
@@ -79,7 +81,6 @@ const Cart = connect(state => ({
   const selectStep = e => {
 
     setStep(e.key)
-    cartBodyRef.current.goTo(steps[e.key].index)
   }
   
   return <div
@@ -88,63 +89,61 @@ const Cart = connect(state => ({
       ${ opened ? 'Opened' : '' }
     `}
   >
-    <div className="Header">
-      <div className="Servicios">
-        <div className="Count">{ totalServices }</div>
-        <div className="Text">Raciones</div>
+    {
+      props.services && <>
+      <div className="Header">
+        <div className="Servicios">
+          <div className="Count">{ totalServices }</div>
+          <div className="Text">Raciones</div>
+        </div>
+        <div className="Price">
+          <div className="Number">{ totalPrice }</div>
+          <div className="Currency">€</div>
+        </div>
+        <div className="Tools">
+          <Button
+            icon={ <Icons.ShoppingCartOutlined /> }
+            shape="circle"
+            onClick={ openCart }
+            disabled={ totalPrice == 0 }
+          />
+        </div>
       </div>
-      <div className="Price">
-        <div className="Number">{ totalPrice }</div>
-        <div className="Currency">€</div>
-      </div>
-      <div className="Tools">
-        <Button
-          icon={ <Icons.ShoppingCartOutlined /> }
-          shape="circle"
-          onClick={ openCart }
-          disabled={ totalPrice == 0 }
-        />
-      </div>
-    </div>
-      {
-        opened &&
-        <>
-          <div className="Steps">
-            <Menu
-              onClick={ selectStep } 
-              selectedKeys={[ step ]}
-              mode="horizontal"
-            >
-              {
-                Object.keys(steps)
-                .map(key => <Menu.Item 
-                  key={ key } 
-                  icon={ steps[key].icon }
-                >
-                  { steps[key].name }
-                </Menu.Item>
-                )
-              }
-            </Menu>
-          </div>  
-          <div className="CartBody">
-        <Carousel
-          ref={ cartBodyRef }
+      <div className="Steps">
+        <Menu
+          onClick={ selectStep } 
+          selectedKeys={[ step ]}
+          mode="horizontal"
         >
           {
             Object.keys(steps)
-            .map(key => {
-
-              const Comp = steps[key].comp
-
-              return <Comp key={ key } />
-            })
+            .map(key => <Menu.Item 
+              key={ key } 
+              icon={ steps[key].icon }
+            >
+              { steps[key].name }
+            </Menu.Item>
+            )
           }
-        </Carousel>
+        </Menu>
+      </div>  
+      <div className="CartBody">
+        {
+          Object.keys(steps)
+          .map(key => {
+
+            const Comp = steps[key].comp
+
+            return <Comp
+              key={ key } 
+              actualstep={ step }
+              stepid={ key }
+            />
+          })
+        }
       </div>
-        </>
-      }  
-    </div>
+    </>} 
+  </div>  
 })
 
 export default Cart
