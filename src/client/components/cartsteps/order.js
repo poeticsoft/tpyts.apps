@@ -1,9 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {
+  Button
+} from 'antd'
 import * as Actions from 'rdx/actions'
+import * as Icons from '@ant-design/icons'
 
 const OrderService = connect(state => ({
-  services: state.wp.slotbyid.services
+  services: state.wp.slotbyid.services,
+  cart: state.ui.cart
 }))(props => {
 
   const service = props.services[props.serviceid]
@@ -30,6 +35,10 @@ const OrderService = connect(state => ({
           <div className="Currency">€</div>
         </div>
         <div className="Igual">=</div>
+        <div className="Total">
+          <div className="Number">{ total }</div>
+          <div className="Currency">€</div>
+        </div>
       </div>      
     </div>
   </div>
@@ -37,30 +46,45 @@ const OrderService = connect(state => ({
 
 const Order = connect(state => ({
   services: state.wp.slotbyid.services,
-  order: state.ui.order
+  order: state.ui.order,
+  cart: state.ui.cart
 }))(props => {  
+
+  const goWhere = e => {
+
+    props.dispatch(Actions.uiSetCartStatus({
+      actualstep: 'location'
+    }))
+  }
   
-  return props.actualstep == props.stepid ?
-    <div className="Step Order">
-      <div className="ServicesQuantity">        
-        {
-          Object.keys(props.order.services)
-          .map((key, index) => <OrderService
-            key={ key }
-            serviceid={ key }
-            quantity={ props.order.services[key] }
-          />)
-        }
-      </div>
-      <div className="Total">
-        <div className="Text">
-          Total
-        </div>
-        <div className=""></div>
-      </div>
+  return <div 
+    className={`
+      Step
+      Order
+      ${ props.cart.actualstep == 'order' ? 'Visible' : '' }
+    `}
+  >
+    <div className="Content">        
+      {
+        Object.keys(props.order.services)
+        .map((key, index) => <OrderService
+          key={ key }
+          serviceid={ key }
+          quantity={ props.order.services[key] }
+        />)
+      }
     </div>
-    :
-    <></>
+    <div className="Next">
+      <div className="Text">
+        Donde lo llevamos?
+      </div>
+      <Button 
+        shape="circle"
+        icon={ <Icons.RightOutlined /> }
+        onClick={ goWhere }
+      />
+    </div>
+  </div>
 })
 
 export default Order

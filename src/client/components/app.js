@@ -22,7 +22,6 @@ const App = props => {
 
     store.dispatch(Actions.uiSetMessage({ text: 'Loading...' }))
     store.dispatch(Actions.wpInit())
-
   }, [])
   
   return <Provider store={ store }>

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react';
 import * as Actions from 'rdx/actions'
+import { GMaps } from 'utils/config'
 import {
   Button
 } from 'antd'
@@ -55,7 +56,7 @@ const Map = connect(state => ({
     </div>
     <div className="Google">      
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyAksiltFsr6peuQ4voDgkYNPYFVo2a5bgw' }}
+        bootstrapURLKeys={{ key: GMaps.key }}
         center={ props.map.location }
         zoom={ props.map.zoom }
         yesIWantToUseGoogleMapApiInternals

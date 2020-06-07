@@ -1,0 +1,47 @@
+.Step.Payment {
+
+  $totalsize: $space * 6;
+  overflow: hidden;
+
+  .Content {  
+
+    .Card {
+
+    }
+
+    .Form {
+
+      padding: $space * 2 0 0;
+
+      .Field {
+
+        display: inline-block;
+        width: 100%;
+
+        .ant-row {
+
+          margin-bottom: $space * 1.5;
+        }
+
+        &.Expiry,
+        &.CVC {
+
+          width: 45%;
+        }
+
+        &.CVC {
+
+          margin: 0 0 0 10%;
+        }
+
+        &.Pay {
+
+          button {
+
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,12 +1,6 @@
 .Step.Order {
 
-  $totalsize: $space * 6;
-
-  .ServicesQuantity {  
-    
-    @include absolutebox();
-    bottom: $totalsize;
-    z-index: 0;
+  .Content {  
 
     .OrderService {
 
@@ -52,7 +46,7 @@
           font-size: 100%;
           text-align: right;
           bottom: 0;
-          right: 0;
+          right: $space * 2;
 
           * {
 
@@ -88,27 +82,23 @@
 
             margin: 0 $space;
           }
+
+          .Total {
+
+
+            
+            .Number {
+
+              font-family: "Roboto Condensed Bold";
+              font-size: 170%;          
+            }
+            
+            .Currency {
+
+            }
+          }
         }
       }
     }
   }  
-          
-  .Total {
-
-    @include absolutebox();
-    top: auto;
-    height: $totalsize;  
-    z-index: 1;  
-    background: $color-tpyts-green;
-          
-    .Number {
-
-      font-family: "Roboto Condensed Bold";
-      font-size: 170%;          
-    }
-    
-    .Currency {
-
-    }
-  }
 }

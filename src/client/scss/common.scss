@@ -40,7 +40,7 @@ body {
 
     .Steps {
 
-      height: $cartstepssize;
+      height: $cartstepssize - 1;
       margin: $space $space * 2;
     }
 
