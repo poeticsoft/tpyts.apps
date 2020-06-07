@@ -1,16 +1,13 @@
 import store from 'rdx/store'
 import * as Actions from 'rdx/actions'
-import {
-  throttle
-} from 'lodash'
 
-const saveState = data => {
+const saveState = (mod, data) => {
 
   try {
 
     const serializedState = JSON.stringify(data);
 
-    localStorage.setItem('TPYTSUIState', serializedState);
+    localStorage.setItem('TPYTS_' + mod + '_State', serializedState);
 
   } catch(e) {
 
@@ -18,45 +15,51 @@ const saveState = data => {
   }
 }
 
-const loadState = () => {
+const loadState = (mod) => {
 
   try {
 
-    const serializedState = localStorage.getItem('TPYTSUIState'); 
+    const serializedState = localStorage.getItem('TPYTS_' + mod + '_State'); 
 
     if (serializedState === null) {
-      return {};
+
+      return null;
     }   
 
     return JSON.parse(serializedState);
 
   } catch (err) {
 
-    return {};
+    return null;
   }
 }
 
-// store.subscribe(throttle(() => {
 store.subscribe(() => {
 
+  return
+  
   const UIState = { ...store.getState().ui }
-
-  /* Clean state */
   delete UIState.message
   delete UIState.map
   delete UIState.gallery
+  saveState('UI', UIState);
 
-  saveState(UIState);
-  
-// }, 1000))
+  const WPState = { ...store.getState().wp }
+  saveState('WP', WPState);  
 })
 
-export const initUISavedState = () => {  
+export const initSavedState = () => {  
 
-  const savedUIState = loadState()
-  if (savedUIState !== null) {
+  /*
+  const savedUIState = loadState('UI')
+  savedUIState !== null &&
+  store.dispatch(Actions.uiSetInitialState(savedUIState))
 
-    store.dispatch(Actions.uiSetInitialState(savedUIState)) 
-  }
+  const savedWPState = loadState('WP')
+  savedWPState !== null &&
+  store.dispatch(Actions.wpSetInitialState(savedWPState))
+  */
+
+  store.dispatch(Actions.wpInit())
 }
 

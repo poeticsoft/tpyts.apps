@@ -1,4 +1,4 @@
-.Showcase.Stores {
+.Showcase .Stores {
 
   .ant-collapse > .ant-collapse-item {
     //border-bottom: none;
@@ -31,7 +31,7 @@
           background-size: cover;
           background-position: center;
           overflow: hidden;
-          border-radius: 10% 0 0 0;
+          border-radius: $space * 2.8 0 0 0;
 
           @media (min-width: 420px) { padding: 0 0 100%; }
         }

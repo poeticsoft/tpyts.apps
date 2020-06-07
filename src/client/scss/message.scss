@@ -1,7 +1,5 @@
 #TPYTSClient .Message {
 
-  @include absolutebox();
-  top: auto;
   padding: $space $space * 2;
   background-color: #ccc;
   text-align: right;

@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import * as Actions from 'rdx/actions'
 
 const Search = connect(state => ({
-  shops: state.fb.shops.data,
-  services: state.fb.services.data
+  showcase: state.ui.showcase
 }))(props => {  
   
-  return <div className="Showcase Search">
+  return props.showcase == 'search' && 
+  <div className="Search">
     SEARCH
   </div>
 })

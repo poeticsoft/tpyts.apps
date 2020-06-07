@@ -33,8 +33,6 @@ const StoreCover = props => {
 
     e.stopPropagation()
 
-    console.log(props)
-
     const galleryData = {
       active: true,
       slides: props.gallery.map(slide => ({ src: slide })),
@@ -136,18 +134,17 @@ const StoreService = props => {
 }
 
 const Stores = connect(state => ({
+  showcase: state.ui.showcase,
   stores: state.wp.slot.stores,
-  services: state.wp.slot.services,
-  status: state.wp.status
-}))(props => <div className="Showcase Stores">
+  services: state.wp.slot.services
+}))(props => props.showcase == 'stores' &&
+  <div className="Stores">
     <Collapse
       bordered={ true }
       expandIconPosition="left"
     >
       {
-        props.status == 'loaded' &&
-        props.stores.length &&
-        props.stores
+        props.stores.data
         .map(store => <Panel
           key={ store.ID }
           storeid={ store.ID }
@@ -157,7 +154,7 @@ const Stores = connect(state => ({
           />}
         >
           {
-            props.services
+            props.services.data
             .filter(service => service.servicebasic.store == store.ID)
             .map(service => <StoreService
               key={ service.ID }

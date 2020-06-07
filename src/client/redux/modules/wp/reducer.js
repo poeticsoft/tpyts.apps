@@ -2,43 +2,76 @@ import immutableUpdate from 'immutable-update'
 import * as Actions from './actions'
 
 const initialState = {
+  ready: false,
   slot: {
-    data: [],
-    stores: [],
-    services: [],
-    allergens: [],
-    terms: []
+    datas: {
+      lastchangedate: '',
+      updated: false,
+      data: {}
+    },
+    stores: {
+      lastchangedate: '',
+      updated: false,
+      data: []
+    },
+    services: {
+      lastchangedate: '',
+      updated: false,
+      data: []
+    },
+    allergens: {
+      lastchangedate: '',
+      updated: false,
+      data: []
+    },
+    terms: {
+      lastchangedate: '',
+      updated: false,
+      data: []
+    }
   },
-  slotbyid: {},
-  status: 'loading' // loading, loaded 
+  slotbyid: {}
 } 
 
-const reducers = {
+const reducers = {  
+  
+  [Actions.WP_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
+    state,
+    action.payload.state
+  ),
 
-  [Actions.WP_DATA_SET_STATUS]: (state, action) => {
+  [Actions.WP_UPDATE_STATUS]: (state, action) => {
 
     return immutableUpdate(
       state,
-      {
-        status: action.payload.status
-      }
+      { ...action.payload.status }
     )
   },
 
-  [Actions.WP_DATA_LOADED]: (state, action) => { 
+  [Actions.WP_UPDATE_SLOT]: (state, action) => { 
     
     const slot = action.payload.data.slot
     const data = action.payload.data.data
 
-    let slotbyid = {}
-    if(
-      slot == 'services' 
-      ||
-      slot == 'stores'
-    ) {
+    let newState = {
+      slot: {
+        [slot] : data
+      }
+    }
 
-      slotbyid = {
-        [slot]: data
+    if(  
+      data.data &&
+      (   
+        slot == 'stores'
+        ||
+        slot == 'services'
+        ||
+        slot == 'allergens'
+      )  
+    ) {
+      
+      newState.slotbyid = {
+        [slot]: data.data
         .reduce((list, item) => {
 
           list[item.ID] = item
@@ -46,17 +79,28 @@ const reducers = {
         }, {})
       }
     }
+    
+    return immutableUpdate(
+      state,
+      { ...newState }
+    )
+  },
+
+  [Actions.WP_CHECK_SLOTS_UPDATED]: (state, action) => {
+
+    const slotsupdated = Object.keys(state.slot)
+    .reduce((status, key) => {
+      
+      return status && state.slot[key].updated
+    }, true)
 
     return immutableUpdate(
       state,
-      {
-        slot: {
-          [slot] : data
-        },
-        slotbyid: slotbyid
+      { 
+        ready: slotsupdated
       }
     )
-  }
+  },
 } 
 
 const reducer = (state = initialState, action) => reducers[action.type] ? 

@@ -6,11 +6,8 @@ import Payment from 'comps/cartsteps/payment'
 import * as Icons from '@ant-design/icons'
 import * as Actions from './actions'
 
-const initialState = {
-  message: {
-    type: 'info',
-    text: 'Loading...'
-  },
+const initialState = {  
+  message: {},
   map: {
     active: false,
     location:{
@@ -50,8 +47,6 @@ const initialState = {
         icon: <Icons.EuroOutlined />
       }
     },
-    totalservices: 0,
-    totalprice: 0,
     card: {
       cvc: '',
       expiry: '',
@@ -65,7 +60,8 @@ const initialState = {
     address: {},
     location: {},
     errors: {}
-  }
+  },
+  showcase: 'stores'
 }
 
 const reducers = { 
@@ -86,15 +82,10 @@ const reducers = {
     { message: null }
   ),
   
-  [Actions.UI_SET_INITIAL_STATE]: (state, action) => {
-
-    // console.log(action.payload.state)
-
-    return  immutableUpdate(
-      state,
-      action.payload.state
-    )
-  },
+  [Actions.UI_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
+    state,
+    action.payload.state
+  ),
   
   [Actions.UI_SET_SHOP_ACTIVE]: (state, action) => immutableUpdate(
     state,

@@ -5,6 +5,18 @@
 
   .Content {  
 
-    
+    .Check {
+
+      text-align: right;
+      margin-bottom: $space * 3; 
+    }
+
+    .Comments {
+
+      .ant-input {
+
+        min-height: 160px;
+      }
+    }
   }
 }

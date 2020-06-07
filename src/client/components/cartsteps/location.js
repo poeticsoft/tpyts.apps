@@ -13,6 +13,7 @@ import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
 
 const { Option } = Select;
+const { TextArea } = Input;
 
 const Location = connect(state => ({
   geo: state.geo,
@@ -70,7 +71,6 @@ const Location = connect(state => ({
             label="Donde estás?"
             hasFeedback          
             validateStatus={ props.geo.apistatus == 'ready' ? 'error' : 'validating'}
-            help="Buscando tu dirección..."
           >
             <AutoComplete
               options={ props.geo.autocompletepredictions }
@@ -87,8 +87,8 @@ const Location = connect(state => ({
           <div className="Check">
             <Button 
               shape="round"
-              type="primary"
               icon={ <Icons.EnvironmentOutlined /> }
+              disabled
             >
               Comprueba tu localización
             </Button>
@@ -102,6 +102,17 @@ const Location = connect(state => ({
             <DatePicker
               showTime
               size="large"
+            />
+          </Form.Item>
+        </div>
+
+        <div className="Field Comments">
+          <Form.Item
+            label="Comentarios?"
+          >
+            <TextArea 
+              placeholder="Detalles de la entrega" 
+              allowClear 
             />
           </Form.Item>
         </div>

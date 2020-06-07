@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import * as Actions from 'rdx/actions'
 
 const Categories = connect(state => ({
-  shops: state.fb.shops.data,
-  services: state.fb.services.data
+  showcase: state.ui.showcase
 }))(props => {  
   
-  return <div className="Showcase Categories">
-    SHOPS
+  return props.showcase == 'categories' && 
+  <div className="Categories">
+    CATEGORIES
   </div>
 })
 
