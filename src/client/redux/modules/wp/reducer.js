@@ -84,23 +84,7 @@ const reducers = {
       state,
       { ...newState }
     )
-  },
-
-  [Actions.WP_CHECK_SLOTS_UPDATED]: (state, action) => {
-
-    const slotsupdated = Object.keys(state.slot)
-    .reduce((status, key) => {
-      
-      return status && state.slot[key].updated
-    }, true)
-
-    return immutableUpdate(
-      state,
-      { 
-        ready: slotsupdated
-      }
-    )
-  },
+  }
 } 
 
 const reducer = (state = initialState, action) => reducers[action.type] ? 

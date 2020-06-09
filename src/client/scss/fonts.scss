@@ -1,9 +1,69 @@
 @font-face {
-  font-family: "Roboto Condensed Regular";
-  src: url("~fonts/RobotoCondensed-Regular.ttf") format("truetype");
+  font-family: 'Roboto-Regular';
+  src: url('~fonts/RobotoCondensed-Regular.eot');
+  src: local('☺'), 
+  url('~fonts/RobotoCondensed-Regular.woff') format('woff'), 
+  url('~fonts/RobotoCondensed-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: "Roboto Condensed Bold";
-  src: url("~fonts/RobotoCondensed-Bold.ttf") format("truetype");
+  font-family: 'Roboto-RegularItalic';
+  src: url('~fonts/RobotoCondensed-Italic.eot');
+  src: local('☺'), 
+  url('~fonts/RobotoCondensed-Italic.woff') format('woff'), 
+  url('~fonts/RobotoCondensed-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('~fonts/RobotoCondensed-Bold.eot');
+  src: local('☺'), 
+  url('~fonts/RobotoCondensed-Bold.woff') format('woff'), 
+  url('~fonts/RobotoCondensed-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-BoldItalic';
+  src: url('~fonts/RobotoCondensed-BoldItalic.eot');
+  src: local('☺'), 
+  url('~fonts/RobotoCondensed-BoldItalic.woff') format('woff'), 
+  url('~fonts/RobotoCondensed-BoldItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-Light';
+  src: url('~fonts/RobotoCondensed-Light.eot');
+  src: local('☺'), 
+  url('~fonts/RobotoCondensed-Light.woff') format('woff'), 
+  url('~fonts/RobotoCondensed-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-LightItalic';
+  src: url('~fonts/RobotoCondensed-LightItalic.eot');
+  src: local('☺'), 
+  url('~fonts/RobotoCondensed-LightItalic.woff') format('woff'), 
+  url('~fonts/RobotoCondensed-LightItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Consolas';
+  src: url('~fonts/Consolas.eot');
+  src: local('☺'), 
+  url('~fonts/Consolas.woff') format('woff'), 
+  url('~fonts/Consolas.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }

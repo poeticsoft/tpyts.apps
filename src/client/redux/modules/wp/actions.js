@@ -16,10 +16,10 @@ export const slots = [
   'terms'
 ]
 
-export const wpInit = () => (dispatch, getState) => {
+export const wpRefresh = () => (dispatch, getState) => {
 
   dispatch(Actions.wpUpdateStatus({
-    status: 'updating'
+    ready: false
   }))
 
   const state = getState().wp
@@ -60,8 +60,25 @@ export const wpInit = () => (dispatch, getState) => {
 
           dispatch(Actions.wpCheckSlotsUpdated())
         }))
+      } else {
+
+        dispatch(Actions.wpCheckSlotsUpdated())
       }
     })
+  }))
+}
+
+export const wpCheckSlotsUpdated = () => (dispatch, getState) => {
+
+  const slot = getState().wp.slot
+  const slotsupdated = Object.keys(slot)
+  .reduce((status, key) => {
+    
+    return status && slot[key].updated
+  }, true)
+
+  dispatch(Actions.wpUpdateStatus({
+    ready: slotsupdated
   }))
 }
 
@@ -76,6 +93,3 @@ export const wpUpdateSlot = data => ({
   type: WP_UPDATE_SLOT,
   payload: { data: data }
 })
-
-export const WP_CHECK_SLOTS_UPDATED = 'WP_CHECK_SLOTS_UPDATED'
-export const wpCheckSlotsUpdated = data => ({ type: WP_CHECK_SLOTS_UPDATED })

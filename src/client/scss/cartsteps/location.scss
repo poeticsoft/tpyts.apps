@@ -1,14 +1,50 @@
 .Step.Location {
 
-  $totalsize: $space * 6;
-  overflow: hidden;
+  .Content { 
+    
+    .Field {
 
-  .Content {  
+      .ant-form-item {
+
+        margin-bottom: $space * 2;
+      }
+
+      .ant-form-item-label > label {
+
+        height: 14px;
+      }
+
+      $gap: $space * 2;
+
+      &.Tel,
+      &.Mail {
+
+        display: inline-block;
+        width: calc(50% - #{$gap / 2})
+      }
+
+      &.Mail {
+
+        margin: 0 0 0 $gap;
+      }
+
+      &.WhenSelect,
+      &.WhenPicker {
+
+        display: inline-block;
+        width: calc(50% - #{$gap / 2});
+      }
+
+      &.WhenPicker {
+
+        margin: 0 0 0 $gap;
+      }
+    }
 
     .Check {
 
       text-align: right;
-      margin-bottom: $space * 3; 
+      margin-bottom: $space * 2; 
     }
 
     .Comments {

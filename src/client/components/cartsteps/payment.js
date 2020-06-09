@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Cards from 'react-credit-cards';
-import 'react-credit-cards/es/styles-compiled.css'
+import * as CartUtils from 'utils/payment'
 import { 
   Form, 
   Input, 
@@ -29,15 +29,34 @@ const Payment = connect(state => ({
     props.dispatch(Actions.uiSetCardData({ focus: e.target.name }))
   }
 
-  const handleInputChange  = e => {
+  const handleInputChange = ({ target }) => {
 
-    const { name, value } = e.target
-    props.dispatch(Actions.uiSetCardData({ [name]: value }))
+    if (target.name === "number") {
+
+      target.value = CartUtils.formatCreditCardNumber(target.value);
+
+    } else if (target.name === "expiry") {
+
+      target.value = CartUtils.formatExpirationDate(target.value);
+
+    } else if (target.name === "cvc") {
+
+      target.value = CartUtils.formatCVC(target.value);
+    }
+
+    console.log(target.value)
+
+    props.dispatch(Actions.uiSetCardData({ [target.name]: target.value }))
+  };
+
+  const onCancel = e => {
+
+    props.dispatch(Actions.uiCartCancel())
   }
 
   const onPay = e => {
 
-    props.dispatch(Actions.uiPay())
+    props.dispatch(Actions.uiCartPay())
   }
   
   return <div 
@@ -55,6 +74,7 @@ const Payment = connect(state => ({
           expiry={ props.cart.card.expiry }
           cvc={ props.cart.card.cvc }
           focused={ props.cart.card.focus }
+          preview={ false }
         />      
       </div>
       <div className="Form">
@@ -68,6 +88,7 @@ const Payment = connect(state => ({
                 placeholder="Número Tarjeta" 
                 size="large"
                 required  
+                value={ props.cart.card.number }
                 onChange={ handleInputChange }
                 onFocus={ handleInputFocus }
               />
@@ -80,7 +101,8 @@ const Payment = connect(state => ({
                 name="name"
                 placeholder="Nombre titular" 
                 size="large"
-                required  
+                required 
+                value={ props.cart.card.name } 
                 onChange={ handleInputChange }
                 onFocus={ handleInputFocus }
               />
@@ -94,7 +116,8 @@ const Payment = connect(state => ({
                 name="expiry"
                 placeholder="Valida hasta" 
                 size="large"
-                required  
+                required 
+                value={ props.cart.card.expiry } 
                 onChange={ handleInputChange }
                 onFocus={ handleInputFocus }
               />
@@ -108,14 +131,16 @@ const Payment = connect(state => ({
                 name="cvc"
                 placeholder="CVC" 
                 size="large"
-                required  
+                required 
+                value={ props.cart.card.cvc } 
                 onChange={ handleInputChange }
                 onFocus={ handleInputFocus }
               />
             </Form.Item>
           </div>
-          <div className="Field Pay">
+          <div className="Field Pay">  
             <Button
+              className="Go"
               size="large"
               type="primary"
               shape="round"
@@ -123,7 +148,18 @@ const Payment = connect(state => ({
               onClick={ onPay }
             >
               Pagar
-            </Button>
+            </Button>          
+            <Button
+              className="Cancel"
+              size="large"
+              type="primary"
+              shape="circle"
+              icon={ <Icons.CloseCircleOutlined /> }
+              onClick={ onCancel }
+            />
+          </div>
+          <div className="Field Log">  
+            Log operations
           </div>
         </Form>
       </div>

@@ -30,14 +30,14 @@
 
     .TuPedido {
 
-      font-family: "Roboto Condensed Bold";
+      font-family: "Roboto-Bold";
     }
     
     .Servicios {
       
       .Count {
 
-        font-family: "Roboto Condensed Bold";
+        font-family: "Roboto-Bold";
         font-size: 170%;      
       }
       
@@ -55,13 +55,13 @@
       
       .Number {
 
-        font-family: "Roboto Condensed Bold";
+        font-family: "Roboto-Bold";
         font-size: 170%;      
       }
       
       .Currency {
 
-        font-family: "Roboto Condensed Bold";
+        font-family: "Roboto-Bold";
         font-size: 100%;
         margin: 0 0 0 $space / 2;    
       }
@@ -146,7 +146,7 @@
               
         .Text {
 
-          font-family: "Roboto Condensed Bold";
+          font-family: "Roboto-Bold";
           color: $color-text-light;   
           margin: 0 $space 0 0;      
         }

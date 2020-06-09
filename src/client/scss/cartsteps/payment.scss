@@ -1,12 +1,10 @@
 .Step.Payment {
 
-  $totalsize: $space * 6;
-  overflow: hidden;
-
   .Content {  
 
-    .Card {
-
+    &.Content {      
+    
+      padding: $space * 8 $space * 8 0;
     }
 
     .Form {
@@ -36,10 +34,23 @@
 
         &.Pay {
 
-          button {
+          $gap: $space * 2;
 
-            width: 100%;
+          .Go {
+
+            width: calc(100% - #{$gap + 40px}); // circle button
+            margin: 0 $gap 0 0;
           }
+
+          .Cancel {
+
+            
+          }
+        }
+
+        &.Log {
+
+          margin: $space * 2 0 0; 
         }
       }
     }

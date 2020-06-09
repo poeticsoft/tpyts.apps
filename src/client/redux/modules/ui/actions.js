@@ -109,7 +109,10 @@ export const uiSetCardData = data => ({
   }
 })
 
-export const uiPay = data => (dispatch, getState) => {   
+export const UI_CART_CANCEL = 'UI_CART_CANCEL'
+export const uiCartCancel = () => ({ type: UI_CART_CANCEL })
+
+export const uiCartPay = data => (dispatch, getState) => {   
 
   const fetchConfig = {
     method: 'POST',

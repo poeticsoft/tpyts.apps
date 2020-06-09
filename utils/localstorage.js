@@ -34,23 +34,8 @@ const loadState = (mod) => {
   }
 }
 
-store.subscribe(() => {
-
-  return
-  
-  const UIState = { ...store.getState().ui }
-  delete UIState.message
-  delete UIState.map
-  delete UIState.gallery
-  saveState('UI', UIState);
-
-  const WPState = { ...store.getState().wp }
-  saveState('WP', WPState);  
-})
-
 export const initSavedState = () => {  
 
-  /*
   const savedUIState = loadState('UI')
   savedUIState !== null &&
   store.dispatch(Actions.uiSetInitialState(savedUIState))
@@ -58,8 +43,31 @@ export const initSavedState = () => {
   const savedWPState = loadState('WP')
   savedWPState !== null &&
   store.dispatch(Actions.wpSetInitialState(savedWPState))
-  */
 
-  store.dispatch(Actions.wpInit())
+  store.subscribe(() => {
+    
+    const UIState = { ...store.getState().ui }
+    delete UIState.message
+    delete UIState.map
+    delete UIState.gallery
+    saveState('UI', UIState);
+
+    const WPState = { ...store.getState().wp }
+    WPState.ready = false
+    saveState('WP', WPState);  
+  })
+
+  // setTimeout(() => { 
+
+    /*
+    setInterval(() => {
+
+      store.dispatch(Actions.wpRefresh())
+    }, 30000)
+    */
+
+    store.dispatch(Actions.wpRefresh())
+
+  // }, 2000) // Splash
 }
 

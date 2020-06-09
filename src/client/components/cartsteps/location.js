@@ -7,7 +7,8 @@ import {
   DatePicker,
   Select, 
   AutoComplete,  
-  Button
+  Button,
+  Tooltip
 } from 'antd';
 import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
@@ -66,6 +67,30 @@ const Location = connect(state => ({
           </Form.Item>
         </div>
 
+        <div className="Field Tel">
+          <Form.Item
+            label="Tu teléfono"
+          >
+            <Input
+              id="tel" 
+              placeholder="000 00 00 00" 
+              size="large"
+            />
+          </Form.Item>
+        </div>
+
+        <div className="Field Mail">
+          <Form.Item
+            label="O tu email"
+          >
+            <Input
+              id="mail" 
+              placeholder="mail@dominio.com" 
+              size="large"
+            />
+          </Form.Item>
+        </div>
+
         <div className="Field Location">
           <Form.Item
             label="Donde estás?"
@@ -80,10 +105,10 @@ const Location = connect(state => ({
             >
               <Input 
                 size="large" 
-                placeholder="input here"
+                placeholder="Buscamos tu dirección..."
               />
             </AutoComplete>
-          </Form.Item>
+          </Form.Item>          
           <div className="Check">
             <Button 
               shape="round"
@@ -95,13 +120,35 @@ const Location = connect(state => ({
           </div>
         </div>
 
-        <div className="Field Location">
+        <div className="Field WhenSelect">
           <Form.Item
             label="Cuando lo quieres?"
           >
+            <Select
+              defaultValue="lap"
+            >
+              <Option value="lap">Lo antes posible</Option>
+              <Option value="et" disabled>
+                <Tooltip
+                  title="(no disponible)"
+                  trigger="click"
+                >
+                  Para esta tarde
+                </Tooltip>
+              </Option>
+              <Option value="mnn">Para mañana</Option>
+            </Select>
+          </Form.Item>
+        </div>
+
+        <div className="Field WhenPicker">
+          <Form.Item
+            label="&nbsp;"
+          >
             <DatePicker
-              showTime
-              size="large"
+              mode="time"
+              placeholder="A que hora?"
+              disabled
             />
           </Form.Item>
         </div>

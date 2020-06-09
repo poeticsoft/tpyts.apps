@@ -153,14 +153,14 @@ const reducers = {
     }
   ), 
   
-  [Actions.UI_SET_CARD_DATA]: (state, action) => immutableUpdate(
+  [Actions.UI_SET_CARD_DATA]: (state, action) => { console.log(action.payload.data); return immutableUpdate(
     state,
     { 
       cart: {
         card: action.payload.data
       }
     }
-  ), 
+  ) }, 
 } 
 
 const reducer = (state = initialState, action) => reducers[action.type] ? 
