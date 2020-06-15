@@ -3,7 +3,8 @@ import React, {
 } from 'react'
 import { connect } from 'react-redux'
 import {
-  Button
+  Button,
+  Badge
 } from 'antd'
 import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
@@ -31,6 +32,12 @@ const Cart = connect(state => ({
       actualstep: key 
     }))
   }
+
+  const raciones = Object.keys(props.order.services)
+  .reduce((count, key) => {
+
+    return count + props.order.services[key]
+  }, 0)
   
   return <div
     className={`
@@ -42,82 +49,71 @@ const Cart = connect(state => ({
       }
     `}
   >
-    {
-      Object.keys(props.order.services).length ? <>
-        <div className="Header">
-          <div className="TuPedido">
-            Tu pedido de
-          </div>
-          <div className="Servicios">
-            <div className="Count">
-              { 
-                Object.keys(props.order.services)
-                .reduce((count, key) => {
+    <div className="OpenShadow"></div>
+    <div className="Header">
+      <div className="TuPedido">
+        Tu pedido es de
+      </div>
+      <div className="Price">
+        <div className="Number">{ 
 
-                  return count + props.order.services[key]
-                }, 0)
-              }
-            </div>
-            <div className="Text">Raciones</div>
-          </div>
-          <div className="Price">
-            <div className="Number">{ 
+          Object.keys(props.order.services)
+          .reduce((count, key) => {
 
-              Object.keys(props.order.services)
-              .reduce((count, key) => {
+            return count + (
+              props.order.services[key]
+              *
+              parseFloat(props.services[key].servicebasic.price)
+            )
+          }, 0)
 
-                return count + (
-                  props.order.services[key]
-                  *
-                  props.services[key].servicebasic.price
-                )
-              }, 0)
+        }</div>
+        <div className="Currency">€</div>
+      </div>
+    </div>
+    <div className="OpenCart">
+      <Button
+        icon={ <Icons.ShoppingCartOutlined /> }
+        shape="circle"
+        size="large"
+        onClick={ openCart }
+        disabled={ !Object.keys(props.order.services).length }
+      />
+      <div className="Count">
+        { raciones }
+      </div>
+    </div>
+    <div className="Wrapper">      
+      <div className="Steps">
+        {
+          Object.keys(props.cart.steps)
+          .map((key, index) => <Fragment key={ key }>
+            {
+              index > 0 && <i></i>
+            }
+            <Button           
+              icon={ props.cart.steps[key].icon }
+              shape="round"
+              type={ 'primary' }
+              onClick={ e => selectStep(e, key)}
+            >
+              { props.cart.steps[key].name }
+            </Button>
+          </Fragment>)
+        }
+      </div>  
+      <div className="CartBody">
+        {
+          Object.keys(props.cart.steps)
+          .map(key => {
 
-            }</div>
-            <div className="Currency">€</div>
-          </div>
-          <div className="Tools">
-            <Button
-              icon={ <Icons.ShoppingCartOutlined /> }
-              shape="circle"
-              onClick={ openCart }
-              disabled={ !Object.keys(props.order.services).length }
-            />
-          </div>
-        </div>
-        <div className="Steps">
-          {
-            Object.keys(props.cart.steps)
-            .map((key, index) => <Fragment key={ key }>
-              {
-                index > 0 && <i></i>
-              }
-              <Button           
-                icon={ props.cart.steps[key].icon }
-                shape="round"
-                type={ 'primary' }
-                onClick={ e => selectStep(e, key)}
-              >
-                { props.cart.steps[key].name }
-              </Button>
-            </Fragment>)
-          }
-        </div>  
-        <div className="CartBody">
-          {
-            Object.keys(props.cart.steps)
-            .map(key => {
+            const Comp = props.cart.steps[key].comp
 
-              const Comp = props.cart.steps[key].comp
-
-              return <Comp key={ key } />
-            })
-          }
-        </div>
-      </>
-      :
-      <></>
-    } 
+            return <Comp key={ key } />
+          })
+        }
+      </div>
+    </div>
   </div>  
 })
 

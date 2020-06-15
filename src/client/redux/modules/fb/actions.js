@@ -1,7 +1,6 @@
 // https://firebase.google.com/docs/database/web/read-and-write
 // https://firebase.google.com/docs/database/web/lists-of-data
-
-//https://console.firebase.google.com/project/tpyts-test/database/tpyts-test/data
+// https://console.firebase.google.com/project/tpyts-test/database/tpyts-test/data
 
 import * as Actions from 'rdx/actions'
 import firebase from 'firebase/app'
@@ -9,22 +8,21 @@ import 'firebase/auth'
 import 'firebase/database'
 // import basedata from './basedata.json'
 
-const fbConfig = {
-  apiKey: 'AIzaSyCoreTl2luCABh07LNLd_2uET-94fRbZdU',
-  authDomain: 'tpyts-test.firebaseapp.com',
-  databaseURL: 'https://tpyts-test.firebaseio.com',
-  projectId: 'tpyts-test',
-  storageBucket: 'tpyts-test.appspot.com',
-  messagingSenderId: '528636007709',
-  appId: '1:528636007709:web:172ac058b5240f49f13df4'
-}
+var firebaseConfig = {
+  apiKey: "AIzaSyBhZcmPA_Wa7qm4bvB3NTvUv9xz2aCK4Lg",
+  authDomain: "tpyts-summer-2020.firebaseapp.com",
+  databaseURL: "https://tpyts-summer-2020.firebaseio.com",
+  projectId: "tpyts-summer-2020",
+  storageBucket: "tpyts-summer-2020.appspot.com",
+  messagingSenderId: "754566191773",
+  appId: "1:754566191773:web:f9d7d8f978f58b84375274",
+  measurementId: "G-2VK34YDRFB"
+};
 
 const fbSlots = {
-  providers: null,
-  shops: null,
+  stores: null,
   services: null,
   dealers: null,
-  dealertypes: null,
   orders: null
 }  
 

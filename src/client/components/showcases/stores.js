@@ -6,7 +6,7 @@ import {
   Button
 } from 'antd'
 import * as Icons from '@ant-design/icons'
-import Quantity from '../common/quantity'
+import Service from './service'
 
 const { Panel } = Collapse
 
@@ -82,63 +82,10 @@ const StoreCover = props => {
   </div>
 }
 
-const StoreService = props => {
-  
-  return <div className="Service">
-    <div
-      className="Image"
-      style={{
-        backgroundImage: 'url(' + props.thumbnail + ')'
-      }}
-    ></div>
-    <div className="Data">
-      <div className="Name">
-        { props.post_title }
-      </div>
-      <div className="Excerpt">
-        { props.post_excerpt }
-      </div>
-      <div 
-        className="Components"
-        dangerouslySetInnerHTML={{ __html: props.servicebasic.components }}
-      />
-      <div className="Allergens">
-        { 
-          props.servicebasic.allergens
-          .split('|')
-          .map((allergen, index) => <div
-            key={ index }
-            className={`
-              Allergen
-              A_${ allergen }
-            `}
-          />)
-        }
-      </div>
-      <div className="Price">
-        <div
-          className="Comments"
-          dangerouslySetInnerHTML={{ __html: props.servicebasic.comments }}
-        />
-        <div className="NumberCurrency">
-          <span className="Number">{ props.servicebasic.price }</span>
-          <span className="Currency">€</span>
-        </div>
-      </div>
-      <Quantity 
-        serviceid={ props.ID }
-        dispatch={ props.dispatch }
-      />
-    </div>
-  </div>
-}
-
 const Stores = connect(state => ({
-  showcase: state.ui.showcase,
   stores: state.wp.slot.stores,
   services: state.wp.slot.services
-}))(props => props.showcase == 'stores' &&
-  <div className="Stores">
+}))(props => <div className="Stores">
     <Collapse
       bordered={ true }
       expandIconPosition="left"
@@ -156,7 +103,7 @@ const Stores = connect(state => ({
           {
             props.services.data
             .filter(service => service.servicebasic.store == store.ID)
-            .map(service => <StoreService
+            .map(service => <Service
               key={ service.ID }
               dispatch={ props.dispatch }
               { ...service } 

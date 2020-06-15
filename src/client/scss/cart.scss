@@ -1,31 +1,51 @@
 .Cart {
 
   background-color: $color-tpyts-yellow;
-  border: solid $color-tpyts-green;
-  border-width: 0 0 1px 0;
   @include boxshadow();
-  overflow: hidden;
 
-  transition-property: bottom;
-  transition-duration: 0.5s;
+  &.Opened {
+
+    .Wrapper {
+
+      height: 608px
+    }
+  }
+
+  .OpenShadow {
+
+    $size: $space * 8;
+
+    position: absolute;
+    top: $space / 2;
+    right: 0;
+    width: $size;
+    height: $size;
+    background-color: $color-tpyts-yellow;
+    border-radius: 0 0 0 50%;
+    @include boxshadow();
+  }
+
+  .Header,
+  .Wrapper {
+
+    border-radius: 0 0 $space * 3 $space * 3;
+  }
 
   .Header {
 
-    padding: $space;
+    padding: $space $space * 8;
     text-align: right;
-
-    * {
+    background-color: $color-tpyts-yellow;
+    position: relative;
+    
+    .TuPedido,
+    .Price,
+    .Number,
+    .Currency {
 
       display: inline-block;
       vertical-align: middle;
-      line-height: 100%;
-    }
-
-    .Servicios,
-    .Price,
-    .Tools {
-
-      margin: 0 0 0 $space * 2;
+      line-height: $space * 5;;
     }
 
     .TuPedido {
@@ -33,30 +53,13 @@
       font-family: "Roboto-Bold";
     }
     
-    .Servicios {
-      
-      .Count {
-
-        font-family: "Roboto-Bold";
-        font-size: 170%;      
-      }
-      
-      .Text {
-
-        margin: 0 0 0 $space / 2;      
-      }
-    }
-    
-    .Price {    
-
-      border: solid 1px $color-border-dark;
-      padding: $space / 2 $space * 1.5;
-      border-radius: $space * 2.8;
+    .Price {  
       
       .Number {
 
         font-family: "Roboto-Bold";
         font-size: 170%;      
+        margin: 0 0 0 $space / 2; 
       }
       
       .Currency {
@@ -66,101 +69,132 @@
         margin: 0 0 0 $space / 2;    
       }
     }
+  }   
     
-    .Tools {
+  .OpenCart {
 
-      button {
+    position: absolute;
+    top: $space * 2;
+    right: $space;
+    z-index: 2;
 
-        &:not(:disabled) {
+    button:not(:disabled) {
 
-          @include boxshadow();
-        }
-      }
+      @include boxshadow();
     }
-  }
 
-  .Steps {
+    .Count {
 
-    background-color: $color-background-light;
-    border-radius: $space * 2.8 0 0 0;
-    padding: $space 0 0 $space;  
-    
-    * {
+      $size: $space * 3;
 
       display: inline-block;
-      vertical-align: middle;
-    }
-
-    i {
-
-      width: $space;
-      height: 2px;
+      position: absolute;
+      top: -$space;
+      left: -$space;
+      width: $size;
+      height: $size;
+      line-height: $size;
+      text-align: center;
+      border-radius: $size / 2;
+      color: $color-text-light;
       background-color: $color-tpyts-green;
-    }
-
-    button.ant-btn-round {
-
-      padding: $space / 2 $space * 1.5;
+      font-size: 80%;
     }
   }
 
-  .CartBody {
+  .Wrapper {
 
-    .Step {
-
-      $nextsize: $space * 6;
-
-      @include absolutebox();
-      padding: $space * 2;
-      overflow-y: auto;
-      background-color: $color-background-light;      
-      border-radius: 0 0 $space * 2.8 $space * 2.8;
-      display: none;
-      overflow: hidden;
-
-      .Content {  
-        
+    position: relative;
+    background-color: $color-tpyts-yellow;
+    height: 0;
+    overflow: hidden;
+    z-index: 1;
+    transition-property: height;
+    transition-duration: 0.5s;
+  
+    .Steps {
+  
+      background-color: $color-background-light;
+      border-radius: $space * 2.8 0 0 0;
+      padding: $space 0 0 $space; 
+      
+      * {
+  
+        display: inline-block;
+        vertical-align: middle;
+      }
+  
+      i {
+  
+        width: $space;
+        height: 2px;
+        background-color: $color-tpyts-green;
+      }
+  
+      button.ant-btn-round {
+  
+        padding: $space / 2 $space * 1.5;
+      }
+    }
+  
+    .CartBody {
+  
+      .Step {
+  
+        $nextsize: $space * 6;
+  
         @include absolutebox();
-        bottom: $nextsize;
-        overflow-y: auto;
-        z-index: 0;
         padding: $space * 2;
-      }
+        overflow-y: auto;
+        background-color: $color-background-light;      
+        border-radius: 0 0 $space * 2.8 $space * 2.8;
+        display: none;
+        overflow: hidden;
+  
+        .Content {  
+          
+          @include absolutebox();
+          bottom: $nextsize;
+          overflow-y: auto;
+          z-index: 0;
+          padding: $space * 2;
+        }
+                  
+        .Next {
+  
+          @include absolutebox();
+          top: auto;
+          height: $nextsize;  
+          z-index: 1;  
+          background: $color-tpyts-green;
+          padding: $space;
+          text-align: right;
                 
-      .Next {
-
-        @include absolutebox();
-        top: auto;
-        height: $nextsize;  
-        z-index: 1;  
-        background: $color-tpyts-green;
-        padding: $space;
-        text-align: right;
-              
-        .Text,    
-        button {
-
-          display: inline-block;
-          vertical-align: middle;
+          .Text,    
+          button {
+  
+            display: inline-block;
+            vertical-align: middle;
+          }
+                
+          .Text {
+  
+            font-family: "Roboto-Bold";
+            color: $color-text-light;   
+            margin: 0 $space 0 0;      
+          }
+  
+          button.Back {
+  
+            float:left;
+          }
         }
-              
-        .Text {
-
-          font-family: "Roboto-Bold";
-          color: $color-text-light;   
-          margin: 0 $space 0 0;      
-        }
-
-        button.Back {
-
-          float:left;
-        }
-      }
-    
-      &.Visible {
-
-        display: block;
-      }     
-    } 
+      
+        &.Visible {
+  
+          display: block;
+        }     
+      } 
+    }
   }
 }

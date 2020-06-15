@@ -1,42 +1,52 @@
 .Showcase .Stores {
 
-  // ant-collapse-item
-
   .ant-collapse {
 
     background-color: $color-tpyts-yellow-transparent;
-  }
-
-  .ant-collapse > 
-  .ant-collapse-item > 
-  .ant-collapse-header {
-
-    padding: 0;
     
-    .ant-collapse-arrow {     
-      
-      position: absolute;
-      top: unset;
-      left: $space * 2;
-      bottom: $space * 2;
-      font-size: 16px;
-      -webkit-transform: none;
-      transform: none;
-      color: $color-tpyts-green;
+    > .ant-collapse-item {
 
-      &:after,
-      svg {
+      border-top: solid 8px $color-tpyts-green;
 
-        display: inline-block;
-        vertical-align: middle;
+      > .ant-collapse-header {
+
+        padding: 0;
+        
+        .ant-collapse-arrow {     
+          
+          position: absolute;
+          top: unset;
+          left: $space * 2;
+          bottom: $space * 2;
+          font-size: 16px;
+          -webkit-transform: none;
+          transform: none;
+          color: $color-tpyts-green;
+
+          &:after,
+          svg {
+
+            display: inline-block;
+            vertical-align: middle;
+          }
+
+          &:after {
+
+            content: "MENU";
+            font-family: "Roboto-Regular";
+            font-size: 100%;
+            margin: 2px 0 0 $space / 2;
+          }
+        }
       }
+    }
 
-      &:after {
+    .ant-collapse-content {
 
-        content: "MENU";
-        font-family: "Roboto-Regular";
-        font-size: 100%;
-        margin: 2px 0 0 $space / 2;
+      .ant-collapse-content-box {
+
+        padding: $space;
+        background-color: $color-tpyts-yellow;
       }
     }
   }

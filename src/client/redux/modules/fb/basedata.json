@@ -1,0 +1,27 @@
+{
+  "providers": {
+    "providerid": {
+      "data": "value"
+    }
+  },
+  "stores": {
+    "storeid": {
+      "data": "value"
+    }
+  },
+  "services": {
+    "serviceid": {
+      "data": "value"
+    }
+  },
+  "dealers": {
+    "dealerid": {
+      "data": "value"
+    }
+  },
+  "orders": {
+    "orderid": {
+      "data": "value"
+    }
+  }
+}

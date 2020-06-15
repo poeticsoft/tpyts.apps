@@ -21,10 +21,9 @@ const fbConfig = {
 
 const fbSlots = {
   providers: null,
-  shops: null,
+  stores: null,
   services: null,
   dealers: null,
-  dealertypes: null,
   orders: null
 }  
 

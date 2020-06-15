@@ -7,7 +7,12 @@ const Message = connect(
   })
 )(props => {  
 
-  return props.message &&
+  return <></>
+
+  return (
+    props.message &&
+    props.message.text
+  ) ?
   <div 
     className= {`
       Message
@@ -16,6 +21,8 @@ const Message = connect(
   >
     { props.message.text}
   </div>
+  :
+  <></>
 })
 
 export default Message;

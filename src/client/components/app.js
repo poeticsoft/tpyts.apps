@@ -10,6 +10,7 @@ import Showcase from './showcase'
 import Map from './map'
 import Gallery from './gallery'
 import Cart from './cart'
+import Tools from './tools'
 import Splash from './splash'
 
 const App = props => {
@@ -21,6 +22,7 @@ const App = props => {
     <Cart />
     <Map />
     <Gallery />
+    <Tools />
     <Splash />
     <Message />
   </Provider>

@@ -37,14 +37,6 @@ export const uiSetInitialState = state => ({
   }
 })
 
-export const UI_SET_SHOP_ACTIVE = 'UI_SET_SHOP_ACTIVE'
-export const uiSetShopActive = shopid => ({
-  type: UI_SET_SHOP_ACTIVE,
-  payload: {
-    shopid: shopid
-  }
-})
-
 export const UI_SET_SERVICE_ACTIVE = 'UI_SET_SERVICE_ACTIVE'
 export const uiSetServiceActive = serviceid => ({
   type: UI_SET_SERVICE_ACTIVE,
@@ -66,6 +58,43 @@ export const uiSetGalleryState = data => ({
   type: UI_SET_GALLERY_STATE,
   payload: {
     data: data
+  }
+})
+
+export const uiSearch = text => (dispatch, getState) => { 
+
+  dispatch(Actions.uiShowMessage({
+    text: 'Buscando ' + text
+  }))
+
+  dispatch(Actions.uiSetSearchStatus({
+    status: 'searching',
+    text: text
+  }))
+  
+  fetch('/wp-json/wp/v2/search?subtype=service&search=' + text)
+  .then(function(response) {
+
+    response.json()
+    .then(results => {
+
+      dispatch(Actions.uiSetSearchStatus({
+        status: 'found',
+        results: results
+      }))
+    })
+  })
+  .catch(error => {
+
+    console.log(error)
+  })
+}
+
+export const UI_SET_SEARCH_STATUS = 'UI_SET_SEARCH_STATUS'
+export const uiSetSearchStatus = status => ({
+  type: UI_SET_SEARCH_STATUS,
+  payload: {
+    status: status
   }
 })
 

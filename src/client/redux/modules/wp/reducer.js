@@ -2,7 +2,7 @@ import immutableUpdate from 'immutable-update'
 import * as Actions from './actions'
 
 const initialState = {
-  ready: false,
+  updated: false,
   slot: {
     datas: {
       lastchangedate: '',

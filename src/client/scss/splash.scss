@@ -1,0 +1,34 @@
+.Splash {
+
+  opacity: 1; 
+  transition-property: opacity, transform;
+  transition-duration: 1s;  
+  transform: translateY(0);
+  text-align: center;
+
+  &.Ready {
+
+    opacity: 0;
+    transform: translateY(-100%)
+  }
+
+  &:before,
+  .Logo {
+
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &:before {
+
+    content: "";
+    width: 0;
+    height: 100%;
+  }
+
+  .Logo {
+
+    max-width: 60%;
+    height: 50%;
+  }
+}

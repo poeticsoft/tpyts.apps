@@ -21,27 +21,43 @@ body {
       0,
       0,
       0
-    );    
+    );      
+    background-color: $color-background-light;
+    overflow: hidden;
     z-index: 0;
 
     .Stores,
-    .Catergories,
-    .Search {
+    .Search,
+    .Terms {
+
+      @include absolutebox();      
+      background-color: $color-background-light;
+      overflow-y: auto;      
+      padding: $space * 2;
+    }
+
+    .Search,
+    .Terms {
       
-      @include absolutebox();
+      transition-property: transform;
+      transition-duration: 0.5s; 
+      transform: translateY(0); 
+
+      &.hidden {
+
+        transform: translateY(100%);
+      }  
     }
   }
 
   .Cart {
 
-    @include absolutebox();
-    bottom: calc(100% - #{ $cartheadersize });
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 0 0 $space * 3 $space * 3;
+    width: 320px;
     z-index: 1;
-
-    &.Opened {
-
-      bottom: $space * 2;
-    }
 
     .Header {
 
@@ -51,16 +67,13 @@ body {
     .Steps {
 
       height: $cartstepssize - 1;
-      margin: $space $space * 2;
+      margin: $space * 3 0 0;
     }
 
     .CartBody {
 
-      @include absolutebox(        
-        $cartheadersize + $cartstepssize + $space,
-        $space * 2,
-        $space * 2,
-        $space * 2
+      @include absolutebox(  
+        $space * 9
       )
     }
   }
@@ -96,11 +109,19 @@ body {
     z-index: 3;
   }
 
+  > .Tools {
+
+    @include absolutebox();
+    top: auto;
+    height: $space * 10;
+    z-index: 4;
+  }
+
   .Splash {
 
     @include absolutebox();
     background-color: $color-tpyts-yellow;
-    z-index: 4;
+    z-index: 5;
   }
 
   .Message {
@@ -108,6 +129,6 @@ body {
     @include absolutebox();
     top: auto;
     left: auto;
-    z-index: 4;
+    z-index: 6;
   }
 }

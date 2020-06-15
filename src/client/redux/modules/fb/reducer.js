@@ -2,19 +2,11 @@ import immutableUpdate from 'immutable-update'
 import * as Actions from './actions'
 
 const initialState = {
-  providers: {
-    status: 'empty',
-    data: {}
-  },
-  shops: {
+  stores: {
     status: 'empty',
     data: {}
   },
   services: {
-    status: 'empty',
-    data: {}
-  },
-  dealers: {
     status: 'empty',
     data: {}
   },

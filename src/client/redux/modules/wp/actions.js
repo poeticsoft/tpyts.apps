@@ -16,16 +16,37 @@ export const slots = [
   'terms'
 ]
 
+let refreshPollTime = 30
+
 export const wpRefresh = () => (dispatch, getState) => {
 
-  dispatch(Actions.wpUpdateStatus({
-    ready: false
+  dispatch(Actions.uiSetMessage({
+    text: 'Comprobando datos...'
   }))
+
+  slots
+  .forEach(slot => {
+
+    dispatch(Actions.wpUpdateSlot({
+      slot: slot,
+      data: {
+        updated: false
+      }
+    }))
+  })
+
+  dispatch(Actions.wpCheckSlotsUpdated())
 
   const state = getState().wp
 
   fetch('/wp-json/tpyts/changes')
   .then(response => response.json().then(changes => {
+
+    const changesRefreshPollTime = parseInt(changes.refreshpolltime)
+    refreshPollTime = isNaN(changesRefreshPollTime) ? 
+      refreshPollTime
+      :
+      changesRefreshPollTime
 
     slots
     .forEach(slot => {
@@ -44,6 +65,10 @@ export const wpRefresh = () => (dispatch, getState) => {
           data: {
             updated: false
           }
+        }))        
+
+        dispatch(Actions.uiSetMessage({
+          text: 'Actualizando ' + slot + '...'
         }))
 
         fetch('/wp-json/tpyts/' + slot)
@@ -62,6 +87,13 @@ export const wpRefresh = () => (dispatch, getState) => {
         }))
       } else {
 
+        dispatch(Actions.wpUpdateSlot({
+          slot: slot,
+          data: {
+            updated: true
+          }
+        }))
+
         dispatch(Actions.wpCheckSlotsUpdated())
       }
     })
@@ -70,7 +102,8 @@ export const wpRefresh = () => (dispatch, getState) => {
 
 export const wpCheckSlotsUpdated = () => (dispatch, getState) => {
 
-  const slot = getState().wp.slot
+  const state = getState()
+  const slot = state.wp.slot
   const slotsupdated = Object.keys(slot)
   .reduce((status, key) => {
     
@@ -78,8 +111,17 @@ export const wpCheckSlotsUpdated = () => (dispatch, getState) => {
   }, true)
 
   dispatch(Actions.wpUpdateStatus({
-    ready: slotsupdated
+    ready: slotsupdated ? slotsupdated : state.ready,
+    updated: slotsupdated    
   }))
+
+  if(slotsupdated) {
+
+    setTimeout(() => {
+
+      dispatch(Actions.wpRefresh())
+    }, refreshPollTime * 1000)
+  }
 }
 
 export const WP_UPDATE_STATUS = 'WP_UPDATE_STATUS'

@@ -34,7 +34,7 @@ const loadState = (mod) => {
   }
 }
 
-export const initSavedState = () => {  
+export const initSavedState = () => { 
 
   const savedUIState = loadState('UI')
   savedUIState !== null &&
@@ -50,6 +50,11 @@ export const initSavedState = () => {
     delete UIState.message
     delete UIState.map
     delete UIState.gallery
+    UIState.search = {
+      status: 'hidden',
+      searchtext: '',
+      results: []
+    },
     saveState('UI', UIState);
 
     const WPState = { ...store.getState().wp }
@@ -57,17 +62,16 @@ export const initSavedState = () => {
     saveState('WP', WPState);  
   })
 
-  // setTimeout(() => { 
+  store.dispatch(Actions.wpRefresh())
 
-    /*
-    setInterval(() => {
+  /*
 
-      store.dispatch(Actions.wpRefresh())
-    }, 30000)
-    */
+  setTimeout(() => { 
 
     store.dispatch(Actions.wpRefresh())
 
-  // }, 2000) // Splash
+  }, 3000) // Splash
+
+  */
 }
 

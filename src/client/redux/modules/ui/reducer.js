@@ -61,7 +61,14 @@ const initialState = {
     location: {},
     errors: {}
   },
-  showcase: 'stores'
+  search: {
+    status: 'hidden',
+    searchtext: '',
+    results: []
+  },
+  terms: {
+    status: 'hidden'
+  } 
 }
 
 const reducers = { 
@@ -85,12 +92,7 @@ const reducers = {
   [Actions.UI_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
     state,
     action.payload.state
-  ),
-  
-  [Actions.UI_SET_SHOP_ACTIVE]: (state, action) => immutableUpdate(
-    state,
-    { shopactive: action.payload.shopid }
-  ),  
+  ), 
   
   [Actions.UI_SET_SERVICE_ACTIVE]: (state, action) => immutableUpdate(
     state,
@@ -108,6 +110,13 @@ const reducers = {
     state,
     { 
       gallery: action.payload.data
+    }
+  ),
+
+  [Actions.UI_SET_SEARCH_STATUS]: (state, action) => immutableUpdate(
+    state,
+    { 
+      search: action.payload.status
     }
   ),
 
