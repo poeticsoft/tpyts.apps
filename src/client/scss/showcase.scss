@@ -1,4 +1,60 @@
 .Showcase {
 
+  $titlesize: $space * 6;
 
+  @include absolutebox();      
+  background-color: $color-background-light;
+  overflow: hidden;
+  z-index: 0;
+
+  .ShowcaseTitle {
+
+    @include absolutebox();  
+    bottom: auto;
+    height: $titlesize;
+    font-family: "Roboto-Bold";
+    font-size: 140%;
+    border: solid $color-border-green;
+    border-width: 0 0 1px 0;
+
+    span {
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: $space* 2;
+      opacity: 0;
+      transition-property: opacity;
+      transition-duration: 0.5s;
+      text-transform: uppercase;
+
+      &.Visible {
+
+        opacity: 1;
+      }
+    }
+  }
+
+  .Stores,
+  .Search,
+  .Terms {
+
+    @include absolutebox();  
+    top: $titlesize;   
+    background-color: $color-background-light;
+    overflow-y: auto;
+  }
+
+  .Search,
+  .Terms {
+    
+    transition-property: transform;
+    transition-duration: 0.5s; 
+    transform: translateY(0); 
+
+    &.hidden {
+
+      transform: translateY(100%);
+    }  
+  }
 }

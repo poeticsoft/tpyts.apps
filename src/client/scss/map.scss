@@ -1,8 +1,28 @@
-.Map {
+.Map {     
 
   border: solid 1px $color-border-medium;
   background-color: #fff;
-  @include boxshadow(); 
+  @include boxshadow();
+  $mapheaderheight: $space * 6;
+
+  @include absolutebox(
+    $space * 2,
+    $space * 2,
+    $space * 2,
+    $space * 2
+  );
+  z-index: 2;
+
+  .Header {      
+
+    height: $mapheaderheight;
+  }
+
+  .Google {
+
+    @include absolutebox();
+    top: $mapheaderheight;
+  } 
 
   .Header {
 

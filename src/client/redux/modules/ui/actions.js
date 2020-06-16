@@ -61,11 +61,21 @@ export const uiSetGalleryState = data => ({
   }
 })
 
+export const UI_SET_SHOWCASE_ACTIVE = 'UI_SET_SHOWCASE_ACTIVE'
+export const uiSetShowcaseActive = showcase => ({
+  type: UI_SET_SHOWCASE_ACTIVE,
+  payload: {
+    showcase: showcase
+  }
+})
+
 export const uiSearch = text => (dispatch, getState) => { 
 
   dispatch(Actions.uiShowMessage({
     text: 'Buscando ' + text
   }))
+
+  dispatch(Actions.uiSetShowcaseActive('search'))
 
   dispatch(Actions.uiSetSearchStatus({
     status: 'searching',
@@ -105,6 +115,34 @@ export const uiAddServicesToOrder = data => ({
     data: data
   }
 })
+
+export const uiOpenCart = () => (dispatch, getState) => { 
+
+  dispatch(Actions.uiSetCartStatus({
+    openstate: 'header'
+  }))
+
+  setTimeout(() => {
+
+    dispatch(Actions.uiSetCartStatus({
+      openstate: 'wrapper'
+    }))
+  }, 500)
+}
+
+export const uiCloseCart = () => (dispatch, getState) => { 
+
+  dispatch(Actions.uiSetCartStatus({
+    openstate: 'header'
+  }))
+
+  setTimeout(() => {
+
+    dispatch(Actions.uiSetCartStatus({
+      openstate: 'hidden'
+    }))
+  }, 500)
+}
 
 export const UI_SET_CART_STATUS = 'UI_SET_CART_STATUS'
 export const uiSetCartStatus = status => ({

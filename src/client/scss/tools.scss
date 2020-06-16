@@ -1,5 +1,9 @@
 #TPYTSClient > .Tools {
 
+  @include absolutebox();
+  top: auto;
+  height: $space * 10;
+  z-index: 4;
   transition-property: left;
   transition-delay: 0.5s;
   transition-duration: 0.5s; 

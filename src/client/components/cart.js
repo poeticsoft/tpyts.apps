@@ -17,11 +17,15 @@ const Cart = connect(state => ({
   order: state.ui.order
 }))(props => { 
 
-  const openCart = e => {
+  const toggleCart = e => {
 
-    props.dispatch(Actions.uiSetCartStatus({
-      opened: !props.cart.opened 
-    }))
+    e.stopPropagation()
+
+    props.cart.openstate != 'wrapper' &&    
+    props.dispatch(Actions.uiOpenCart())
+
+    props.cart.openstate != 'hidden' &&    
+    props.dispatch(Actions.uiCloseCart())
   }
 
   const selectStep = (e, key) => {
@@ -42,48 +46,15 @@ const Cart = connect(state => ({
   return <div
     className={`
       Cart
-      ${ 
-        (
-          props.cart.opened
-        ) ? 'Opened' : '' 
-      }
+      ${ props.cart.openstate }
     `}
   >
-    <div className="OpenShadow"></div>
-    <div className="Header">
-      <div className="TuPedido">
-        Tu pedido es de
-      </div>
-      <div className="Price">
-        <div className="Number">{ 
-
-          Object.keys(props.order.services)
-          .reduce((count, key) => {
-
-            return count + (
-              props.order.services[key]
-              *
-              parseFloat(props.services[key].servicebasic.price)
-            )
-          }, 0)
-
-        }</div>
-        <div className="Currency">€</div>
-      </div>
-    </div>
-    <div className="OpenCart">
-      <Button
-        icon={ <Icons.ShoppingCartOutlined /> }
-        shape="circle"
-        size="large"
-        onClick={ openCart }
-        disabled={ !Object.keys(props.order.services).length }
-      />
-      <div className="Count">
-        { raciones }
-      </div>
-    </div>
-    <div className="Wrapper">      
+    <div className="Wrapper"> 
+      <div className="Header">
+        <div className="Title">
+          Tu pedido
+        </div>
+      </div>    
       <div className="Steps">
         {
           Object.keys(props.cart.steps)
@@ -112,6 +83,28 @@ const Cart = connect(state => ({
             return <Comp key={ key } />
           })
         }
+      </div>
+    </div>
+    <div className="OpenCart">
+      <Button
+        icon={ <Icons.ShoppingCartOutlined /> }
+        shape="circle"
+        size="large"
+        onClick={ toggleCart }
+        disabled={ !Object.keys(props.order.services).length }
+      />
+      <div className="Count">
+        { raciones } / {          
+          Object.keys(props.order.services)
+          .reduce((count, key) => {
+
+            return count + (
+              props.order.services[key]
+              *
+              parseFloat(props.services[key].servicebasic.price)
+            )
+          }, 0)
+        } €
       </div>
     </div>
   </div>  

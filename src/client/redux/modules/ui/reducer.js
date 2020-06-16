@@ -25,7 +25,7 @@ const initialState = {
     }
   },
   cart: {
-    opened: false,
+    openstate: 'hidden',
     actualstep: 'order',
     steps: {
       'order': {        
@@ -61,6 +61,7 @@ const initialState = {
     location: {},
     errors: {}
   },
+  showcase: 'stores',
   search: {
     status: 'hidden',
     searchtext: '',
@@ -110,6 +111,13 @@ const reducers = {
     state,
     { 
       gallery: action.payload.data
+    }
+  ),
+
+  [Actions.UI_SET_SHOWCASE_ACTIVE]: (state, action) => immutableUpdate(
+    state,
+    { 
+      showcase: action.payload.showcase
     }
   ),
 

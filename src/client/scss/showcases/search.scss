@@ -1,4 +1,16 @@
 .Showcase .Search {
 
-  
+  .Close {
+
+    position: absolute;
+    top: $space * 3;
+    right: $space;
+    @include boxshadow();
+  }
+
+  .Results {
+
+    @include absolutebox();
+    overflow-y: auto;
+  }
 }
