@@ -1,0 +1,42 @@
+.Quantity {
+
+  text-align: right;
+
+  button.Down,
+  .Number,
+  button.Up,
+  button.Add {
+
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  button.Down,
+  button.Up,
+  button.Add {
+
+    padding: 0;
+  }
+  
+  button.Up {
+    
+  }
+  
+  .Number {
+    
+    font-family: "BebasNeue-Bold";
+    font-size: 160%;
+    padding: 0 $space / 2;
+    min-width: $space * 4;
+    text-align: center;
+  }
+  
+  button.Down {
+    
+  }
+  
+  button.Add {
+    
+    margin: 0 0 0 $space;
+  }
+}

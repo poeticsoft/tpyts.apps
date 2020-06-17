@@ -36,26 +36,25 @@ const Quantity = props => {
       shape="circle"
       onClick={ e => inc(e, -1) }
       className="Down"
-      size="small"
       disabled={ quantity < 2 }
     >
-      <Icons.DownCircleOutlined />
+      <Icons.DownOutlined />
     </Button>   
     <div className="Number">{ quantity }</div>       
     <Button 
       shape="circle"
       onClick={ e => inc(e, 1) }
       className="Up"
-      size="small"
     >
-      <Icons.UpCircleOutlined/>
+      <Icons.UpOutlined/>
     </Button>
     <Button
       shape="circle"
       className="Add"
+      size="large"
       onClick={ addToOrder }
     >
-      <Icons.PlusCircleOutlined />
+      <Icons.PlusOutlined />
     </Button>
   </div>
 }

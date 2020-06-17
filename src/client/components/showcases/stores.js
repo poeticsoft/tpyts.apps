@@ -1,6 +1,12 @@
-import React from 'react'
+import React, {
+  useState,
+  useEffect,
+  useRef
+} from 'react'
+import { debounce } from 'lodash'
 import { connect } from 'react-redux'
 import * as Actions from 'rdx/actions'
+import Draggable from 'react-draggable'
 import {
   Collapse,
   Button
@@ -85,34 +91,72 @@ const StoreCover = props => {
 const Stores = connect(state => ({
   stores: state.wp.slot.stores,
   services: state.wp.slot.services
-}))(props => <div className="Stores">
-    <Collapse
-      bordered={ true }
-      expandIconPosition="left"
-    >
-      {
-        props.stores.data
-        .map(store => <Panel
-          key={ store.ID }
-          storeid={ store.ID }
-          header={ <StoreCover 
-            dispatch={ props.dispatch }
-            { ...store }
-          />}
-        >
-          {
-            props.services.data
-            .filter(service => service.servicebasic.store == store.ID)
-            .map(service => <Service
-              key={ service.ID }
+}))(props => {
+
+  const [ dragBound, setDragBound ] = useState(0)
+  const bounds = useRef()
+
+  const resize = debounce(() => {
+
+    console.log(bounds.current.childNodes[0].name)
+
+    setDragBound(bounds.current.innerWidth + window.innerWidth)
+  })
+
+  useEffect(() => {
+
+    window.addEventListener('resize', resize)
+
+    resize()
+
+    return () => window.removeEventListener('resize', resize)
+  })
+  return <div className="Stores">
+    {
+      props.stores.data &&
+      props.stores.data.length &&
+      <Collapse
+        bordered={ true }
+        expandIconPosition="left"
+        defaultActiveKey={ [ props.stores.data[0].ID] }
+      >
+        {
+          props.stores.data
+          .map(store => <Panel
+            key={ store.ID }
+            storeid={ store.ID }
+            header={ <StoreCover 
               dispatch={ props.dispatch }
-              { ...service } 
-            />)
-          }
-        </Panel>)
-      }
-    </Collapse>
+              { ...store }
+            />}
+          > 
+            <Draggable 
+              axis="x" 
+              bounds={{
+                left: -dragBound,
+                right: 0
+              }}
+            >
+              <div 
+                className="Services"
+                ref={ bounds }
+              >      
+                {
+                  props.services.data
+                  .filter(service => service.servicebasic.store == store.ID)
+                  .map(service => <Service
+                    key={ service.ID }
+                    dispatch={ props.dispatch }
+                    { ...service } 
+                  />)
+                }              
+              </div>
+            </Draggable>
+          </Panel>)
+        }
+      </Collapse>
+    }
   </div>
-)
+})
 
 export default Stores

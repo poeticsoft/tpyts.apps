@@ -2,7 +2,7 @@
 
   .ant-collapse {
 
-    background-color: $color-tpyts-yellow-transparent;
+    background-color: $color-tpyts-yellow-transparent-a;
     border: none;
     
     > .ant-collapse-item {
@@ -17,12 +17,17 @@
           
           position: absolute;
           top: unset;
-          left: $space * 2;
-          bottom: $space * 2;
+          left: 0;
+          bottom: -1;
           font-size: 16px;
           -webkit-transform: none;
           transform: none;
           color: $color-tpyts-green;
+          background-color: $color-background-light;
+          padding: $space * 2 $space * 3;
+          border: solid $color-border-medium;
+          border-width: 1px 1px 0 0;
+          border-radius: 0 $space * 2.8 0 0;
 
           &:after,
           svg {
@@ -47,7 +52,31 @@
       .ant-collapse-content-box {
 
         padding: $space;
-        background-color: $color-tpyts-yellow;
+        white-space: nowrap;
+        position: relative;
+
+        .Services {
+          
+          display: inline-block;
+
+          .Service {          
+
+            display: inline-block;
+            vertical-align: top;
+            padding: $space;
+            width: 90%;
+            white-space: normal;
+
+            @media (min-width: 420px) { width: 45%; }
+            @media (min-width: 600px) { width: 30%; }
+            @media (min-width: 900px) { width: 20%; }
+
+            .Quantity {
+
+              margin: $space 0;
+            }
+          }
+        }
       }
     }
   }
@@ -99,7 +128,7 @@
       
         .Title {
 
-          font-family: "Roboto-Bold";
+          font-family: "BebasNeue-Bold";
           font-size: 180%;
         }
         
