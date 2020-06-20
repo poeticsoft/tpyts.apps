@@ -166,13 +166,13 @@
       top: -$space;
       right: calc(100% - #{ $space * 1.5 });
       height: $size;
-      padding: 0 $space;
+      padding: 1px $space 0 $space * 1.5;
       line-height: $size;
       text-align: center;
       border-radius: $size / 2;
       color: $color-text-light;
       background-color: $color-tpyts-green;
-      font-size: 80%;
+      font-size: 100%;
       white-space: nowrap;
     }
   }

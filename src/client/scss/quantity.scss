@@ -1,19 +1,15 @@
 .Quantity {
 
-  text-align: right;
-
   button.Down,
   .Number,
-  button.Up,
-  button.Add {
+  button.Up {
 
     display: inline-block;
     vertical-align: middle;
   }
   
   button.Down,
-  button.Up,
-  button.Add {
+  button.Up {
 
     padding: 0;
   }
@@ -33,10 +29,5 @@
   
   button.Down {
     
-  }
-  
-  button.Add {
-    
-    margin: 0 0 0 $space;
   }
 }

@@ -12,7 +12,7 @@
     @include absolutebox();  
     bottom: auto;
     height: $titlesize;
-    font-family: "Roboto-Bold";
+    font-family: "BebasNeue-Bold";
     font-size: 140%;
     border: solid $color-border-green;
     border-width: 0 0 1px 0;
@@ -22,7 +22,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      padding: $space* 2;
+      padding: $space * 1.5 0 0 $space * 2;
       opacity: 0;
       transition-property: opacity;
       transition-duration: 0.5s;

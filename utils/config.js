@@ -1,5 +1,5 @@
 export const GMaps = {
-  key: 'AIzaSyAksiltFsr6peuQ4voDgkYNPYFVo2a5bgw',
+  key: 'AIzaSyBhZcmPA_Wa7qm4bvB3NTvUv9xz2aCK4Lg',
   locationcenter: {
     lat: 41.183210,
     lng: 1.524458

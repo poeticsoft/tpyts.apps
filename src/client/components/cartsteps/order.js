@@ -12,7 +12,7 @@ const OrderService = connect(state => ({
 }))(props => {
 
   const service = props.services[props.serviceid]
-  const price = parseFloat(service.servicebasic.price)
+  const price = parseFloat(service.servicebasic.price.replace(',', '.'))
   const total = price * props.quantity
 
   return <div 

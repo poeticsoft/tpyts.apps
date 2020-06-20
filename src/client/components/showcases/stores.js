@@ -1,17 +1,15 @@
 import React, {
   useState,
-  useEffect,
-  useRef
+  useEffect
 } from 'react'
-import { debounce } from 'lodash'
 import { connect } from 'react-redux'
 import * as Actions from 'rdx/actions'
-import Draggable from 'react-draggable'
 import {
   Collapse,
   Button
 } from 'antd'
 import * as Icons from '@ant-design/icons'
+import Draggable from 'react-draggable'
 import Service from './service'
 
 const { Panel } = Collapse
@@ -51,7 +49,20 @@ const StoreCover = props => {
     props.dispatch(Actions.uiSetGalleryState(galleryData))    
   }
 
-  return <div className="Cover">
+  const style = (
+    props.gallery
+    &&
+    props.gallery[0]
+  ) ? {
+    backgroundImage: 'url(' + props.gallery[0] + ')'
+  }
+  :
+  {}
+
+  return <div
+    className="Cover"
+    style={ style }
+  >
     <div
       className="Logo"
       style={{
@@ -88,29 +99,31 @@ const StoreCover = props => {
   </div>
 }
 
+const ServicesList = connect(state => ({
+  window: state.ui.window
+}))(props => {
+  
+  return <div 
+    className={`
+      ServicesWrapper
+    `}
+  > 
+    {
+      props.services
+      .map(service => <Service
+        key={ service.ID }
+        dispatch={ props.dispatch }
+        { ...service }
+      />)
+    }
+  </div>
+})
+
 const Stores = connect(state => ({
   stores: state.wp.slot.stores,
   services: state.wp.slot.services
-}))(props => {
+}))(props => {  
 
-  const [ dragBound, setDragBound ] = useState(0)
-  const bounds = useRef()
-
-  const resize = debounce(() => {
-
-    console.log(bounds.current.childNodes[0].name)
-
-    setDragBound(bounds.current.innerWidth + window.innerWidth)
-  })
-
-  useEffect(() => {
-
-    window.addEventListener('resize', resize)
-
-    resize()
-
-    return () => window.removeEventListener('resize', resize)
-  })
   return <div className="Stores">
     {
       props.stores.data &&
@@ -130,28 +143,12 @@ const Stores = connect(state => ({
               { ...store }
             />}
           > 
-            <Draggable 
-              axis="x" 
-              bounds={{
-                left: -dragBound,
-                right: 0
-              }}
-            >
-              <div 
-                className="Services"
-                ref={ bounds }
-              >      
-                {
-                  props.services.data
-                  .filter(service => service.servicebasic.store == store.ID)
-                  .map(service => <Service
-                    key={ service.ID }
-                    dispatch={ props.dispatch }
-                    { ...service } 
-                  />)
-                }              
-              </div>
-            </Draggable>
+            <ServicesList
+              services={
+                props.services.data
+                .filter(service => service.servicebasic.store == store.ID)
+              }
+            />            
           </Panel>)
         }
       </Collapse>

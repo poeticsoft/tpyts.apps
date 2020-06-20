@@ -1,9 +1,15 @@
 .Showcase .Search {
 
+  @include absolutebox();
+  top: 46px;
+  border-top: solid 8px #008f36;
+
+  z-index: 4;  
+
   .Close {
 
     position: absolute;
-    top: $space * 3;
+    bottom: $space;
     right: $space;
     @include boxshadow();
   }
@@ -12,5 +18,42 @@
 
     @include absolutebox();
     overflow-y: auto;
+
+    padding: $space 0 $space * 6;
+  }
+
+  .NotFound {
+
+    @include absolutebox();
+    text-align: center;
+    background-color: $color-tpyts-yellow;
+
+    &:before,
+    span {
+
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    &:before {
+
+      height: 100%;
+      width: 0;
+      content: "";
+    }
+
+    span {
+
+      font-family: "BebasNeue-Bold";
+      font-size: 160%;
+
+      &.SearchText {
+
+        margin: 0 0 0 $space;
+        padding: 2px $space * 1.5 0;
+        background-color: $color-tpyts-green;
+        color: $color-text-light;
+      }
+    }
   }
 }

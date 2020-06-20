@@ -33,3 +33,18 @@
   bottom: $bottom;
   left: $left;
 }
+
+@mixin backgroundimg($size: cover) {
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: $size;
+}
+
+@mixin textglowyellow() {
+
+  text-shadow: 0 0 12px $color-tpyts-yellow,
+               0 0 12px $color-tpyts-yellow,
+               0 0 16px $color-tpyts-yellow,
+               0 0 18px $color-tpyts-yellow;
+}

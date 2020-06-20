@@ -4,6 +4,8 @@
   background-color: #fff;
   @include boxshadow();
   $mapheaderheight: $space * 6;
+  border-radius: 0 $space * 3 0 0;
+  overflow: hidden;
 
   @include absolutebox(
     $space * 2,
@@ -16,12 +18,15 @@
   .Header {      
 
     height: $mapheaderheight;
+    background-color: $color-tpyts-yellow;
+    position: relative;
   }
 
   .Google {
 
     @include absolutebox();
     top: $mapheaderheight;
+    z-index: 0;
   } 
 
   .Header {
@@ -31,15 +36,20 @@
 
     .Text {
 
-      font-family: "Roboto-Bold";
+      font-family: "BebasNeue-Bold";
+      font-size: 180%;
       float: left;
-      line-height: 250%;
       padding: 0 0 0 $space;
     }
 
     .Tools {
 
       float: right;
+
+      button {
+
+        @include boxshadow();
+      }
     }
   }
 

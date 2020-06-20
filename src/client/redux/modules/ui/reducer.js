@@ -8,6 +8,7 @@ import * as Actions from './actions'
 
 const initialState = {  
   message: {},
+  window:{},
   map: {
     active: false,
     location:{
@@ -64,7 +65,7 @@ const initialState = {
   showcase: 'stores',
   search: {
     status: 'hidden',
-    searchtext: '',
+    text: '',
     results: []
   },
   terms: {
@@ -84,6 +85,13 @@ const reducers = {
       { message: newMessage }
     )
   },
+  
+  [Actions.UI_SET_WINDOW]: (state, action) => immutableUpdate(
+    state,
+    {
+      window: action.payload.data
+    }
+  ), 
   
   [Actions.UI_HIDE_MESSAGE]: (state, action) => immutableUpdate(
     state,
@@ -128,10 +136,10 @@ const reducers = {
     }
   ),
 
-  [Actions.UI_ADD_SERVICES_TO_ORDER]: (state, action) => {
+  [Actions.UI_INCREMENT_ORDER_SERVICE]: (state, action) => {
 
     const serviceQuantity = state.order.services[action.payload.data.serviceid] || 0
-    const newServiceQuantity = serviceQuantity + action.payload.data.quantity
+    const newServiceQuantity = serviceQuantity + action.payload.data.inc
     
     return immutableUpdate(
       state,

@@ -22,7 +22,10 @@
   .Wrapper {    
 
     width: 90%;
-  
+    border-radius: 0 $space * 3 $space * 3 0;
+    overflow: hidden;
+    background-color: $color-background-light;
+
     $headerheight: $space * 6;
 
     .Header {
@@ -30,13 +33,13 @@
       padding: $space;
       bottom: auto;
       height: $headerheight;
-      background-color: $color-background-light;
+      background-color: $color-tpyts-yellow;
   
       .Text {
   
-        font-family: "Roboto-Bold";
+        font-family: "BebasNeue-Bold";
+        font-size: 180%;
         float: left;
-        line-height: 250%;
         padding: 0 0 0 $space;
       }
   
@@ -92,7 +95,9 @@
     .Info {
 
       padding: $space * 2 $space * 2 $space;
-      background-color: $color-background-light;
+      background-color: $color-tpyts-yellow-transparent-a;
+      font-family: "Roboto-Bold";
+      line-height: 120%;
     }
   }
 }

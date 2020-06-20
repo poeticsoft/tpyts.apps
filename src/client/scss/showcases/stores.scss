@@ -1,4 +1,7 @@
 .Showcase .Stores {
+  
+  $logosize: $space * 10;
+  $logosizebig: $space * 16;
 
   .ant-collapse {
 
@@ -18,16 +21,18 @@
           position: absolute;
           top: unset;
           left: 0;
-          bottom: -1;
+          bottom: 0;
           font-size: 16px;
           -webkit-transform: none;
           transform: none;
+          width: $logosize + $space * 2;
           color: $color-tpyts-green;
           background-color: $color-background-light;
-          padding: $space * 2 $space * 3;
+          padding: $space * 1.2 0;
           border: solid $color-border-medium;
           border-width: 1px 1px 0 0;
-          border-radius: 0 $space * 2.8 0 0;
+          border-radius: 0 $space * 2 0 0;
+          z-index: 1;
 
           &:after,
           svg {
@@ -45,6 +50,19 @@
           }
         }
       }
+
+      &.ant-collapse-item-active {
+        
+        > .ant-collapse-header {
+
+          padding: 0;
+          
+          .ant-collapse-arrow { 
+
+            bottom: -1;
+          }
+        }
+      }
     }
 
     .ant-collapse-content {
@@ -52,30 +70,10 @@
       .ant-collapse-content-box {
 
         padding: $space;
-        white-space: nowrap;
-        position: relative;
 
-        .Services {
-          
-          display: inline-block;
+        .ServicesWrapper {
 
-          .Service {          
-
-            display: inline-block;
-            vertical-align: top;
-            padding: $space;
-            width: 90%;
-            white-space: normal;
-
-            @media (min-width: 420px) { width: 45%; }
-            @media (min-width: 600px) { width: 30%; }
-            @media (min-width: 900px) { width: 20%; }
-
-            .Quantity {
-
-              margin: $space 0;
-            }
-          }
+          padding: $space 0 $space * 6;
         }
       }
     }
@@ -84,16 +82,25 @@
   .Cover {
 
     position: relative;
-    padding: $space * 2;
-    $logosize: $space * 10;
-    $logosizebig: $space * 16;
+    padding: $space * 2 $space $space * 3 $space * 2;
     z-index: 0;
+    @include backgroundimg();
+
+    &:before {
+
+      content: "";
+      display: block;
+      @include absolutebox();
+      background-color: $color-tpyts-yellow-transparent-b;
+      z-index: 0;
+    }
 
     .Logo,
     .Data {
 
       display: inline-block;
       vertical-align: top;
+      position: relative;
     }
 
     .Logo {
@@ -104,18 +111,22 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
-
+      
+      /*
       @media (min-width: 640px) {        
         
         width: $logosizebig;
         height: $logosizebig;
       }
+      */
+      z-index: 1;
     }
 
     .Data {
 
       width: calc(100% - #{$logosize});
-      padding: 0 0 0 $space * 2;      
+      padding: 0 0 0 $space * 2;  
+      z-index: 2;    
 
       @media (min-width: 640px) { 
         
@@ -130,20 +141,26 @@
 
           font-family: "BebasNeue-Bold";
           font-size: 180%;
+          @include textglowyellow();
         }
         
         .Excerpt {
-          
+
+          font-family: "Roboto-Bold";
           font-size: 90%;
+          @include textglowyellow();
+          padding: 0 $space 0 0;
         }
       }
       
       .Address {
 
         margin: $space 0 0;
-        border: dotted $color-border-medium;
+        border: dotted $color-border-dark;
         border-width: 1px 0 0 0;
         padding: $space 0 0;
+        font-family: "Roboto-Bold";
+        @include textglowyellow();
 
         button,
         .Texts {      
@@ -173,8 +190,20 @@
 
     .Tools {
 
-      padding: $space * 2 0 0 0; 
-      text-align: right;    
+      position: absolute;
+      bottom: -$space * 1.5;
+      right: $space / 2;
+      padding: $space 0 0 0; 
+      text-align: right;
+      z-index: 3;    
+
+      button {
+
+        @include boxshadow();
+        padding-top: 5px;
+        padding-bottom: 4px;
+        padding-left: 14px;
+      }
 
       button + button {
 

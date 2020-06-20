@@ -13,6 +13,14 @@ export const uiSetMessage = data => (dispatch, getState) => {
   }
 }
 
+export const UI_SET_WINDOW = 'UI_SET_WINDOW'
+export const uiSetWindow = data => ({
+  type: UI_SET_WINDOW,
+  payload: {
+    data: data
+  }
+})
+
 export const UI_SHOW_MESSAGE = 'UI_SHOW_MESSAGE'
 export const uiShowMessage = message => ({
   type: UI_SHOW_MESSAGE,
@@ -108,9 +116,9 @@ export const uiSetSearchStatus = status => ({
   }
 })
 
-export const UI_ADD_SERVICES_TO_ORDER = 'UI_ADD_SERVICES_TO_ORDER'
-export const uiAddServicesToOrder = data => ({
-  type: UI_ADD_SERVICES_TO_ORDER,
+export const UI_INCREMENT_ORDER_SERVICE = 'UI_INCREMENT_ORDER_SERVICE'
+export const uiIncrementOrderService = data => ({
+  type: UI_INCREMENT_ORDER_SERVICE,
   payload: {
     data: data
   }

@@ -1,6 +1,7 @@
 import React, {
   useEffect
 } from 'react'
+import { debounce } from 'lodash'
 import { Provider } from 'react-redux'
 import store from 'rdx/store'
 import { initSavedState } from 'utils/localstorage'
@@ -12,10 +13,25 @@ import Gallery from './gallery'
 import Cart from './cart'
 import Tools from './tools'
 import Splash from './splash'
+import * as Actions from 'rdx/actions'
+
+const resize = () => {
+
+  store.dispatch(Actions.uiSetWindow({
+    w: window.innerWidth,
+    h: window.inerHeight
+  }))
+}
 
 const App = props => {
 
-  useEffect(initSavedState, [])
+  useEffect(() => {
+    
+    initSavedState()
+
+    window.addEventListener('resize', debounce(resize, 500))
+
+  }, [])
   
   return <Provider store={ store }>
     <Showcase />

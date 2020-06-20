@@ -1,5 +1,6 @@
 import React, {
-  useState
+  useState,
+  useEffect
 } from 'react'
 import { connect } from 'react-redux'
 import {
@@ -8,26 +9,17 @@ import {
 import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
 
-const Quantity = props => {  
-
-  const [ quantity, setQuantity ] = useState(1)
+const Quantity = connect(state => ({
+  orderservices: state.ui.order.services
+}))(props => { 
 
   const inc = (e, n) => {    
 
     e.stopPropagation()
 
-    const Q = quantity + n
-    Q > 0 &&
-    setQuantity(quantity + n)
-  }
-
-  const addToOrder = (e, n) => {    
-
-    e.stopPropagation()
-
-    props.dispatch(Actions.uiAddServicesToOrder({
-      serviceid: props.serviceid,
-      quantity: quantity
+    props.dispatch(Actions.uiIncrementOrderService({
+      serviceid:props.serviceid,
+      inc: n
     }))
   }
   
@@ -36,11 +28,15 @@ const Quantity = props => {
       shape="circle"
       onClick={ e => inc(e, -1) }
       className="Down"
-      disabled={ quantity < 2 }
+      disabled={ 
+        !props.orderservices[props.serviceid]
+        ||
+        props.orderservices[props.serviceid] < 1 
+      }
     >
       <Icons.DownOutlined />
     </Button>   
-    <div className="Number">{ quantity }</div>       
+    <div className="Number">{ props.orderservices[props.serviceid] || 0 }</div>       
     <Button 
       shape="circle"
       onClick={ e => inc(e, 1) }
@@ -48,15 +44,7 @@ const Quantity = props => {
     >
       <Icons.UpOutlined/>
     </Button>
-    <Button
-      shape="circle"
-      className="Add"
-      size="large"
-      onClick={ addToOrder }
-    >
-      <Icons.PlusOutlined />
-    </Button>
   </div>
-}
+})
 
 export default Quantity

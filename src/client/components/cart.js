@@ -101,9 +101,9 @@ const Cart = connect(state => ({
             return count + (
               props.order.services[key]
               *
-              parseFloat(props.services[key].servicebasic.price)
+              parseFloat(props.services[key].servicebasic.price.replace(',', '.'))
             )
-          }, 0)
+          }, 0).toFixed(2).replace('.', ',')
         } €
       </div>
     </div>
