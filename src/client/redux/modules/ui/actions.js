@@ -135,20 +135,34 @@ export const uiOpenCart = () => (dispatch, getState) => {
     dispatch(Actions.uiSetCartStatus({
       openstate: 'wrapper'
     }))
+
+    setTimeout(() => {
+
+      dispatch(Actions.uiSetCartStatus({
+        openstate: 'visibles'
+      }))
+    }, 500)
   }, 500)
 }
 
-export const uiCloseCart = () => (dispatch, getState) => { 
-
+export const uiCloseCart = () => (dispatch, getState) => {  
+  
   dispatch(Actions.uiSetCartStatus({
-    openstate: 'header'
-  }))
+    openstate: 'wrapper'
+  }))  
 
   setTimeout(() => {
 
     dispatch(Actions.uiSetCartStatus({
-      openstate: 'hidden'
+      openstate: 'header'
     }))
+
+    setTimeout(() => {
+
+      dispatch(Actions.uiSetCartStatus({
+        openstate: 'hidden'
+      }))
+    }, 500)
   }, 500)
 }
 

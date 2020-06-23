@@ -1,61 +1,68 @@
 .Map {     
 
-  border: solid 1px $color-border-medium;
-  background-color: #fff;
-  @include boxshadow();
-  $mapheaderheight: $space * 6;
-  border-radius: 0 $space * 3 0 0;
-  overflow: hidden;
+  @include absolutebox();
+  background-color: $color-background-transparent-dark;
+  z-index: 4;
+  
+  .Wrapper {
 
-  @include absolutebox(
-    $space * 2,
-    $space * 2,
-    $space * 2,
-    $space * 2
-  );
-  z-index: 2;
+    border: solid 1px $color-border-medium;
+    background-color: #fff;
+    @include boxshadow();
+    $mapheaderheight: $space * 6;
+    border-radius: 0 $space * 3 0 0;
+    overflow: hidden;
 
-  .Header {      
+    @include absolutebox(
+      $space * 2,
+      $space * 2,
+      $space * 2,
+      $space * 2
+    );
+    z-index: 2;
 
-    height: $mapheaderheight;
-    background-color: $color-tpyts-yellow;
-    position: relative;
-  }
+    .Header {      
 
-  .Google {
-
-    @include absolutebox();
-    top: $mapheaderheight;
-    z-index: 0;
-  } 
-
-  .Header {
-
-    padding: $space;
-    bottom: auto;
-
-    .Text {
-
-      font-family: "BebasNeue-Bold";
-      font-size: 180%;
-      float: left;
-      padding: 0 0 0 $space;
+      height: $mapheaderheight;
+      background-color: $color-tpyts-yellow;
+      position: relative;
     }
 
-    .Tools {
+    .Google {
 
-      float: right;
+      @include absolutebox();
+      top: $mapheaderheight;
+      z-index: 0;
+    } 
 
-      button {
+    .Header {
 
-        @include boxshadow();
+      padding: $space;
+      bottom: auto;
+
+      .Text {
+
+        font-family: "BebasNeue-Bold";
+        font-size: 180%;
+        float: left;
+        padding: 0 0 0 $space;
+      }
+
+      .Tools {
+
+        float: right;
+
+        button {
+
+          @include boxshadow();
+        }
       }
     }
-  }
 
-  .Target{
+    .Target{
 
-    font-size: 200%;
-    color: $color-tpyts-green;
+      font-size: 200%;
+      color: $color-tpyts-green;
+    }
   }
 }

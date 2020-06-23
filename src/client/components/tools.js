@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Logo from 'assets/img/logo.svg'
 import * as Icons from '@ant-design/icons'
 import { debounce } from 'lodash'
 import {
@@ -28,14 +27,8 @@ const Tools = connect(state => ({
     `}
   >
     <div className="SearchShadow"></div>
-    <div
-      className="Logo"
-    >
-      <img src={ Logo} />
-    </div>
-    <div
-      className="Search"
-    >
+    <div className="Logo" />
+    <div className="Search">
       <Input  
         placeholder="Que te apetece?" 
         prefix={ <Icons.SearchOutlined /> }

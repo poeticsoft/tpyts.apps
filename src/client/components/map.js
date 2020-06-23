@@ -42,32 +42,34 @@ const Map = connect(state => ({
   <div 
     className="Map"
   >
-    <div className="Header">
-      <div className="Text">
-        { props.map.data.title }
+    <div className="Wrapper">
+      <div className="Header">
+        <div className="Text">
+          { props.map.data.title }
+        </div>
+        <div className="Tools">
+          <Button
+            shape="circle"
+            icon={ <Icons.CheckOutlined /> } 
+            onClick={ closeMap }
+          />
+        </div>        
       </div>
-      <div className="Tools">
-        <Button
-          shape="circle"
-          icon={ <Icons.CheckOutlined /> } 
-          onClick={ closeMap }
-        />
-      </div>        
-    </div>
-    <div className="Google">      
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: GMaps.key }}
-        center={ props.map.location }
-        zoom={ props.map.zoom }
-        yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-      >
-        <Target
-          lat={ props.map.location.lat }
-          lng={ props.map.location.lng }
-          name={ props.map.data.title }
-        />
-      </GoogleMapReact>
+      <div className="Google">      
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: GMaps.key }}
+          center={ props.map.location }
+          zoom={ props.map.zoom }
+          yesIWantToUseGoogleMapApiInternals
+          onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+        >
+          <Target
+            lat={ props.map.location.lat }
+            lng={ props.map.location.lng }
+            name={ props.map.data.title }
+          />
+        </GoogleMapReact>
+      </div>
     </div>
   </div>
 })

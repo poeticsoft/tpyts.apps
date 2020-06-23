@@ -4,37 +4,71 @@
   $cartstepssize: $space * 6;
   $cartwidth: $space * 40;
   $cartclose: $space * 7;
-
-  position: absolute;
-  top: 0;
-  right: 0;
+  @include absolutebox();
   z-index: 1;
+  background-color: $color-background-transparent-dark;
 
-  &,
-  .Wrapper {
-  }
-
-  &.Opened {
-
-    .Wrapper {
-
-      height: 608px
-    }
-  }
+  transition-property: bottom;
+  transition-duration: 0.5s;
 
   .Wrapper {
 
     position: absolute;
     top: 0;
-    width: $cartwidth;
+    right: $space * 3;
+    width: $cartclose;
+  } 
+
+  &.hidden {
+    
+    bottom: 100%;
+  }
+
+  &.header {
+
+    .Wrapper {      
+
+      width: $cartwidth;
+    }
+  }
+
+  &.wrapper {
+
+    .Wrapper {             
+
+      width: $cartwidth;
+      height: 648px;
+      border-radius: 0 0 $space * 2.8 $space * 2.8;
+    }
+  } 
+
+  &.visibles {
+
+    .Wrapper {            
+
+      width: $cartwidth;
+      height: 648px;
+      border-radius: 0 0 $space * 2.8 $space * 2.8;
+
+      .Header .Title,
+      .Steps,
+      .CartBody { 
+        
+        opacity: 1;
+      }
+    }
+  } 
+
+  .Wrapper {
+
     background-color: $color-tpyts-yellow;
     overflow: hidden;
     z-index: 1;
     height: $space * 8;
     @include boxshadow();
-    border-radius: 0 0 0 $space * 3.5;
+    border-radius: 0 0 $space * 3.5 $space * 3.5;
 
-    transition-property: left, height, border-radius;
+    transition-property: width, height, border-radius;
     transition-duration: 0.5s;
 
     .Header {
@@ -60,6 +94,10 @@
       background-color: $color-background-light;
       border-radius: $space * 2.8 0 0 0;
       padding: $space 0 0 $space; 
+      transition-property: opacity;
+      transition-duration: 0.5s;
+      transition-timing-function: ease-in;
+      opacity: 0;
       
       * {
   
@@ -81,6 +119,11 @@
     }
   
     .CartBody {
+
+      transition-property: opacity;
+      transition-duration: 0.5s;
+      transition-timing-function: ease-in;
+      opacity: 0;
 
       @include absolutebox(  
         $space * 14
@@ -149,7 +192,7 @@
 
     position: absolute;
     top: $space * 2;
-    right: $space;
+    right: $space * 4;
     z-index: 2;
 
     button:not(:disabled) {
@@ -174,36 +217,6 @@
       background-color: $color-tpyts-green;
       font-size: 100%;
       white-space: nowrap;
-    }
-  }
-
-  &.hidden {
-
-    .Wrapper {      
-
-      left: calc(100% - #{ $cartclose });
-    }
-  }
-
-  &.header {
-
-    .Wrapper {      
-
-      left: calc(100% - #{ $cartwidth });
-
-      .Header .Title { opacity: 1; }
-    }
-  }
-
-  &.wrapper {
-
-    .Wrapper {      
-
-      left: calc(100% - #{ $cartwidth });
-      height: 648px;
-      border-radius: 0 0 0 $space * 2.8;
-
-      .Header .Title { opacity: 1; }
     }
   }
 }

@@ -5,6 +5,16 @@ const saveState = (mod, data) => {
 
   try {
 
+    delete data.message
+    delete data.map
+    delete data.gallery
+    data.search = {
+      status: 'hidden',
+      searchtext: '',
+      results: []
+    }
+    data.showcase = null
+
     const serializedState = JSON.stringify(data);
 
     localStorage.setItem('TPYTS_' + mod + '_State', serializedState);
@@ -47,14 +57,6 @@ export const initSavedState = () => {
   store.subscribe(() => {
     
     const UIState = { ...store.getState().ui }
-    delete UIState.message
-    delete UIState.map
-    delete UIState.gallery
-    UIState.search = {
-      status: 'hidden',
-      searchtext: '',
-      results: []
-    },
     saveState('UI', UIState);
 
     const WPState = { ...store.getState().wp }

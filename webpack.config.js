@@ -5,6 +5,8 @@ const LiveReloadPlugin = require('webpack-livereload-plugin');
 const PolyfillInjectorPlugin = require('webpack-polyfill-injector');
 const EventHooksPlugin = require('event-hooks-webpack-plugin');
 
+process.env.NODE_ENV = 'development';
+
 let mode, app, block
 
 module.exports = env => {
@@ -59,7 +61,8 @@ module.exports = env => {
       : 
       'none'
   
-  const rootdestpath = 'C:\\trabajo\\manperez\\tpyts\\wp-content\\themes\\tpyts\\'
+  // const rootdestpath = 'C:\\trabajo\\manperez\\tpyts\\wp-content\\themes\\tpyts\\'
+  const rootdestpath = 'E:\\tpyts\\tpyts\\wp-content\\themes\\tpyts\\'
   const apppath = app == 'theme' ?
       ''
       :
@@ -116,7 +119,7 @@ module.exports = env => {
       }
     })
   ]  
-  app != 'block' &&
+    
   plugins.push(new PolyfillInjectorPlugin({
     singleFile: true,
     polyfills: [
@@ -138,23 +141,13 @@ module.exports = env => {
   console.log(wmode)
   console.log(wexternals)
   console.log(devtool)
+  console.log(destpath)
 
   return {
     context: __dirname,
     mode: wmode,
     devtool: devtool,
-    entry: (
-      app == 'block'
-      ||
-      app == 'theme'
-    ) ? {
-      main: [
-        `./src/${ srcpath }/main.js`,
-        `./src/${ srcpath }/main.scss`,
-      ]
-    }
-    :
-    {
+    entry: {
       ['main']: `webpack-polyfill-injector?${JSON.stringify({
         modules: [
           `./src/${ srcpath }/main.js`,
@@ -229,8 +222,8 @@ module.exports = env => {
           options: {          
             esModule: false,
             name: '[name].[ext]',
-            outputPath: app != 'theme' ? '../fonts/' : 'fonts/',
-            publicPath: app != 'theme' ? '../fonts/' : 'fonts/',
+            outputPath: 'fonts',
+            publicPath: 'fonts'
           }
         },
         {
@@ -240,8 +233,8 @@ module.exports = env => {
           options: {         
             esModule: false,
             name: '[name].[ext]',
-            outputPath: app != 'theme' ? '../assets/' : 'assets',
-            publicPath: app != 'theme' ? '../assets/' : 'assets'
+            outputPath: 'assets',
+            publicPath: 'assets'
           }
         }
       ]

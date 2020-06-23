@@ -135,20 +135,6 @@ const edit = ({attributes, setAttributes}) => {
           />
         </div>   
       </div> 
-    </div>   
-
-    <div className="SectionTitle">
-      { __('Información', 'tpyts') }
-    </div>
-      
-    <div className="Info">
-      <InnerBlocks 
-        templateLock={ false }
-        allowedBlocks={[
-          'core/heading',
-          'core/paragraph'
-        ]}
-      /> 
     </div>
 
     <div className="SectionTitle">

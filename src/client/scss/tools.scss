@@ -26,16 +26,21 @@
 
     padding: $space;
     background-color: $color-tpyts-yellow;
-    width: $space * 10;
     border-radius: 0 50% 0 0;
     @include boxshadow();
-
-    img {
-
-      width: 100%;
-    }
-
     z-index: 1;
+
+    &:before {
+
+      $size: $space * 8;
+
+      content: " ";
+      display: block;
+      width: $size;
+      height: $size;
+      background-image: url(~assets/img/logo.svg);
+      @include backgroundimg();
+    }
   }
 
   .Search {

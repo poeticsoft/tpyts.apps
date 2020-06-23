@@ -24,9 +24,11 @@ $navigationsize: $space * 5;
   @include boxshadow();
 }
 
-#TPYTS {
+#TPYTSAdmin,
+#TPYTSClient,
+#TPYTSProvider,
+#TPYTSDealer {
 
   top: $navigationsize;
-  overflow: auto;
   z-index: 0;
 }

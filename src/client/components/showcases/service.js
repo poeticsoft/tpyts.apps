@@ -24,7 +24,20 @@ const Service = connect(state => ({
         }}
       >
         <div className="Product">
-          <div className="Title">{ props.post_title }</div>
+          {
+            props.showcase == 'search' ?
+            <Highlighter
+              className="Title"
+              highlightClassName="SearchHighlight"
+              searchWords={ props.search.text.split(' ') }
+              autoEscape={ true }
+              textToHighlight={ props.post_title }
+            />
+            :
+            <div className="Title">
+              { props.post_title }
+            </div>
+          }
         </div>
         <div className="Price">
           <span className="Number">{ props.servicebasic.price }</span>
@@ -45,17 +58,16 @@ const Service = connect(state => ({
       
       <div className="Data">
         {
-          props.post_excerpt &&
+          props.post_excerpt &&  
           (
             props.showcase == 'search' ?
-            <div className="Excerpt">
-              <Highlighter
-                highlightClassName="SearchHighlight"
-                searchWords={ props.search.text.split(' ') }
-                autoEscape={true}
-                textToHighlight={ props.post_excerpt }
-              />
-            </div>
+            <Highlighter
+              className="Excerpt"
+              highlightClassName="SearchHighlight"
+              searchWords={ props.search.text.split(' ') }
+              autoEscape={ true }
+              textToHighlight={ props.post_excerpt }
+            />
             :
             <div className="Excerpt">
               { props.post_excerpt }
@@ -63,24 +75,18 @@ const Service = connect(state => ({
           )
         }
         {
-          props.servicebasic.components &&
+          props.servicebasic.components &&  
           (
             props.showcase == 'search' ?
-            <div 
+            <Highlighter
               className="Components"
-            >
-              <Highlighter
-                highlightClassName="SearchHighlight"
-                searchWords={ props.search.text.split(' ') }
-                autoEscape={true}
-                textToHighlight={ props.servicebasic.components }
-              />
-            </div>
-            :
-            <div 
-              className="Components"
-              dangerouslySetInnerHTML={{ __html: props.servicebasic.components }}
+              highlightClassName="SearchHighlight"
+              searchWords={ props.search.text.split(' ') }
+              autoEscape={ true }
+              textToHighlight={ props.servicebasic.components }
             />
+            :
+            <div className="Components">{ props.servicebasic.components }</div>
           )
         }
         {
@@ -101,12 +107,20 @@ const Service = connect(state => ({
           </div>        
         }
         {
-          props.servicebasic.comments &&
-          <div
-            className="Comments"
-            dangerouslySetInnerHTML={{ __html: props.servicebasic.comments }}
-          />
-        }       
+          props.servicebasic.comments &&  
+          (
+            props.showcase == 'search' ?
+            <Highlighter
+              className="Comments"
+              highlightClassName="SearchHighlight"
+              searchWords={ props.search.text.split(' ') }
+              autoEscape={ true }
+              textToHighlight={ props.servicebasic.comments }
+            />
+            :
+            <div className="Comments">{ props.servicebasic.comments }</div>
+          )
+        } 
       </div>
     </div>
   </div>

@@ -4,7 +4,11 @@
   "license": "GPL-2.0-or-later",
   "scripts": {
     "admin": "webpack --env=client --watch",
-    "client": "webpack --env=client --watch"
+    "client": "webpack --env=client",
+    "client-watch": "webpack --env=client --watch",
+    "theme": "webpack --env=theme --watch",
+    "build-client": "webpack --env=client-prod",
+    "build-theme": "webpack --env=theme-prod"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",

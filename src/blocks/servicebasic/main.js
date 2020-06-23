@@ -1,11 +1,11 @@
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 const { 
-  InnerBlocks,
-  RichText
+  InnerBlocks
 } = wp.editor
 const { 
   TextControl,
+  TextareaControl,
   SelectControl 
 } = wp.components
 const { 
@@ -68,7 +68,8 @@ const edit = ({attributes, setAttributes}) => {
           <label className="components-base-control__label">
             { __('Ingredientes', 'tpyts') }
           </label>
-          <RichText
+          <TextareaControl
+            rows={ 2 }
             onChange={ value => setAttributes({
               ...attributes, 
               components: value
@@ -100,7 +101,8 @@ const edit = ({attributes, setAttributes}) => {
           <label className="components-base-control__label">
             { __('Comentarios', 'tpyts') }
           </label>
-          <RichText
+          <TextareaControl
+            rows={ 2 }
             onChange={ value => setAttributes({
               ...attributes, 
               comments: value
@@ -120,20 +122,6 @@ const edit = ({attributes, setAttributes}) => {
           />
         </div> 
       </div> 
-    </div> 
-
-    <div className="SectionTitle">
-      { __('Información', 'tpyts') }
-    </div>
-      
-    <div className="Info">
-      <InnerBlocks 
-        templateLock={ false }
-        allowedBlocks={[
-          'core/heading',
-          'core/paragraph'
-        ]}
-      /> 
     </div>
 
     <div className="SectionTitle">
