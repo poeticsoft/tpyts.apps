@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Quantity from '../common/quantity'
+import Quantity from '../../client/components/common/quantity'
 import Highlighter from 'react-highlight-words'
 
 const Service = connect(state => ({

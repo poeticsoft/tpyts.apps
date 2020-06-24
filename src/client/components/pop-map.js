@@ -12,7 +12,7 @@ const Target = props => <div className="Target">
   <Icons.ShopOutlined />
 </div>;
 
-const Map = connect(state => ({ 
+const PopMap = connect(state => ({ 
   map: state.ui.map
 }))(props => {
 
@@ -40,7 +40,7 @@ const Map = connect(state => ({
 
   return props.map.active &&
   <div 
-    className="Map"
+    className="PopMap"
   >
     <div className="Wrapper">
       <div className="Header">
@@ -74,4 +74,4 @@ const Map = connect(state => ({
   </div>
 })
 
-export default Map;
+export default PopMap;

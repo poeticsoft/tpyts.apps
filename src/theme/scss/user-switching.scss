@@ -1,0 +1,14 @@
+#user_switching_switch_on {
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  a {
+    
+    display: block;
+    padding: $space $space * 2;
+    background-color: $color-tpyts-green;
+    color: $color-text-light;
+  }
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as Actions from 'rdx/actions'
-import Service from './service'
+import Service from 'common/components/service'
 import {
   Button
 } from 'antd'

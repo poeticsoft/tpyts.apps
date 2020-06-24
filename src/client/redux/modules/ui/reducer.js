@@ -9,6 +9,9 @@ import * as Actions from './actions'
 const initialState = {  
   message: {},
   window:{},
+  stores: {
+    storesactive: []
+  },
   map: {
     active: false,
     location:{
@@ -24,6 +27,10 @@ const initialState = {
     data: {
       title: 'gallery'
     }
+  },
+  serviceinfo: {
+    active: true,
+    serviceid: null
   },
   cart: {
     openstate: 'hidden',
@@ -103,9 +110,13 @@ const reducers = {
     action.payload.state
   ), 
   
-  [Actions.UI_SET_SERVICE_ACTIVE]: (state, action) => immutableUpdate(
+  [Actions.UI_SET_STORES_ACTIVE]: (state, action) => immutableUpdate(
     state,
-    { serviceactive: action.payload.serviceid }
+    { 
+      stores: {
+        storesactive: action.payload.storeids
+      }
+    }
   ),
 
   [Actions.UI_SET_MAP_STATE]: (state, action) => immutableUpdate(
@@ -119,6 +130,13 @@ const reducers = {
     state,
     { 
       gallery: action.payload.data
+    }
+  ),
+
+  [Actions.UI_SET_SERVICE_INFO_STATE]: (state, action) => immutableUpdate(
+    state,
+    { 
+      serviceinfo: action.payload.data
     }
   ),
 

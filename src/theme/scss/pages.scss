@@ -1,0 +1,31 @@
+
+.um-page-login,
+.um-page-password-reset {
+
+  .um-row {
+
+    margin: 0 0 $space * 2 !important;
+  }
+
+  .um-col-alt {
+
+    margin: 0;
+  }
+  
+  #TPYTS {
+
+    #Content {
+
+      max-width: 400px;
+
+      .Post {
+
+        .Content{
+
+          padding-top: $space;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+}

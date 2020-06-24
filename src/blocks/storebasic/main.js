@@ -14,13 +14,18 @@ const {
 
 const edit = ({attributes, setAttributes}) => {
 
-  const [ providers, setProviders ] = useState([])
+  const [ providers, setProviders ] = useState([])  
+  const [ storeusers, setStoreUsers ] = useState([])
 
   useEffect(() => {
     
     fetch('/wp-json/tpyts/providers?per_page=100')
     .then(res => res.json())
     .then(providers => setProviders(providers))
+    
+    fetch('/wp-json/tpyts/storeusers')
+    .then(res => res.json())
+    .then(storeusers => setStoreUsers(storeusers))
 
   }, [])
 
@@ -38,7 +43,7 @@ const edit = ({attributes, setAttributes}) => {
           { __('Administración', 'tpyts') }
         </div>
         
-        <div className="Field Provider G5">
+        <div className="Field Provider G3">
           <SelectControl
             label={ __('Provider', 'tpyts') }
             value={ attributes.provider }
@@ -62,7 +67,7 @@ const edit = ({attributes, setAttributes}) => {
           />
         </div> 
 
-        <div className="Field StoreId G5">
+        <div className="Field StoreId G4">
           <TextControl
             label={ __('Identificador', 'tpyts')}
             value={ attributes.storeid }
@@ -71,6 +76,33 @@ const edit = ({attributes, setAttributes}) => {
               storeid: value
             })}
           />
+        </div> 
+        
+        <div className="Field StoreUsers G3">
+          <SelectControl
+            label={ __('Usuarios (PRECAUCIÓN)', 'tpyts') }
+            multiple
+            value={ attributes.storeusers && attributes.storeusers.split('|') }
+            options={ 
+              storeusers
+              .map(storeuser => ({
+                value: storeuser.ID,
+                label: storeuser.firstname + ' ' + storeuser.lastname            
+              }))
+            }
+            onChange={ value => setAttributes({
+              ...attributes,
+              storeusers: value.join('|')
+            })}
+          />
+          <div className="Comments">
+            {
+              __(
+                'Cuidado, los usuarios seleccionados tienen acceso a los datos  de los pedidos.', 
+                'tpyts'
+              ) 
+            }
+          </div>
         </div>    
       </div>
 
@@ -78,7 +110,7 @@ const edit = ({attributes, setAttributes}) => {
         <div className="GroupTitle">
           { __('Localización', 'tpyts') }
         </div>  
-        <div className="Field AddressStreet IN G3">
+        <div className="Field AddressStreet IN G4">
           <TextControl
             label={ __('Calle', 'tpyts')}
             value={ attributes.addressstreet }
@@ -88,7 +120,7 @@ const edit = ({attributes, setAttributes}) => {
             })}
           />
         </div>    
-        <div className="Field AddressNumber IN G2">
+        <div className="Field AddressNumber IN G3">
           <TextControl
             label={ __('Número', 'tpyts')}
             value={ attributes.addressnumber }
@@ -163,6 +195,9 @@ registerBlockType(
         type: 'string'
       },
       storeid: {
+        type: 'string'
+      },
+      storeusers: {
         type: 'string'
       },
       addressstreet: {

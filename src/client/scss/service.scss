@@ -1,23 +1,14 @@
-.Showcase .ServiceWrapper { 
-            
-  display: inline-block;
-  vertical-align: top;
-  padding-left: $space;
-  padding-right: $space;
-  width: 100%;
-  margin-bottom: $space * 3;
-  line-height: 120%;
 
-  @media (min-width: 490px) { width: 50%; }
-  @media (min-width: 640px) { width: 33.33%; }
-  @media (min-width: 920px) { width: 25%; }
-  @media (min-width: 1200px) { width: 20%; }
-  @media (min-width: 1400px) { width: 16.66%; }
+$lineservicehexcerpt: $space * 2;
+
+.ServiceWrapper,
+.ServiceResumeWrapper { 
   
   .Service {
 
     border: solid 1px $color-border-medium;
     border-radius: 0 $space * 2.8 0 $space *3;
+    line-height: 120%;
     overflow: hidden;
     position: relative;
     @include boxshadow();
@@ -33,7 +24,7 @@
     .Image {
       
       width: 100%;
-      padding: 0 0 100%;
+      padding: 0 0 50%;
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -43,6 +34,8 @@
       border-width: 0 0 1px 0;
       position: relative;
       z-index: 1;
+
+      // @media (min-width: 490px) { padding: 0 0 100%; }
 
       .Product {
 
@@ -143,6 +136,7 @@
 
         padding: $space * 1.5;
         display: block;
+        box-sizing: border-box;
       }
 
       > *:not(.Excerpt) {
@@ -160,6 +154,7 @@
       .Excerpt {    
         
         font-family: "Roboto-Bold";
+        line-height: $lineservicehexcerpt;
       }
       
       .Comments {    
@@ -208,5 +203,50 @@
         }
       }
     }  
+  }
+}
+
+.ServiceResumeWrapper { 
+
+  .Data {    
+
+    padding-bottom: $space * 2;
+      
+    .Excerpt {    
+      
+      height: $lineservicehexcerpt * 3.75;
+      overflow: hidden;
+      position: relative;
+
+      &:after {
+
+        content: "";
+        display: block;
+        @include absolutebox();
+        top: auto;
+        height: $lineservicehexcerpt;
+        background-color: $color-tpyts-yellow-transparent-a-solid;
+        background: linear-gradient(
+          0deg, 
+          $color-tpyts-yellow-transparent-a-solid 10%,
+          $color-tpyts-yellow-transparent-a-transparent 100%
+        );
+      }
+
+    }
+  }
+
+  .MoreInfo {
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: $space / 2 + 2 $space $space / 2;
+    font-family: "BebasNeue-Bold";
+    background-color: $color-tpyts-yellow;
+    color: $color-text-dark;
+    border-radius: $space 0 0 0;
+    @include boxshadow();
+    cursor: pointer;
   }
 }

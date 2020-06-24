@@ -1,0 +1,32 @@
+
+  .ant-drawer-body {
+
+    position: relative;
+  }
+
+  #TPYTSClient {
+
+  .ant-table-wrapper {
+
+    @include absolutebox();
+
+    .ant-spin-nested-loading,
+    .ant-spin-container {
+
+      @include absolutebox();
+    }
+
+    .ant-table,
+    .ant-table-container {
+
+      height: 100%;
+    }
+
+    .ant-table-body {
+      
+      height: calc(100% - 38px);
+      border: solid $color-border-light;
+      border-width: 0 0 1px 0;
+    }
+  }
+}

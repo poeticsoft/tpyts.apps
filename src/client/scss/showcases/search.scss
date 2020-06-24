@@ -18,8 +18,15 @@
 
     @include absolutebox();
     overflow-y: auto;
+    padding: $space $space $space * 6;
 
-    padding: $space 0 $space * 6;
+    .ServiceWrapper {
+
+      display: inline-block;
+      vertical-align: top;
+      padding: $space;
+      width: 100%;
+    }
   }
 
   .NotFound {

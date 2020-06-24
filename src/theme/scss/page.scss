@@ -1,5 +1,80 @@
 
+@keyframes fadein {
+
+  from {
+
+    opacity: 0;
+  }
+
+  to {
+    
+    opacity: 1;
+  }
+}
+
 #TPYTS {
 
-  padding: $space * 5;
+  padding: 0 $space * 2;
+  overflow: auto;
+  font-family: "Roboto-Regular";
+  background-color: $color-tpyts-yellow;
+
+  #Content {
+
+    max-width: 640px;
+    margin: 0 auto;
+    animation: fadein 1s linear;
+
+    &.Index,
+    &.Page {
+
+      .Post {
+
+        border-radius: $space;
+        background-color: $color-background-light;
+        overflow: hidden;
+        margin: $space * 3 0;
+        @include boxshadow();
+
+        .Title {
+          
+          background-color: $color-tpyts-green;
+          color: $color-text-light;
+          padding: $space * 2 $space * 2 $space $space * 3;
+          font-family: 'BebasNeue-Bold';
+          font-size: 150%;
+        }
+
+        .Image {
+
+          padding: 0 0 30% 0;
+          overflow: hidden;
+          position: relative;
+
+          img {
+
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .Excerpt {
+
+          padding: $space * 3;
+          background-color: $color-tpyts-yellow-transparent-a;
+          font-family: 'Roboto-BoldItalic';
+
+          p { margin: 0; }
+        }
+
+        .Content {
+
+          padding: $space * 3;
+        }
+      }
+    }
+  }
 }

@@ -7,7 +7,7 @@ import {
 } from 'antd'
 import * as Icons from '@ant-design/icons'
 
-const Gallery = connect(state => ({ 
+const PopGallery = connect(state => ({ 
   gallery: state.ui.gallery
 }))(props => {
 
@@ -26,7 +26,7 @@ const Gallery = connect(state => ({
     props.gallery.slides.length
   ) ?
     <div 
-      className="Gallery"
+      className="PopGallery"
     >
       <div className="Wrapper">
         <div className="Header">
@@ -74,4 +74,4 @@ const Gallery = connect(state => ({
     <></>
 })
 
-export default Gallery;
+export default PopGallery;

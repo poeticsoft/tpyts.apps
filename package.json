@@ -4,11 +4,16 @@
   "license": "GPL-2.0-or-later",
   "scripts": {
     "admin": "webpack --env=client --watch",
+    "admin-watch": "webpack --env=admin --watch",
+    "admin-build": "webpack --env=admin-prod",
     "client": "webpack --env=client",
     "client-watch": "webpack --env=client --watch",
+    "client-build": "webpack --env=client-prod",
+    "store": "webpack --env=store",
+    "store-watch": "webpack --env=store --watch",
+    "store-build": "webpack --env=store-prod",
     "theme": "webpack --env=theme --watch",
-    "build-client": "webpack --env=client-prod",
-    "build-theme": "webpack --env=theme-prod"
+    "theme-build": "webpack --env=theme-prod"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
@@ -55,6 +60,7 @@
     "react-highlight-words": "^0.16.0",
     "react-i18next": "^11.3.3",
     "react-redux": "^7.1.3",
+    "react-scrollbars-custom": "^4.0.25",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"

@@ -91,7 +91,11 @@ module.exports = env => {
     new LiveReloadPlugin({
       protocol: 'http',
       hostname: 'localhost',
-      delay: app == 'block' ? 10000 : 500,
+      delay: (
+        app == 'block'
+        ||
+        app == 'theme'
+      ) ? 10000 : 500,
       appendScriptTag: true
     }),
     new EventHooksPlugin({
@@ -223,7 +227,11 @@ module.exports = env => {
             esModule: false,
             name: '[name].[ext]',
             outputPath: 'fonts',
-            publicPath: 'fonts'
+            publicPath: (
+              app != 'theme'
+              &&
+              app != 'block'
+            ) ? '/wp-content/themes/tpyts/apps/fonts' : 'fonts'
           }
         },
         {
@@ -234,7 +242,11 @@ module.exports = env => {
             esModule: false,
             name: '[name].[ext]',
             outputPath: 'assets',
-            publicPath: 'assets'
+            publicPath: (
+              app != 'theme'
+              &&
+              app != 'block'
+            ) ? '/wp-content/themes/tpyts/apps/assets' : 'assets'
           }
         }
       ]

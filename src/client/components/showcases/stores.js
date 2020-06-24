@@ -9,8 +9,8 @@ import {
   Button
 } from 'antd'
 import * as Icons from '@ant-design/icons'
-import Draggable from 'react-draggable'
-import Service from './service'
+import { Scrollbar } from 'react-scrollbars-custom'
+import ServiceResume from './service-resume'
 
 const { Panel } = Collapse
 
@@ -110,7 +110,7 @@ const ServicesList = connect(state => ({
   > 
     {
       props.services
-      .map(service => <Service
+      .map(service => <ServiceResume
         key={ service.ID }
         dispatch={ props.dispatch }
         { ...service }
@@ -120,39 +120,60 @@ const ServicesList = connect(state => ({
 })
 
 const Stores = connect(state => ({
+  storesactive: state.ui.stores.storesactive,
   stores: state.wp.slot.stores,
   services: state.wp.slot.services
 }))(props => {  
 
+  const onChange = data => {
+
+    props.dispatch(Actions.uiSetStoresActive(data))
+  }
+
   return <div className="Stores">
-    {
-      props.stores.data &&
-      props.stores.data.length &&
-      <Collapse
-        bordered={ true }
-        expandIconPosition="left"
-        defaultActiveKey={ [ props.stores.data[0].ID] }
-      >
-        {
-          props.stores.data
-          .map(store => <Panel
-            key={ store.ID }
-            storeid={ store.ID }
-            header={ <StoreCover 
-              dispatch={ props.dispatch }
-              { ...store }
-            />}
-          > 
-            <ServicesList
-              services={
-                props.services.data
-                .filter(service => service.servicebasic.store == store.ID)
-              }
-            />            
-          </Panel>)
-        }
-      </Collapse>
-    }
+    <Scrollbar 
+      noScrollX
+      style={{ 
+        width: '100%', 
+        height: '100%'
+      }}> 
+      {
+        props.stores.data &&
+        props.stores.data.length &&
+        <Collapse
+          bordered={ true }
+          expandIconPosition="left"
+          defaultActiveKey={ props.storesactive }
+          onChange={ onChange }
+        >
+          {
+            props.stores.data
+            .map(store => <Panel
+              key={ store.ID }
+              storeid={ store.ID }
+              header={ <StoreCover 
+                dispatch={ props.dispatch }
+                { ...store }
+              />}
+            >
+              <Scrollbar 
+                noScrollY
+                style={{ 
+                  width: '100%', 
+                  height: 270 
+                }}>              
+                <ServicesList
+                  services={
+                    props.services.data
+                    .filter(service => service.servicebasic.store == store.ID)
+                  }
+                />      
+              </Scrollbar>
+            </Panel>)
+          }
+        </Collapse>
+      }
+    </Scrollbar>
   </div>
 })
 

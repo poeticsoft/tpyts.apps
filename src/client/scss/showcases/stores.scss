@@ -10,7 +10,14 @@
     
     > .ant-collapse-item {
 
-      border-top: solid 8px $color-tpyts-green;
+      border-top: solid 10px $color-tpyts-green;
+
+      margin-bottom: $space * 3;
+
+      &:last-child {
+
+        margin-bottom: $space * 12;
+      }
 
       > .ant-collapse-header {
 
@@ -69,11 +76,23 @@
 
       .ant-collapse-content-box {
 
-        padding: $space;
+        padding: $space * 2 0 0;
 
         .ServicesWrapper {
 
-          padding: $space 0 $space * 6;
+          white-space: nowrap;
+          padding: $space;
+
+          .ServiceResumeWrapper {
+
+            display: inline-block;
+            vertical-align: top;
+            width: $space * 30;
+            margin-bottom: $space * 3;          
+            padding-left: $space;
+            padding-right: $space;
+            white-space: normal;
+          }
         }
       }
     }
@@ -179,6 +198,7 @@
           .AddressNumber {
             
             display: inline-block;
+            margin: 0 $space / 2 0 0;
           }
           
           .Location {

@@ -1,0 +1,47 @@
+
+
+.ScrollbarsCustom-Track {
+
+  &.ScrollbarsCustom-TrackX,
+  &.ScrollbarsCustom-TrackY { 
+
+    background-color: $color-tpyts-green !important;
+    border-radius: 0 !important;
+  
+    .ScrollbarsCustom-Thumb {
+
+      &.ScrollbarsCustom-ThumbX,
+      &.ScrollbarsCustom-ThumbY {
+
+        background-color: $color-tpyts-yellow !important;
+        border-radius: 0 !important;
+        width: 8px !important;
+        margin: 0 0 0 1px;
+      }
+      
+      &.ScrollbarsCustom-ThumbX {
+
+        height: 8px !important;
+        margin: 1px 0 0 0;
+      }
+
+      &.ScrollbarsCustom-ThumbY {
+
+        width: 8px !important;
+        margin: 0 0 0 1px;
+      }
+    }
+  }
+}
+
+.ScrollbarsCustom-Track.ScrollbarsCustom-TrackX {
+
+  left: 0 !important;
+  width: 100% !important;
+}
+
+.ScrollbarsCustom-Track.ScrollbarsCustom-TrackY {
+
+  top: 0 !important;
+  height: 100% !important;
+}

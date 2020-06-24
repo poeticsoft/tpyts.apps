@@ -24,6 +24,7 @@ $navigationsize: $space * 5;
   @include boxshadow();
 }
 
+#TPYTS,
 #TPYTSAdmin,
 #TPYTSClient,
 #TPYTSProvider,
@@ -31,4 +32,9 @@ $navigationsize: $space * 5;
 
   top: $navigationsize;
   z-index: 0;
+}
+
+p {
+
+  margin: 0 0 $space * 1.5;
 }

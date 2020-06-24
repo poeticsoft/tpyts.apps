@@ -1,0 +1,252 @@
+
+$lineservicehexcerpt: $space * 2;
+
+.ServiceWrapper,
+.ServiceResumeWrapper { 
+  
+  .Service {
+
+    border: solid 1px $color-border-medium;
+    border-radius: 0 $space * 2.8 0 $space *3;
+    line-height: 120%;
+    overflow: hidden;
+    position: relative;
+    @include boxshadow();
+
+    .SearchHighlight {
+
+      display: inline-block;
+      padding: 2px 3px 0;
+      background-color: $color-tpyts-green;
+      color: $color-text-light;
+    }
+    
+    .Image {
+      
+      width: 100%;
+      padding: 0 0 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      background-color: #ccc;
+      border: solid $color-border-medium;
+      border-width: 0 0 1px 0;
+      position: relative;
+      z-index: 1;
+
+      // @media (min-width: 490px) { padding: 0 0 100%; }
+
+      .Product {
+
+        position: absolute;
+        font-family: "BebasNeue-Bold";
+        font-size: 160%;
+        line-height: 100%;
+        padding: $space $space * 1.5 $space * 0.75 $space;
+        border-radius: 0 0 $space * 2 0;
+        top: 0;
+        left: 0;
+        background-color: $color-tpyts-yellow-transparent-b;
+      }
+
+      .Price {  
+
+        position: absolute;
+        right: $space;
+        bottom: $space;
+        padding: $space / 2 + 1 $space + 2 $space / 2 - 1;
+        background-color: $color-tpyts-yellow;
+        border-radius: $space * 2;
+        @include boxshadow();
+          
+        .Number,      
+        .Currency {              
+
+          display: inline-block;
+          vertical-align: middle;
+          font-family: "BebasNeue-Bold";
+          line-height: 100%;
+        } 
+          
+        .Number {    
+
+          font-size: 180%;
+          margin: 0 $space / 4 0 0;
+        }
+        
+        .Currency {              
+
+          font-size: 120%;   
+        }
+      }
+    }
+
+    .Stock {
+      
+      position: absolute;
+      left: 0;
+      padding: $space / 2 $space * 1.5 $space / 2 $space;
+      border-radius: 0 $space * 2 $space * 2 0;
+      color: $color-text-light;
+      background-color: $color-tpyts-green;
+      white-space: nowrap;
+      font-size: 90%;
+      z-index: 2;
+      margin: -$space 0 0 0;
+      @include boxshadow();
+
+      .Text {
+
+        font-family: "BebasNeue-Regular";
+      } 
+
+      .Number {
+
+        font-family: "Roboto-Bold";
+        margin: 0 $space / 2;
+      } 
+    }
+
+    .Quantity {
+
+      float: right;
+      padding: $space / 1.5;
+      border: solid $color-border-medium;
+      border-width: 0 0 1px 1px;
+      border-radius: 0 0 0 $space * 3;
+      background-color: $color-background-light;
+      margin: -1px 0 0 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .Data {
+
+      background-color: $color-tpyts-yellow-transparent-a;
+
+      &:before {
+
+        content: "";
+        display: block;
+        clear: both;
+      }
+
+      > * {
+
+        padding: $space * 1.5;
+        display: block;
+        box-sizing: border-box;
+      }
+
+      > *:not(.Excerpt) {
+        
+        font-size: 85%;
+      }
+      
+      > *:not(:first-child) {
+        
+        border: dotted $color-border-medium;
+        border-width: 1px 0 0;
+        text-align: right;
+      } 
+      
+      .Excerpt {    
+        
+        font-family: "Roboto-Bold";
+        line-height: $lineservicehexcerpt;
+      }
+      
+      .Comments {    
+        
+        font-family: "Roboto-BoldItalic";
+        padding-left: 30%;
+        text-align: right;
+      }
+      
+      .Allergens {
+
+        .Label {   
+        
+          font-family: "BebasNeue-Bold";
+          font-size: 85%;
+          line-height: 100%;
+          margin-bottom: $space / 2;
+        }
+        
+        .Allergen {       
+
+          $size: $space * 4;
+
+          display: inline-block;
+          vertical-align: middle;
+          width: $size;
+          height: $size;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+
+          &.A_000 { background-image: url(~assets/allergens/000.png) }
+          &.A_001 { background-image: url(~assets/allergens/001.png) }
+          &.A_002 { background-image: url(~assets/allergens/002.png) }
+          &.A_003 { background-image: url(~assets/allergens/003.png) }
+          &.A_004 { background-image: url(~assets/allergens/004.png) }
+          &.A_005 { background-image: url(~assets/allergens/005.png) }
+          &.A_006 { background-image: url(~assets/allergens/006.png) }
+          &.A_007 { background-image: url(~assets/allergens/007.png) }
+          &.A_008 { background-image: url(~assets/allergens/008.png) }
+          &.A_009 { background-image: url(~assets/allergens/009.png) }
+          &.A_010 { background-image: url(~assets/allergens/010.png) }
+          &.A_011 { background-image: url(~assets/allergens/011.png) }
+          &.A_012 { background-image: url(~assets/allergens/012.png) }
+          &.A_013 { background-image: url(~assets/allergens/013.png) }
+        }
+      }
+    }  
+  }
+}
+
+.ServiceResumeWrapper { 
+
+  .Data {    
+
+    padding-bottom: $space * 2;
+      
+    .Excerpt {    
+      
+      height: $lineservicehexcerpt * 3.75;
+      overflow: hidden;
+      position: relative;
+
+      &:after {
+
+        content: "";
+        display: block;
+        @include absolutebox();
+        top: auto;
+        height: $lineservicehexcerpt;
+        background-color: $color-tpyts-yellow-transparent-a-solid;
+        background: linear-gradient(
+          0deg, 
+          $color-tpyts-yellow-transparent-a-solid 10%,
+          $color-tpyts-yellow-transparent-a-transparent 100%
+        );
+      }
+
+    }
+  }
+
+  .MoreInfo {
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: $space / 2 + 2 $space $space / 2;
+    font-family: "BebasNeue-Bold";
+    background-color: $color-tpyts-yellow;
+    color: $color-text-dark;
+    border-radius: $space 0 0 0;
+    @include boxshadow();
+    cursor: pointer;
+  }
+}

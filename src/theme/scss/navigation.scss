@@ -10,6 +10,7 @@
       margin: $space 0;
       padding: 0;
       text-align: right;
+      font-size: 110%;
 
       li,
       a {
@@ -23,7 +24,7 @@
 
           a {
 
-            font-family: "Roboto Condensed Light";
+            font-family: "BebasNeue-Regular";
             color: $color-links-selected;
           }
         }
@@ -31,7 +32,7 @@
 
       li + li {
 
-        margin: 0 0 0 $space;
+        margin: 0 0 0 $space * 0.75;
       }
 
       a {
@@ -39,7 +40,7 @@
         text-transform: uppercase;
         text-decoration: none;
         color: $color-links;
-        font-family: "Roboto Condensed Bold";
+        font-family: "BebasNeue-Bold";
       }
     }
   }

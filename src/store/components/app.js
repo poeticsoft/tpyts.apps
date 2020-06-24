@@ -7,12 +7,6 @@ import store from 'rdx/store'
 import { initSavedState } from 'utils/localstorage'
 import Message from 'common/components/message'
 import 'antd/dist/antd.less'
-import Showcase from './showcase'
-import PopMap from './pop-map'
-import PopGallery from './pop-gallery'
-import PopService from './pop-service'
-import Cart from './cart'
-import Tools from './tools'
 import Splash from 'common/components/splash'
 import * as Actions from 'rdx/actions'
 
@@ -35,12 +29,6 @@ const App = props => {
   }, [])
   
   return <Provider store={ store }>
-    <Showcase />
-    <Cart />
-    <PopMap />
-    <PopGallery />
-    <PopService />
-    <Tools />
     <Splash />
     <Message />
   </Provider>

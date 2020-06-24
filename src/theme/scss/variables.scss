@@ -5,6 +5,26 @@ $space: 8px;
 
 // Colors
 
-$color-shadows: #000;
+$color-tpyts-green: #008f36; 
+$color-tpyts-greendark: #00481b; 
+$color-tpyts-yellow: #ffec00;
+
+$color-text: #888;
+$color-text-light: #fff;
+$color-background-light: #fff;
+$color-background-dark: #000;
+$color-background-transparent-dark: rgba(0, 0, 0, 0.7);
+$color-shadows: transparentize($color-tpyts-greendark, 0.3);
+
+
+$color-border-medium: #ccc;
+$color-border-light: #f0f0f0;
+$color-border-dark: #000;
+$color-border-green: $color-tpyts-green;
+
+$color-tpyts-yellow-transparent-a: rgba(255, 236, 0, 0.1);
+$color-tpyts-yellow-transparent-b: rgba(255, 236, 0, 0.5);
+$color-tpyts-yellow-transparent-b: rgba(255, 236, 0, 0.7);
+
 $color-links: rgb(4, 122, 0);
 $color-links-selected:  rgba(4, 122, 0, 0.486);

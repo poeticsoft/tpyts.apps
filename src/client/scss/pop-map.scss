@@ -1,4 +1,4 @@
-.Map {     
+.PopMap {     
 
   @include absolutebox();
   background-color: $color-background-transparent-dark;
@@ -26,17 +26,6 @@
       height: $mapheaderheight;
       background-color: $color-tpyts-yellow;
       position: relative;
-    }
-
-    .Google {
-
-      @include absolutebox();
-      top: $mapheaderheight;
-      z-index: 0;
-    } 
-
-    .Header {
-
       padding: $space;
       bottom: auto;
 
@@ -58,6 +47,13 @@
         }
       }
     }
+
+    .Google {
+
+      @include absolutebox();
+      top: $mapheaderheight;
+      z-index: 0;
+    } 
 
     .Target{
 

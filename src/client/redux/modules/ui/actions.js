@@ -45,11 +45,11 @@ export const uiSetInitialState = state => ({
   }
 })
 
-export const UI_SET_SERVICE_ACTIVE = 'UI_SET_SERVICE_ACTIVE'
-export const uiSetServiceActive = serviceid => ({
-  type: UI_SET_SERVICE_ACTIVE,
+export const UI_SET_STORES_ACTIVE = 'UI_SET_STORES_ACTIVE'
+export const uiSetStoresActive = storeids => ({
+  type: UI_SET_STORES_ACTIVE,
   payload: {
-    serviceid: serviceid
+    storeids: storeids
   }
 })
 
@@ -69,6 +69,14 @@ export const uiSetGalleryState = data => ({
   }
 })
 
+
+export const UI_SET_SERVICE_INFO_STATE = 'UI_SET_SERVICE_INFO_STATE'
+export const uiSetServiceInfoState = data => ({
+  type: UI_SET_SERVICE_INFO_STATE,
+  payload: {
+    data: data
+  }
+})
 export const UI_SET_SHOWCASE_ACTIVE = 'UI_SET_SHOWCASE_ACTIVE'
 export const uiSetShowcaseActive = showcase => ({
   type: UI_SET_SHOWCASE_ACTIVE,
