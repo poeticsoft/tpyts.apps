@@ -1,13 +1,23 @@
-import React from 'react'
+import React, {
+  useState
+} from 'react'
 import { connect } from 'react-redux'
 import Quantity from '../common/quantity'
 import Highlighter from 'react-highlight-words'
 import * as Actions from 'rdx/actions'
+import VisibilitySensor from 'react-visibility-sensor'
 
 const ServiceResume = connect(state => ({
   showcase: state.ui.showcase,
   search: state.ui.search
 }))(props => {
+
+  const [ visible, setVisible ] = useState(false)
+
+  const amIVisible = iAmVisible => {
+
+    setVisible(iAmVisible || visible)
+  }
 
   const moreInfo = e => {
 
@@ -22,40 +32,43 @@ const ServiceResume = connect(state => ({
   return <div
     className="ServiceResumeWrapper"
   >
-    <div
-      className="Service"
-      style={{
-        width: props.width + 'px'
-      }}
-    >    
-      <div
-        className="Image"
-        style={{
-          backgroundImage: 'url(' + props.fullsize + ')'
-        }}
-      >
-        <div className="Product">
+    <div className="Service"> 
+      <VisibilitySensor 
+        onChange={ amIVisible }
+        partialVisibility
+      > 
+        <div className="Show">
           {
-            props.showcase == 'search' ?
-            <Highlighter
-              className="Title"
-              highlightClassName="SearchHighlight"
-              searchWords={ props.search.text.split(' ') }
-              autoEscape={ true }
-              textToHighlight={ props.post_title }
+            visible &&
+            <div
+              className="Image"
+              style={{
+                backgroundImage: 'url(' + props.fullsize + ')'
+              }}
             />
-            :
-            <div className="Title">
-              { props.post_title }
-            </div>
           }
+          <div className="Product">
+            {
+              props.showcase == 'search' ?
+              <Highlighter
+                className="Title"
+                highlightClassName="SearchHighlight"
+                searchWords={ props.search.text.split(' ') }
+                autoEscape={ true }
+                textToHighlight={ props.post_title }
+              />
+              :
+              <div className="Title">
+                { props.post_title }
+              </div>
+            }
+          </div>
+          <div className="Price">
+            <span className="Number">{ props.servicebasic.price || 0 }</span>
+            <span className="Currency">€</span>
+          </div> 
         </div>
-        <div className="Price">
-          <span className="Number">{ props.servicebasic.price }</span>
-          <span className="Currency">€</span>
-        </div> 
-      </div>
-                     
+      </VisibilitySensor  >                     
       <div className="Stock">
         <span className="Text">Quedan</span>
         <span className="Number">30</span>

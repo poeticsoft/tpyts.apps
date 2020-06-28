@@ -12,6 +12,7 @@ $lineservicehexcerpt: $space * 2;
     overflow: hidden;
     position: relative;
     @include boxshadow();
+    background-color: $color-tpyts-yellow-transparent-a;
 
     .SearchHighlight {
 
@@ -21,21 +22,26 @@ $lineservicehexcerpt: $space * 2;
       color: $color-text-light;
     }
     
-    .Image {
+    .Show {
       
-      width: 100%;
-      padding: 0 0 50%;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
       overflow: hidden;
-      background-color: #ccc;
       border: solid $color-border-medium;
       border-width: 0 0 1px 0;
+      z-index: 0;
       position: relative;
-      z-index: 1;
 
       // @media (min-width: 490px) { padding: 0 0 100%; }
+
+      .Image {        
+      
+        width: 100%;
+        padding: 0 0 50%;
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-color: #ccc;
+      }
 
       .Product {
 
@@ -122,8 +128,6 @@ $lineservicehexcerpt: $space * 2;
     }
     
     .Data {
-
-      background-color: $color-tpyts-yellow-transparent-a;
 
       &:before {
 
@@ -243,6 +247,7 @@ $lineservicehexcerpt: $space * 2;
     bottom: 0;
     padding: $space / 2 + 2 $space $space / 2;
     font-family: "BebasNeue-Bold";
+    font-size: 120%;
     background-color: $color-tpyts-yellow;
     color: $color-text-dark;
     border-radius: $space 0 0 0;

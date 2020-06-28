@@ -61,8 +61,8 @@ module.exports = env => {
       : 
       'none'
   
-  // const rootdestpath = 'C:\\trabajo\\manperez\\tpyts\\wp-content\\themes\\tpyts\\'
-  const rootdestpath = 'E:\\tpyts\\tpyts\\wp-content\\themes\\tpyts\\'
+  // const rootdestpath = 'E:\\tpyts\\tpyts\\wp-content\\themes\\tpyts\\'
+  const rootdestpath = 'E:\\trabajo\\manperez\\tpyts\\wp-content\\themes\\tpyts\\'
   const apppath = app == 'theme' ?
       ''
       :
@@ -96,7 +96,7 @@ module.exports = env => {
         ||
         app == 'theme'
       ) ? 10000 : 500,
-      appendScriptTag: true
+      appendScriptTag: false
     }),
     new EventHooksPlugin({
       'done': () => {  

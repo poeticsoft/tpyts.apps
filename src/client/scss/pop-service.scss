@@ -6,7 +6,6 @@
   
   .Wrapper {
 
-    border: solid 1px $color-border-medium;
     background-color: #fff;
     @include boxshadow();
     $mapheaderheight: $space * 6;
@@ -21,30 +20,27 @@
     );
     z-index: 2;
 
-    .Header {      
+    .ServiceWrapper {
 
-      height: $mapheaderheight;
-      background-color: $color-tpyts-yellow;
-      position: relative;
-      padding: $space;
-      bottom: auto;
+      z-index: 0;
+      height: 100%;
 
-      .Text {
+      .Service {
 
-        font-family: "BebasNeue-Bold";
-        font-size: 180%;
-        float: left;
-        padding: 0 0 0 $space;
+        height: 100%;
       }
+    }
 
-      .Tools {
+    .Tools {
 
-        float: right;
+      position: absolute;
+      top: $space;
+      right: $space;
+      z-index: 1;
 
-        button {
+      button {
 
-          @include boxshadow();
-        }
+        @include boxshadow();
       }
     }
   }

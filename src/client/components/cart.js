@@ -98,10 +98,15 @@ const Cart = connect(state => ({
           Object.keys(props.order.services)
           .reduce((count, key) => {
 
+            const price = props.services[key].servicebasic.price ?
+              parseFloat(props.services[key].servicebasic.price.replace(',', '.'))
+              :
+              0
+
             return count + (
               props.order.services[key]
               *
-              parseFloat(props.services[key].servicebasic.price.replace(',', '.'))
+              price
             )
           }, 0).toFixed(2).replace('.', ',')
         } €

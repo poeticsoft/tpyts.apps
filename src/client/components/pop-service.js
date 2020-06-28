@@ -30,20 +30,15 @@ const PopService = connect(state => ({
     className="PopService"
   >
     <div className="Wrapper">
-      <div className="Header">
-        <div className="Text">
-          { props.services[props.serviceinfo.serviceid].post_title }
-        </div>
-        <div className="Tools">
-          <Button
-            shape="circle"
-            icon={ <Icons.CheckOutlined /> } 
-            onClick={ closeService }
-          />
-        </div>        
-      </div>
+      <Service { ...props.services[props.serviceinfo.serviceid] } />
+      <div className="Tools">
+        <Button
+          shape="circle"
+          icon={ <Icons.CheckOutlined /> } 
+          onClick={ closeService }
+        />
+      </div> 
     </div>
-    <Service { ...props.services[props.serviceinfo.serviceid] } />
   </div>
   :
   <></>
