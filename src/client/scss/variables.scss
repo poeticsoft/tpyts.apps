@@ -7,8 +7,10 @@ $color-tpyts-yellow: #ffec00;
 $color-text: #888;
 $color-text-light: #fff;
 $color-text-dark: #000;
+$color-text-green: $color-tpyts-green;
 $color-background-light: #fff;
 $color-background-dark: #000;
+$color-background-yellow:$color-tpyts-yellow;
 $color-background-transparent-dark: rgba(0, 0, 0, 0.7);
 $color-shadows: transparentize($color-tpyts-greendark, 0.3);
 
@@ -18,7 +20,7 @@ $color-border-light: #f0f0f0;
 $color-border-dark: #000;
 $color-border-green: $color-tpyts-green;
 
-$color-tpyts-yellow-transparent-a: rgba(255, 236, 0, 0.1);
+$color-tpyts-yellow-transparent-a: rgba(255, 236, 0, 0.3);
 $color-tpyts-yellow-transparent-a-transparent: rgba(255, 236, 0, 0);
 $color-tpyts-yellow-transparent-a-solid: #fffde5;
 $color-tpyts-yellow-transparent-b: rgba(255, 236, 0, 0.5);

@@ -170,6 +170,20 @@ const reducers = {
       }
     )
   },
+
+  [Actions.UI_CANCEL_ORDER_SERVICE]: (state, action) => {
+
+    const newState = immutableUpdate(
+      state,
+      {}
+    ) 
+
+    console.log(newState.order.services[action.payload.serviceid])
+
+    delete newState.order.services[action.payload.serviceid]
+
+    return newState
+  },
   
   [Actions.UI_SET_CART_STATUS]: (state, action) => immutableUpdate(
     state,

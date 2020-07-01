@@ -1,104 +1,114 @@
 .Step.Order {
 
-  .Content {  
+  .Content { 
 
     .OrderService {
 
       $imagesize: $space * 10;
-      padding: $space 0;
-      border: solid $color-border-medium;
-      border-width: 0 0 1px;
       position: relative;
+      overflow: hidden;
+      border-radius: $space * 2 + 2 0 $space * 2 + 2 0;
+      background-color: $color-tpyts-yellow-transparent-a;
+      @include boxshadow();
+
+      .Image,
+      .Data {
+
+        display: inline-block;
+        vertical-align: top;
+      }
 
       .Image {
-
-        position: absolute;
-        top: $space;
-        left: 0;
+        
         width: $imagesize;
         height: $imagesize;
         background-color: $color-tpyts-yellow;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        position: relative;
+      }
+
+      .Cancel {
+
+        position: absolute;
+        top: $space / 2;
+        left: $space / 2;
       }
 
       .Data {      
 
-        padding: 0 0 0 $imagesize + $space;
-        line-height: 120%;
-        position: relative;
-        min-height: $imagesize;
+        width: calc(100% - #{ $imagesize });
+        padding: $space;
       
         .Title {
 
-          font-family: "Roboto-Bold";
-          font-size: 120%;      
+          font-family: "BebasNeue-Bold";
+          font-size: 150%;
+          line-height: 100%;     
         }
-        
-        .Comments {
-          
-        }
-        
-        .Calculo {
+
+        .Quantity {
 
           position: absolute;
-          font-size: 100%;
-          text-align: right;
-          bottom: 0;
-          right: $space * 2;
+          right: $space / 2;
+          bottom: $space / 2 - 1;
 
-          * {
-
-            display: inline-block;
-            vertical-align: middle;
-          }
-          
-          .Quantity {
-
-            font-family: "Roboto-Bold";
-            font-size: 130%;        
-          }
-
-          .Por {
-
-            margin: 0 $space;
-          }
-          
-          .Price {
+          .Number {
             
-            .Number {
-
-              font-family: "Roboto-Bold";
-              font-size: 130%;          
-            }
-            
-            .Currency {
-
-            }
-          }
-
-          .Igual {
-
-            margin: 0 $space;
-          }
-
-          .Total {
-
-
-            
-            .Number {
-
-              font-family: "Roboto-Bold";
-              font-size: 170%;          
-            }
-            
-            .Currency {
-
-            }
+            color: $color-text-green;
           }
         }
       }
     }
-  }  
+
+    .OrderService + .OrderService {
+
+      margin: $space 0 0 0;
+    }
+  }
+  
+  .TotalOrder {
+
+    position: absolute;
+    right: 0;
+    bottom: $space * 6;
+    background-color: $color-background-light;
+    padding: $space $space * 2 $space / 2;
+    border-radius: $space * 2 0 0 0;
+    border: solid $color-border-green;
+    border-width: 1px 0 0 1px;
+    @include boxshadow();
+
+    .Text,
+    .Number,
+    .Currency {
+
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 100%;
+    }    
+
+    .Text {
+
+      font-family: "BebasNeue-Regular";
+      font-size: 120%;
+      margin: 0 0 3px;
+    }   
+
+    .Number {
+
+      font-family: "BebasNeue-Bold";
+      font-size: 200%;
+      margin: 0 $space / 4;
+      color: $color-text-green;
+    }   
+
+    .Currency {
+
+      font-family: "BebasNeue-Regular";
+      font-size: 120%;
+    }
+
+  }
 }

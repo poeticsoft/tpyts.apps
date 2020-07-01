@@ -5,10 +5,12 @@ import {
 } from 'antd'
 import * as Actions from 'rdx/actions'
 import * as Icons from '@ant-design/icons'
+import Quantity from '../common/quantity'
 
 const OrderService = connect(state => ({
   services: state.wp.slotbyid.services,
-  cart: state.ui.cart
+  cart: state.ui.cart,
+  order: state.ui.order
 }))(props => {
 
   const service = props.services[props.serviceid]
@@ -17,6 +19,13 @@ const OrderService = connect(state => ({
     :
     0
   const total = price * props.quantity
+
+  const cancel = e => {
+
+    e.stopPropagation()
+
+    props.dispatch(Actions.uiCancelOrderService(props.serviceid))
+  }
 
   return <div 
     className="OrderService"
@@ -27,22 +36,18 @@ const OrderService = connect(state => ({
         backgroundImage: 'url(' + service.thumbnail + ')'
       }}
     />
+    <Button 
+      className="Cancel"
+      shape="circle"
+      icon={ <Icons.CloseOutlined /> }
+      onClick={ cancel }
+    />
     <div className="Data">
-      <div className="Title">{ service.post_title }</div>
-      <div className="Comments">{ service.servicebasic.comments }</div>
-      <div className="Calculo">
-        <div className="Quantity">{ props.quantity }</div>
-        <div className="Por">x</div>
-        <div className="Price">
-          <div className="Number">{ price }</div>
-          <div className="Currency">€</div>
-        </div>
-        <div className="Igual">=</div>
-        <div className="Total">
-          <div className="Number">{ total }</div>
-          <div className="Currency">€</div>
-        </div>
-      </div>      
+      <div className="Title">{ service.post_title }</div>      
+      <Quantity 
+        serviceid={ props.serviceid }
+        dispatch={ props.dispatch }
+      /> 
     </div>
   </div>
 })
@@ -76,6 +81,32 @@ const Order = connect(state => ({
           quantity={ props.order.services[key] }
         />)
       }
+    </div>
+    <div className="TotalOrder">
+      <div className="Text">
+        Total
+      </div>
+      <div className="Number">
+        {          
+          Object.keys(props.order.services)
+          .reduce((count, key) => {
+
+            const price = props.services[key].servicebasic.price ?
+              parseFloat(props.services[key].servicebasic.price.replace(',', '.'))
+              :
+              0
+
+            return count + (
+              props.order.services[key]
+              *
+              price
+            )
+          }, 0).toFixed(2).replace('.', ',')
+        }
+      </div>
+      <div className="Currency">
+        €
+      </div>
     </div>
     <div className="Next">
       <div className="Text">

@@ -37,7 +37,7 @@
     .Wrapper {             
 
       width: $cartwidth;
-      height: 648px;
+      height: calc(100% - #{$space * 7});
       border-radius: 0 0 $space * 2.8 $space * 2.8;
     }
   } 
@@ -47,7 +47,7 @@
     .Wrapper {            
 
       width: $cartwidth;
-      height: 648px;
+      height: calc(100% - #{$space * 7});
       border-radius: 0 0 $space * 2.8 $space * 2.8;
 
       .Header .Title,
@@ -147,7 +147,7 @@
           bottom: $nextsize;
           overflow-y: auto;
           z-index: 0;
-          padding: $space * 2;
+          padding: $space $space * 2 $space * 6 $space;
         }
                   
         .Next {

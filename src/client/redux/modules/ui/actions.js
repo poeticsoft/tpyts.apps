@@ -132,6 +132,14 @@ export const uiIncrementOrderService = data => ({
   }
 })
 
+export const UI_CANCEL_ORDER_SERVICE = 'UI_CANCEL_ORDER_SERVICE'
+export const uiCancelOrderService = serviceid => ({
+  type: UI_CANCEL_ORDER_SERVICE,
+  payload: {
+    serviceid: serviceid
+  }
+})
+
 export const uiOpenCart = () => (dispatch, getState) => { 
 
   dispatch(Actions.uiSetCartStatus({
