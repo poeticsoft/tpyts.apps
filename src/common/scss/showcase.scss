@@ -3,7 +3,7 @@
   $titlesize: $space * 6;
 
   @include absolutebox();      
-  background-color: $color-background-light;
+  background-color: $color-light;
   overflow: hidden;
   z-index: 0;
 
@@ -14,7 +14,7 @@
     height: $titlesize;
     font-family: "BebasNeue-Bold";
     font-size: 140%;
-    border: solid $color-border-green;
+    border: solid $color-green;
     border-width: 0 0 1px 0;
 
     span {
@@ -41,7 +41,7 @@
 
     @include absolutebox();  
     top: $titlesize;   
-    background-color: $color-background-light;
+    background-color: $color-light;
     overflow-y: auto;
   }
 

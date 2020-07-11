@@ -1,7 +1,7 @@
 .PopService {     
 
   @include absolutebox();
-  background-color: $color-background-transparent-dark;
+  background-color: $color-dark-transparent;
   z-index: 4;
   
   .Wrapper {

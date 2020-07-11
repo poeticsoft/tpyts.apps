@@ -24,6 +24,11 @@ const initialState = {
       updated: false,
       data: []
     },
+    toppings: {
+      lastchangedate: '',
+      updated: false,
+      data: []
+    },
     terms: {
       lastchangedate: '',
       updated: false,
@@ -67,6 +72,8 @@ const reducers = {
         slot == 'services'
         ||
         slot == 'allergens'
+        ||
+        slot == 'toppings'
       )  
     ) {
       

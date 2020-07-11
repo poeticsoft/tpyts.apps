@@ -13,10 +13,7 @@ const initialState = {
     zoom: 6,
     data: {}
   },
-  serviceinfo: {
-    active: true,
-    serviceid: null
-  }
+  ticketlogo: ''
 }
 
 const reducers = { 
@@ -61,7 +58,7 @@ const reducers = {
     { 
       serviceinfo: action.payload.data
     }
-  ),  
+  ),   
 } 
 
 const reducer = (state = initialState, action) => reducers[action.type] ? 

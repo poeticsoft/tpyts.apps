@@ -9,7 +9,6 @@ import Message from 'common/components/message'
 import 'antd/dist/antd.less'
 import Splash from 'common/components/splash'
 import Orders from './orders'
-
 import * as Actions from 'rdx/actions'
 
 const resize = () => {
@@ -21,6 +20,8 @@ const resize = () => {
 }
 
 const App = props => {
+
+  console.log('app')
 
   useEffect(() => {
     

@@ -16,6 +16,7 @@ const {
 const edit = ({attributes, setAttributes}) => {
 
   const [ stores, setStores ] = useState([])
+  const [ services, setServices ] = useState([])
   const [ allergens, setAllergens ] = useState([])
   
   useEffect(() => {
@@ -24,16 +25,20 @@ const edit = ({attributes, setAttributes}) => {
     .then(res => res.json())
     .then(stores => setStores(stores))
     
+    fetch('/wp-json/tpyts/services?per_page=100')
+    .then(res => res.json())
+    .then(services => setServices(services))
+    
     fetch('/wp-json/tpyts/allergens?per_page=100')
     .then(res => res.json())
     .then(allergens => setAllergens(allergens))
 
   }, [])
 
-  return <div className="TPYTSBlock BlockServiceBasic">
+  return <div className="TPYTSBlock BlockToppingBasic">
 
     <div className="SectionTitle">
-      { __('Servicio', 'tpyts') }
+      { __('Topping', 'tpyts') }
     </div>
 
     <div className="Data">
@@ -56,10 +61,36 @@ const edit = ({attributes, setAttributes}) => {
                 value: store.ID,
                 label: store.post_title                
               })))
-             }
+            }
             onChange={ value => setAttributes({
               ...attributes,
               store: value
+            })}
+          />
+        </div>  
+
+        <div className="Field Services G5">
+          <SelectControl
+            label={ __('Servicios', 'tpyts') }
+            multiple
+            value={ attributes.services && attributes.services.split('|') }
+            options={ 
+              [
+                {
+                  value: 0,
+                  label: __('Selecciona servicio', 'tpyts')               
+                }
+              ].concat(
+              services
+              .filter(service => service.servicebasic.store == attributes.store)
+              .map(service => ({
+                value: service.ID,
+                label: service.post_title                
+              })))
+            }
+            onChange={ value => setAttributes({
+              ...attributes,
+              services: value.join('|')
             })}
           />
         </div>  
@@ -133,20 +164,23 @@ const edit = ({attributes, setAttributes}) => {
 const save = ({ attributes }) => {
 
   return (
-		<div className="BlockServiceBasic">
+		<div className="BlockToppingBasic">
       <InnerBlocks.Content />
 		</div>
 	)
 }
 
 registerBlockType(
-  'tpyts/servicebasic',
+  'tpyts/toppingbasic',
   {
-    title: __('Servicio Básico', 'tpyts'),
+    title: __('Topping básico', 'tpyts'),
     icon: 'clipboard',
     category: 'tpyts',
     attributes: {
       store: {
+        type: 'string'
+      },
+      services: {
         type: 'string'
       },
       components: {

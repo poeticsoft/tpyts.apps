@@ -2,15 +2,15 @@
   
   $logosize: $space * 10;
   $logosizebig: $space * 16;
+  
+  background-color: $color-yellow-light;
 
   .ant-collapse {
-
-    background-color: $color-tpyts-yellow-transparent-a;
     border: none;
     
     > .ant-collapse-item {
 
-      border-top: solid 10px $color-tpyts-green;
+      border-top: solid 10px $color-green;
 
       margin-bottom: $space * 3;
 
@@ -33,10 +33,10 @@
           -webkit-transform: none;
           transform: none;
           width: $logosize + $space * 2;
-          color: $color-tpyts-green;
-          background-color: $color-background-light;
+          color: $color-green;
+          background-color: $color-light;
           padding: $space * 1.2 0;
-          border: solid $color-border-medium;
+          border: solid $color-medium;
           border-width: 1px 1px 0 0;
           border-radius: 0 $space * 2 0 0;
           z-index: 1;
@@ -110,7 +110,7 @@
       content: "";
       display: block;
       @include absolutebox();
-      background-color: $color-tpyts-yellow-transparent-b;
+      background-color: $color-yellow-transparent;
       z-index: 0;
     }
 
@@ -126,7 +126,7 @@
 
       width: $logosize;
       height: $logosize;
-      background-color: $color-tpyts-yellow;
+      background-color: $color-yellow;
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -175,7 +175,7 @@
       .Address {
 
         margin: $space 0 0;
-        border: dotted $color-border-dark;
+        border: dotted $color-dark;
         border-width: 1px 0 0 0;
         padding: $space 0 0;
         font-family: "Roboto-Bold";

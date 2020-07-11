@@ -9,8 +9,18 @@ import VisibilitySensor from 'react-visibility-sensor'
 
 const ServiceResume = connect(state => ({
   showcase: state.ui.showcase,
-  search: state.ui.search
+  search: state.ui.search,
+  toppings: state.wp.slot.toppings.data
 }))(props => {
+
+  const toppings = props.toppings
+  .filter(topping => topping
+    .toppingbasic.services
+    .split('|')
+    .map(topping => parseInt(topping))
+      .includes(props.ID
+    )
+  )
 
   const [ visible, setVisible ] = useState(false)
 
@@ -58,9 +68,15 @@ const ServiceResume = connect(state => ({
                 textToHighlight={ props.post_title }
               />
               :
-              <div className="Title">
-                { props.post_title }
+              <div className="Title">{ props.post_title }</div>
+            }
+            {
+              toppings.length ?
+              <div className="HaveVariations">
+                Admite variaciones
               </div>
+              :
+              <></>
             }
           </div>
           <div className="Price">

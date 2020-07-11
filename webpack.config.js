@@ -83,10 +83,7 @@ module.exports = env => {
       filename: app == 'theme' ? 
         'style.css'
         :
-        app == 'block' ?
-          'main.css'
-          :
-          `${ app }.css`
+        'main.css'
     }),
     new LiveReloadPlugin({
       protocol: 'http',
@@ -99,7 +96,7 @@ module.exports = env => {
       appendScriptTag: false
     }),
     new EventHooksPlugin({
-      'done': () => {  
+      'done': () => {
 
         if(app != 'block') {
 
@@ -141,11 +138,27 @@ module.exports = env => {
     ]
   }))
 
+  const entrymodules = [
+    `./src/${ srcpath }/main.js`,
+    `./src/${ 
+      (
+        app == 'block' 
+        || 
+        app == 'theme'
+      ) ? 
+      srcpath
+      :
+      'common/scss' 
+    }/main.scss`
+  ]
+
   console.log(app)
   console.log(wmode)
   console.log(wexternals)
   console.log(devtool)
+  console.log(srcpath)
   console.log(destpath)
+  console.log(entrymodules)
 
   return {
     context: __dirname,
@@ -153,10 +166,7 @@ module.exports = env => {
     devtool: devtool,
     entry: {
       ['main']: `webpack-polyfill-injector?${JSON.stringify({
-        modules: [
-          `./src/${ srcpath }/main.js`,
-          `./src/${ srcpath }/main.scss`
-        ]
+        modules: entrymodules
       })}!`
     },
     output: {

@@ -1,12 +1,12 @@
 .PopMap {     
 
   @include absolutebox();
-  background-color: $color-background-transparent-dark;
+  background-color: $color-dark-transparent;
   z-index: 4;
   
   .Wrapper {
 
-    border: solid 1px $color-border-medium;
+    border: solid 1px $color-medium;
     background-color: #fff;
     @include boxshadow();
     $mapheaderheight: $space * 6;
@@ -24,7 +24,7 @@
     .Header {      
 
       height: $mapheaderheight;
-      background-color: $color-tpyts-yellow;
+      background-color: $color-yellow;
       position: relative;
       padding: $space;
       bottom: auto;
@@ -58,7 +58,7 @@
     .Target{
 
       font-size: 200%;
-      color: $color-tpyts-green;
+      color: $color-green;
     }
   }
 }

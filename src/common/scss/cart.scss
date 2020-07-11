@@ -6,7 +6,7 @@
   $cartclose: $space * 7;
   @include absolutebox();
   z-index: 1;
-  background-color: $color-background-transparent-dark;
+  background-color: $color-dark-transparent;
 
   transition-property: bottom;
   transition-duration: 0.5s;
@@ -61,7 +61,7 @@
 
   .Wrapper {
 
-    background-color: $color-tpyts-yellow;
+    background-color: $color-yellow;
     overflow: hidden;
     z-index: 1;
     height: $space * 8;
@@ -91,7 +91,7 @@
     .Steps {  
 
       height: $cartstepssize - 1;
-      background-color: $color-background-light;
+      background-color: $color-light;
       border-radius: $space * 2.8 0 0 0;
       padding: $space 0 0 $space; 
       transition-property: opacity;
@@ -109,7 +109,7 @@
   
         width: $space;
         height: 2px;
-        background-color: $color-tpyts-green;
+        background-color: $color-green;
       }
   
       button.ant-btn-round {
@@ -136,7 +136,7 @@
         @include absolutebox();
         padding: $space * 2;
         overflow-y: auto;
-        background-color: $color-background-light;      
+        background-color: $color-light;      
         border-radius: 0 0 0 $space * 2.8;
         display: none;
         overflow: hidden;
@@ -156,7 +156,7 @@
           top: auto;
           height: $nextsize;  
           z-index: 1;  
-          background: $color-tpyts-green;
+          background: $color-green;
           padding: $space;
           text-align: right;
                 
@@ -170,7 +170,7 @@
           .Text {
   
             font-family: "Roboto-Bold";
-            color: $color-text-light;   
+            color: $color-light;   
             margin: 0 $space 0 0;      
           }
   
@@ -213,8 +213,8 @@
       line-height: $size;
       text-align: center;
       border-radius: $size / 2;
-      color: $color-text-light;
-      background-color: $color-tpyts-green;
+      color: $color-light;
+      background-color: $color-green;
       font-size: 100%;
       white-space: nowrap;
     }

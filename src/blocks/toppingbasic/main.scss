@@ -1,0 +1,34 @@
+.TPYTSBlock.BlockToppingBasic {
+  
+  .Field.Store
+  .Field.Services,
+  .Field.Allergens {
+
+    select {
+
+      display: block;
+    }
+  }
+  
+  .Field.Services {
+
+    select {
+
+      height: 183px;
+    }
+  }
+
+  .Field.Allergens {
+
+    select {
+
+      height: 183px;
+    }
+  }
+  
+  .Info {
+
+    font-size: 80%;
+    padding: 0 0 20px 0;
+  }  
+}

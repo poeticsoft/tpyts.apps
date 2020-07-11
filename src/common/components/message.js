@@ -5,24 +5,16 @@ const Message = connect(
   state => ({  
     message: state.ui.message
   })
-)(props => {  
+)(props => {
 
-  return <></>
-
-  return (
-    props.message &&
-    props.message.text
-  ) ?
-  <div 
+  return <div 
     className= {`
       Message
-      ${ props.message.type }  
+      ${ props.message ? props.message.type : ''  }  
     `}
   >
-    { props.message.text}
+    { props.message ? props.message.text : '' }
   </div>
-  :
-  <></>
 })
 
 export default Message;

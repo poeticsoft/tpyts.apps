@@ -1,16 +1,16 @@
 @mixin boxshadow() {
 
-  box-shadow: 0 0 8px $color-shadows; 
+  box-shadow: 0 0 8px $color-dark; 
 }
 
 @mixin boxinnershadow() {
 
-  box-shadow: 0 0 8px inset $color-shadows; 
+  box-shadow: 0 0 8px inset $color-dark; 
 }
 
 @mixin textshadow() {
 
-  box-shadow: 0 0 8px $color-shadows; 
+  box-shadow: 0 0 8px $color-dark; 
 }
 
 @mixin ellipsis () {
@@ -43,8 +43,8 @@
 
 @mixin textglowyellow() {
 
-  text-shadow: 0 0 12px $color-tpyts-yellow,
-               0 0 12px $color-tpyts-yellow,
-               0 0 16px $color-tpyts-yellow,
-               0 0 18px $color-tpyts-yellow;
+  text-shadow: 0 0 12px $color-yellow,
+               0 0 12px $color-yellow,
+               0 0 16px $color-yellow,
+               0 0 18px $color-yellow;
 }

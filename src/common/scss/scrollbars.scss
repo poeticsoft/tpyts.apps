@@ -5,7 +5,7 @@
   &.ScrollbarsCustom-TrackX,
   &.ScrollbarsCustom-TrackY { 
 
-    background-color: $color-tpyts-green !important;
+    background-color: $color-green !important;
     border-radius: 0 !important;
   
     .ScrollbarsCustom-Thumb {
@@ -13,7 +13,7 @@
       &.ScrollbarsCustom-ThumbX,
       &.ScrollbarsCustom-ThumbY {
 
-        background-color: $color-tpyts-yellow !important;
+        background-color: $color-yellow !important;
         border-radius: 0 !important;
         width: 8px !important;
         margin: 0 0 0 1px;

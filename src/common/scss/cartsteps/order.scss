@@ -8,7 +8,7 @@
       position: relative;
       overflow: hidden;
       border-radius: $space * 2 + 2 0 $space * 2 + 2 0;
-      background-color: $color-tpyts-yellow-transparent-a;
+      background-color: $color-yellow-light;
       @include boxshadow();
 
       .Image,
@@ -22,7 +22,7 @@
         
         width: $imagesize;
         height: $imagesize;
-        background-color: $color-tpyts-yellow;
+        background-color: $color-yellow;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -56,7 +56,7 @@
 
           .Number {
             
-            color: $color-text-green;
+            color: $color-green;
           }
         }
       }
@@ -73,10 +73,10 @@
     position: absolute;
     right: 0;
     bottom: $space * 6;
-    background-color: $color-background-light;
+    background-color: $color-light;
     padding: $space $space * 2 $space / 2;
     border-radius: $space * 2 0 0 0;
-    border: solid $color-border-green;
+    border: solid $color-green;
     border-width: 1px 0 0 1px;
     @include boxshadow();
 
@@ -101,7 +101,7 @@
       font-family: "BebasNeue-Bold";
       font-size: 200%;
       margin: 0 $space / 4;
-      color: $color-text-green;
+      color: $color-green;
     }   
 
     .Currency {

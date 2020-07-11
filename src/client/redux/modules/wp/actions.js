@@ -13,6 +13,7 @@ export const slots = [
   'stores',
   'services',
   'allergens',
+  'toppings',
   'terms'
 ]
 

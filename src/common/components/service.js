@@ -8,8 +8,18 @@ import VisibilitySensor from 'react-visibility-sensor'
 
 const Service = connect(state => ({
   showcase: state.ui.showcase,
-  search: state.ui.search
-}))(props => {  
+  search: state.ui.search,
+  toppings: state.wp.slot.toppings.data
+}))(props => { 
+
+  const toppings = props.toppings
+  .filter(topping => topping
+    .toppingbasic.services
+    .split('|')
+    .map(topping => parseInt(topping))
+      .includes(props.ID
+    )
+  ) 
 
   const [ visible, setVisible ] = useState(false) 
   
@@ -95,6 +105,20 @@ const Service = connect(state => ({
             :
             <div className="Components">{ props.servicebasic.components }</div>
           )
+        }
+        {
+          toppings.length ?
+          <div className="Toppings">
+            {
+              toppings
+              .map((topping, index) => <div
+                className="Topping"
+                key={ index }
+              >
+                
+              </div>)
+            }
+          </div>
         }
         {
           props.servicebasic.allergens &&
