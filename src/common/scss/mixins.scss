@@ -3,6 +3,11 @@
   box-shadow: 0 0 8px $color-dark; 
 }
 
+@mixin boxglow() {
+
+  box-shadow: 0 0 8px $color-light; 
+}
+
 @mixin boxinnershadow() {
 
   box-shadow: 0 0 8px inset $color-dark; 
@@ -47,4 +52,15 @@
                0 0 12px $color-yellow,
                0 0 16px $color-yellow,
                0 0 18px $color-yellow;
+}
+
+@mixin clearfloat() {
+
+  &:after {
+
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+  }
 }

@@ -3,10 +3,10 @@
   @include absolutebox();
   top: auto;
   left: auto;
-  z-index: 6;
   padding: $space $space * 2;
   background-color: #ccc;
   text-align: right;
+  z-index: 7;
 
   &.info { background-color: #0f0; }
   &.fail { background-color: #f00; }

@@ -36,10 +36,10 @@ const App = props => {
   
   return <Provider store={ store }>
     <Showcase />
-    <Cart />
     <PopMap />
     <PopGallery />
     <PopService />
+    <Cart />
     <Tools />
     <Splash />
     <Message />

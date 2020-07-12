@@ -64,7 +64,7 @@ const initialState = {
     }
   },
   order: {
-    services: {},
+    services: [],
     address: {},
     location: {},
     errors: {}
@@ -154,24 +154,30 @@ const reducers = {
     }
   ),
 
-  [Actions.UI_INCREMENT_ORDER_SERVICE]: (state, action) => {
+  [Actions.UI_ADD_SERVICE_TO_ORDER]: (state, action) => {
 
-    const serviceQuantity = state.order.services[action.payload.data.serviceid] || 0
-    const newServiceQuantity = serviceQuantity + action.payload.data.inc
+    const services = immutableUpdate(
+      {},
+      state.order.services
+    )
+
+    services.push(
+      {
+        serviceid: action.payload.serviceid
+      }
+    )
     
     return immutableUpdate(
       state,
       { 
         order: {
-          services: {
-            [action.payload.data.serviceid]: newServiceQuantity
-          }
+          services: services
         }
       }
     )
   },
 
-  [Actions.UI_CANCEL_ORDER_SERVICE]: (state, action) => {
+  [Actions.UI_REMOVE_SERVICE_FROM_ORDER]: (state, action) => {
 
     const newState = immutableUpdate(
       state,

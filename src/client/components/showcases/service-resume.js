@@ -2,25 +2,15 @@ import React, {
   useState
 } from 'react'
 import { connect } from 'react-redux'
-import Quantity from '../common/quantity'
+import Pedir from '../common/pedir'
 import Highlighter from 'react-highlight-words'
 import * as Actions from 'rdx/actions'
 import VisibilitySensor from 'react-visibility-sensor'
 
 const ServiceResume = connect(state => ({
   showcase: state.ui.showcase,
-  search: state.ui.search,
-  toppings: state.wp.slot.toppings.data
+  search: state.ui.search
 }))(props => {
-
-  const toppings = props.toppings
-  .filter(topping => topping
-    .toppingbasic.services
-    .split('|')
-    .map(topping => parseInt(topping))
-      .includes(props.ID
-    )
-  )
 
   const [ visible, setVisible ] = useState(false)
 
@@ -71,12 +61,15 @@ const ServiceResume = connect(state => ({
               <div className="Title">{ props.post_title }</div>
             }
             {
-              toppings.length ?
-              <div className="HaveVariations">
-                Admite variaciones
-              </div>
-              :
-              <></>
+              (
+                props.servicebasic.toppings &&
+                props.servicebasic.toppings.split('|').length
+              ) ?
+                <div className="HaveVariations">
+                  Admite variaciones
+                </div>
+                :
+                <></>
             }
           </div>
           <div className="Price">
@@ -91,7 +84,7 @@ const ServiceResume = connect(state => ({
         <span className="Text">raciones</span>
       </div>
       
-      <Quantity 
+      <Pedir 
         serviceid={ props.ID }
         dispatch={ props.dispatch }
       />

@@ -13,6 +13,7 @@ $lineservicehexcerpt: $space * 2;
     position: relative;
     @include boxshadow();
     background-color: $color-yellow-light;
+    min-height: $space * 30;
 
     .SearchHighlight {
 
@@ -134,20 +135,23 @@ $lineservicehexcerpt: $space * 2;
       } 
     }
 
-    .Quantity {
+    .Pedir {
 
       float: right;
-      padding: $space / 1.5;
+      padding: $space / 1.5 $space;
       border: solid $color-medium;
       border-width: 0 0 1px 1px;
-      border-radius: 0 0 0 $space * 3;
+      border-radius: 0 0 0 $space * 2;
       background-color: $color-light;
-      margin: -1px 0 0 0;
       position: relative;
       z-index: 1;
     }
     
     .Data {
+
+      @include absolutebox();
+      overflow: hidden;
+      padding-top: calc(50% + #{ $space * 5 });
 
       &:before {
 
@@ -180,12 +184,109 @@ $lineservicehexcerpt: $space * 2;
         font-family: "Roboto-Bold";
         line-height: $lineservicehexcerpt;
       }
+
+      .Components {
+
+        font-family: "Roboto-Regular";
+      }
+
+      .Toppings {
+
+        font-family: "Roboto-Bold";
+        text-align: left;
+        display: flex;
+        align-items: centers;
+
+        .Text {
+
+          flex: 0 0 85%;
+        }
+
+        .What {
+
+          flex: 0 0 15%;
+          text-align: right;
+          position: relative;
+
+          button {
+
+            position: relative;
+            z-index: 1;
+            @include boxshadow();
+          }
+
+          .ToppingList {
+
+            position: absolute;
+            top: 50%; 
+            right: $space * 3.5;
+            transform: translateY(-50%);
+            width: 200px;
+            background-color: $color-light;
+            z-index: 0;
+            border: solid 1px $color-medium;
+            border-radius: $space/ 2;
+            padding: $space $space * 1.5 $space $space;
+            @include boxshadow();
+
+            .ListTitle {
+
+              text-align: left;
+              padding: $space / 2 0;
+            }
+
+            .List {
+            
+              .ToppingInfo {
+
+                display: flex;
+                align-items: center;
+                font-size: 140%;
+                padding: $space / 2 0;
+                border: dotted $color-medium;
+                border-width: 1px 0 0 0;
       
-      .Comments {    
+                .ToppingTitle {
         
-        font-family: "Roboto-BoldItalic";
-        padding-left: 30%;
-        text-align: right;
+                  flex: 0 0 80%; 
+                  font-family: "BebasNeue-Regular";
+                  text-align: left;
+                }
+
+                .ToppingPrice {
+        
+                  flex: 0 0 20%;
+                  text-align: right;
+                  font-family: "BebasNeue-Bold";
+                }
+              }
+            }
+          }
+        }
+
+        .Topping {
+
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border: dotted $color-medium;
+          margin: $space / 2 0 0 0;
+          border-width: 1px 0 0;
+          padding: $space / 2 0 0 0;
+
+          .Title {
+
+            flex: 0 0 80%;
+            font-family: "BebasNeue-Regular";
+            font-size: 120%;
+          }
+
+          .AddRemove {
+
+            flex: 0 0 20%;
+            float: right;
+          }
+        }
       }
       
       .Allergens {
@@ -225,6 +326,13 @@ $lineservicehexcerpt: $space * 2;
           &.A_012 { background-image: url(~assets/allergens/012.png) }
           &.A_013 { background-image: url(~assets/allergens/013.png) }
         }
+      }
+      
+      .Comments {    
+        
+        font-family: "Roboto-BoldItalic";
+        padding-left: 30%;
+        text-align: right;
       }
     }  
   }

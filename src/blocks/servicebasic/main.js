@@ -16,6 +16,7 @@ const {
 const edit = ({attributes, setAttributes}) => {
 
   const [ stores, setStores ] = useState([])
+  const [ toppings, setToppings ] = useState([])
   const [ allergens, setAllergens ] = useState([])
   
   useEffect(() => {
@@ -23,6 +24,10 @@ const edit = ({attributes, setAttributes}) => {
     fetch('/wp-json/tpyts/stores?per_page=100')
     .then(res => res.json())
     .then(stores => setStores(stores))
+    
+    fetch('/wp-json/tpyts/toppings?per_page=100')
+    .then(res => res.json())
+    .then(toppings => setToppings(toppings))
     
     fetch('/wp-json/tpyts/allergens?per_page=100')
     .then(res => res.json())
@@ -76,7 +81,33 @@ const edit = ({attributes, setAttributes}) => {
             }) }
             value={ attributes.components }
           />
-        </div>          
+        </div>         
+
+        <div className="Field Toppings G6">
+          <SelectControl
+            label={ __('Complementos', 'tpyts') }
+            multiple
+            value={ attributes.toppings && attributes.toppings.split('|') }
+            options={ 
+              [
+                {
+                  value: 0,
+                  label: __('Selecciona complementos', 'tpyts')               
+                }
+              ].concat(
+              toppings
+              .filter(topping => topping.toppingbasic.store == attributes.store)
+              .map(topping => ({
+                value: topping.ID,
+                label: topping.post_title                
+              })))
+            }
+            onChange={ value => setAttributes({
+              ...attributes,
+              toppings: value.join('|')
+            })}
+          />
+        </div>               
 
         <div className="Field Allergens G6">
           <SelectControl
@@ -150,6 +181,9 @@ registerBlockType(
         type: 'string'
       },
       components: {
+        type: 'string'
+      },
+      toppings: {
         type: 'string'
       },
       allergens: {

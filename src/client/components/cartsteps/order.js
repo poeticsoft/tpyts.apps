@@ -5,7 +5,7 @@ import {
 } from 'antd'
 import * as Actions from 'rdx/actions'
 import * as Icons from '@ant-design/icons'
-import Quantity from '../common/quantity'
+import Pedir from '../common/pedir'
 
 const OrderService = connect(state => ({
   services: state.wp.slotbyid.services,
@@ -24,7 +24,7 @@ const OrderService = connect(state => ({
 
     e.stopPropagation()
 
-    props.dispatch(Actions.uiCancelOrderService(props.serviceid))
+    // props.dispatch(Actions.uiCancelOrderService(props.serviceid))
   }
 
   return <div 
@@ -44,7 +44,7 @@ const OrderService = connect(state => ({
     />
     <div className="Data">
       <div className="Title">{ service.post_title }</div>      
-      <Quantity 
+      <Pedir 
         serviceid={ props.serviceid }
         dispatch={ props.dispatch }
       /> 

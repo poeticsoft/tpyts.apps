@@ -1,0 +1,27 @@
+.Pedir {
+   
+  padding: 0 0 0 $space / 2;
+
+  .Text,
+  button {
+
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .Text {
+    
+    font-family: "BebasNeue-Bold";
+    font-size: 100%;
+    padding: 0 $space 0 $space / 2 ;
+    min-width: $space * 4;
+    text-align: center;
+    margin-top: $space / 4;
+  }
+  
+  button {
+
+    padding: 0;
+    @include boxshadow();
+  }
+}

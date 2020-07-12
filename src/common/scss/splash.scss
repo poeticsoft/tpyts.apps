@@ -2,12 +2,12 @@
 
   @include absolutebox();
   background-color: $color-yellow;
-  z-index: 5;
   opacity: 1; 
   transition-property: opacity, transform;
   transition-duration: 1s;  
   transform: translateY(0);
   text-align: center;
+  z-index: 6;
 
   &.Ready {
 

@@ -2,26 +2,20 @@ import React, {
   useState
 } from 'react'
 import { connect } from 'react-redux'
-import Quantity from '../../client/components/common/quantity'
+import Pedir from '../../client/components/common/pedir'
 import Highlighter from 'react-highlight-words'
 import VisibilitySensor from 'react-visibility-sensor'
+import { Button } from 'antd'
+import * as Icons from '@ant-design/icons'
 
 const Service = connect(state => ({
   showcase: state.ui.showcase,
   search: state.ui.search,
-  toppings: state.wp.slot.toppings.data
-}))(props => { 
-
-  const toppings = props.toppings
-  .filter(topping => topping
-    .toppingbasic.services
-    .split('|')
-    .map(topping => parseInt(topping))
-      .includes(props.ID
-    )
-  ) 
+  toppings: state.wp.slotbyid.toppings
+}))(props => {
 
   const [ visible, setVisible ] = useState(false) 
+  const [ toppingsVisible, setToppingsVisible ] = useState(false)
   
   return <div className="ServiceWrapper">
     <div className="Service"> 
@@ -68,7 +62,7 @@ const Service = connect(state => ({
         <span className="Text">raciones</span>
       </div>
       
-      <Quantity 
+      <Pedir 
         serviceid={ props.ID }
         dispatch={ props.dispatch }
       />
@@ -107,18 +101,51 @@ const Service = connect(state => ({
           )
         }
         {
-          toppings.length ?
-          <div className="Toppings">
-            {
-              toppings
-              .map((topping, index) => <div
-                className="Topping"
-                key={ index }
-              >
-                
-              </div>)
-            }
-          </div>
+          (
+            props.servicebasic.toppings &&
+            props.servicebasic.toppings.split('|').length
+          ) ?
+            <div className="Toppings">
+              <div className="Text">
+                Puedes añadir complementos opcionales a cualquiera de las raciones de tu pedido
+              </div>
+              <div className="What">
+                <Button
+                  shape="circle"
+                  icon={ <Icons.QuestionOutlined /> }
+                  onClick={ e => setToppingsVisible(!toppingsVisible ) }
+                /> 
+                {
+                  toppingsVisible &&
+                  <div className="ToppingList">
+                    <div className="ListTitle">
+                      Complementos
+                    </div>
+                    <div className="List">
+                      {
+                        props.servicebasic.toppings.split('|')
+                        .map((toppingid, index) => <div
+                          className="ToppingInfo"
+                          key={ index }
+                        >
+                          <div className="ToppingTitle">{ props.toppings[toppingid].post_title }</div>
+                          <div className="ToppingPrice">
+                            <span className="Number">
+                              { props.toppings[toppingid].toppingbasic.price }
+                            </span>
+                            <span className="Currency">
+                              €
+                            </span>
+                          </div>
+                        </div>)
+                      }
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+            :
+            <></>
         }
         {
           props.servicebasic.allergens &&

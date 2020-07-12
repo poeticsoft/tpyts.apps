@@ -124,19 +124,19 @@ export const uiSetSearchStatus = status => ({
   }
 })
 
-export const UI_INCREMENT_ORDER_SERVICE = 'UI_INCREMENT_ORDER_SERVICE'
-export const uiIncrementOrderService = data => ({
-  type: UI_INCREMENT_ORDER_SERVICE,
+export const UI_ADD_SERVICE_TO_ORDER = 'UI_ADD_SERVICE_TO_ORDER'
+export const uiAddServiceToOrder = serviceid => ({
+  type: UI_ADD_SERVICE_TO_ORDER,
   payload: {
-    data: data
+    serviceid: serviceid
   }
 })
 
-export const UI_CANCEL_ORDER_SERVICE = 'UI_CANCEL_ORDER_SERVICE'
-export const uiCancelOrderService = serviceid => ({
-  type: UI_CANCEL_ORDER_SERVICE,
+export const UI_REMOVE_SERVICE_FROM_ORDER = 'UI_REMOVE_SERVICE_FROM_ORDER'
+export const uiRemoveServiceFromOrder = orderserviceid => ({
+  type: UI_REMOVE_SERVICE_FROM_ORDER,
   payload: {
-    serviceid: serviceid
+    orderserviceid: orderserviceid
   }
 })
 

@@ -2,23 +2,18 @@
 
   @include absolutebox();
   background-color: $color-dark-transparent;
-  z-index: 4;
-  
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   .Wrapper {
 
-    background-color: #fff;
-    @include boxshadow();
-    $mapheaderheight: $space * 6;
+    width: 300px;
+    height: 510px;
     border-radius: 0 $space * 3 0 0;
-    overflow: hidden;
-
-    @include absolutebox(
-      $space * 2,
-      $space * 2,
-      $space * 2,
-      $space * 2
-    );
     z-index: 2;
+    position: relative;
 
     .ServiceWrapper {
 
@@ -28,13 +23,21 @@
       .Service {
 
         height: 100%;
+        @include boxglow();
+
+        .Data {
+
+          top: $space * 20;
+          padding-top: $space * 4;
+          overflow: auto;
+        }
       }
     }
 
     .Tools {
 
       position: absolute;
-      top: $space;
+      top: $space * 8;
       right: $space;
       z-index: 1;
 

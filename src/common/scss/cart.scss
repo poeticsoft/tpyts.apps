@@ -2,10 +2,10 @@
 
   $cartheadersize: $space * 5;
   $cartstepssize: $space * 6;
-  $cartwidth: $space * 40;
+  $cartwidth: $space * 35;
   $cartclose: $space * 7;
   @include absolutebox();
-  z-index: 1;
+  z-index: 4;
   background-color: $color-dark-transparent;
 
   transition-property: bottom;
@@ -147,7 +147,7 @@
           bottom: $nextsize;
           overflow-y: auto;
           z-index: 0;
-          padding: $space $space * 2 $space * 6 $space;
+          padding: $space $space $space * 6 $space;
         }
                   
         .Next {

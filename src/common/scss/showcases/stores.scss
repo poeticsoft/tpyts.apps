@@ -82,7 +82,7 @@
 
           white-space: nowrap;
           padding: $space;
-
+          
           .ServiceResumeWrapper {
 
             display: inline-block;
@@ -92,6 +92,7 @@
             padding-left: $space;
             padding-right: $space;
             white-space: normal;
+            scroll-snap-align: center;
           }
         }
       }

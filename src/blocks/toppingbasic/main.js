@@ -16,7 +16,6 @@ const {
 const edit = ({attributes, setAttributes}) => {
 
   const [ stores, setStores ] = useState([])
-  const [ services, setServices ] = useState([])
   const [ allergens, setAllergens ] = useState([])
   
   useEffect(() => {
@@ -24,10 +23,6 @@ const edit = ({attributes, setAttributes}) => {
     fetch('/wp-json/tpyts/stores?per_page=100')
     .then(res => res.json())
     .then(stores => setStores(stores))
-    
-    fetch('/wp-json/tpyts/services?per_page=100')
-    .then(res => res.json())
-    .then(services => setServices(services))
     
     fetch('/wp-json/tpyts/allergens?per_page=100')
     .then(res => res.json())
@@ -67,33 +62,7 @@ const edit = ({attributes, setAttributes}) => {
               store: value
             })}
           />
-        </div>  
-
-        <div className="Field Services G5">
-          <SelectControl
-            label={ __('Servicios', 'tpyts') }
-            multiple
-            value={ attributes.services && attributes.services.split('|') }
-            options={ 
-              [
-                {
-                  value: 0,
-                  label: __('Selecciona servicio', 'tpyts')               
-                }
-              ].concat(
-              services
-              .filter(service => service.servicebasic.store == attributes.store)
-              .map(service => ({
-                value: service.ID,
-                label: service.post_title                
-              })))
-            }
-            onChange={ value => setAttributes({
-              ...attributes,
-              services: value.join('|')
-            })}
-          />
-        </div>  
+        </div> 
 
         <div className="Field Components components-base-control G10">
           <label className="components-base-control__label">
@@ -178,9 +147,6 @@ registerBlockType(
     category: 'tpyts',
     attributes: {
       store: {
-        type: 'string'
-      },
-      services: {
         type: 'string'
       },
       components: {
