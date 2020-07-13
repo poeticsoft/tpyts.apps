@@ -6,7 +6,7 @@ import {
 import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
 
-const Pedir = connect(state => ({
+const PedirQuitar = connect(state => ({
   orderservices: state.ui.order.services
 }))(props => { 
 
@@ -14,18 +14,24 @@ const Pedir = connect(state => ({
 
     e.stopPropagation()
 
-    props.dispatch(Actions.uiPrepareServiceForOrder(props.serviceid))
+    // props.dispatch(Actions.uiPrepareServiceForOrder(props.serviceid))
   }
   
-  return <div className="Pedir">       
+  return <div className="PedirQuitar">          
     <Button 
-      shape="round"
+      shape="circle"
+      onClick={ inc }
+    >
+      <Icons.MinusOutlined />
+    </Button>   
+    <span>{ 0 }</span> 
+    <Button 
+      shape="circle"
       onClick={ inc }
     >
       <Icons.PlusOutlined />
-      <span>1</span>
     </Button>
   </div>
 })
 
-export default Pedir
+export default PedirQuitar

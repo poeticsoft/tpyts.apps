@@ -3,8 +3,7 @@ import React, {
 } from 'react'
 import { connect } from 'react-redux'
 import {
-  Button,
-  Badge
+  Button
 } from 'antd'
 import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
@@ -37,11 +36,7 @@ const Cart = connect(state => ({
     }))
   }
 
-  const raciones = Object.keys(props.order.services)
-  .reduce((count, key) => {
-
-    return count + props.order.services[key]
-  }, 0)
+  const stepKeys = Object.keys(props.cart.steps)
   
   return <div
     className={`
@@ -57,16 +52,20 @@ const Cart = connect(state => ({
       </div>    
       <div className="Steps">
         {
-          Object.keys(props.cart.steps)
+          stepKeys
           .map((key, index) => <Fragment key={ key }>
             {
               index > 0 && <i></i>
             }
-            <Button           
+            <Button   
               icon={ props.cart.steps[key].icon }
               shape="round"
-              type={ 'primary' }
+              type={ props.cart.actualstep == key ? 'primary' : '' }
               onClick={ e => selectStep(e, key)}
+              disabled={ 
+                index > 0 &&
+                !props.cart.steps[stepKeys[index - 1]].valid 
+              }
             >
               { props.cart.steps[key].name }
             </Button>
@@ -91,23 +90,20 @@ const Cart = connect(state => ({
         shape="circle"
         size="large"
         onClick={ toggleCart }
-        disabled={ !Object.keys(props.order.services).length }
+        disabled={ !props.order.services.length }
       />
       <div className="Count">
-        { raciones } / {          
-          Object.keys(props.order.services)
-          .reduce((count, key) => {
+        { props.order.services.length } / {          
+          props.order.services
+          .reduce((count, service) => {
 
-            const price = props.services[key].servicebasic.price ?
-              parseFloat(props.services[key].servicebasic.price.replace(',', '.'))
+            const price = props.services[service.serviceid].servicebasic.price ?
+              parseFloat(props.services[service.serviceid].servicebasic.price.replace(',', '.'))
               :
               0
 
-            return count + (
-              props.order.services[key]
-              *
-              price
-            )
+            return count + price
+            
           }, 0).toFixed(2).replace('.', ',')
         } €
       </div>

@@ -40,19 +40,22 @@ const initialState = {
         index: 0,
         name: 'Pedido',
         comp: Order,
-        icon: <Icons.UnorderedListOutlined />
+        icon: <Icons.UnorderedListOutlined />,
+        valid: true
       },
       'location': {
         index: 1,
         name: 'Donde?',
         comp: Location,
-        icon: <Icons.EnvironmentOutlined />
+        icon: <Icons.EnvironmentOutlined />,
+        valid: false
       },
       'payment': {
         index: 2,
         name: 'Pago',
         comp: Payment,
-        icon: <Icons.EuroOutlined />
+        icon: <Icons.EuroOutlined />,
+        valid: false
       }
     },
     card: {
@@ -65,8 +68,30 @@ const initialState = {
   },
   order: {
     services: [],
-    address: {},
-    location: {},
+    /*
+      {
+        serviceid: id,
+        quantity: 1, // for process with/out complements
+        complementos: [
+          complementoid
+        ]
+      }
+    */
+    location: {
+      name: null,
+      tel: null,
+      mail: null,
+      address: null,
+      location: {
+        status: null, // null, searching, ok, ko
+        lat: null,
+        lng: null
+      },
+      when: null,
+      time: null, 
+      comments: null
+    },
+    payment: {},
     errors: {}
   },
   showcase: 'stores',
@@ -157,15 +182,11 @@ const reducers = {
   [Actions.UI_ADD_SERVICE_TO_ORDER]: (state, action) => {
 
     const services = immutableUpdate(
-      {},
+      [],
       state.order.services
     )
 
-    services.push(
-      {
-        serviceid: action.payload.serviceid
-      }
-    )
+    services.push(action.payload.data)
     
     return immutableUpdate(
       state,

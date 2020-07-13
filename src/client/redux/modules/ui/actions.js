@@ -124,11 +124,23 @@ export const uiSetSearchStatus = status => ({
   }
 })
 
+export const uiPrepareServiceForOrder = serviceid => (dispatch, getState) => {
+  
+  const state = getState()
+  const serviceHasComplements = state.wp.slotbyid.services[serviceid].servicebasic.toppings
+  const newOrderService = {
+    serviceid: serviceid
+  }
+  serviceHasComplements && (newOrderService.complements = [])
+
+  dispatch(Actions.uiAddServiceToOrder(newOrderService))
+}
+
 export const UI_ADD_SERVICE_TO_ORDER = 'UI_ADD_SERVICE_TO_ORDER'
-export const uiAddServiceToOrder = serviceid => ({
+export const uiAddServiceToOrder = data => ({
   type: UI_ADD_SERVICE_TO_ORDER,
   payload: {
-    serviceid: serviceid
+    data: data
   }
 })
 

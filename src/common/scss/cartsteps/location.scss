@@ -1,20 +1,15 @@
 .Step.Location {
 
+  $gap: $space;
+
   .Content { 
     
     .Field {
 
       .ant-form-item {
 
-        margin-bottom: $space * 2;
+        margin-bottom: $gap;
       }
-
-      .ant-form-item-label > label {
-
-        height: 14px;
-      }
-
-      $gap: $space * 2;
 
       &.Tel,
       &.Mail {
@@ -44,7 +39,7 @@
     .Check {
 
       text-align: right;
-      margin-bottom: $space * 2; 
+      margin-bottom: $gap; 
     }
 
     .Comments {

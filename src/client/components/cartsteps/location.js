@@ -31,7 +31,7 @@ const Location = connect(state => ({
   const goWhere = e => {
 
     props.dispatch(Actions.uiSetCartStatus({
-      actualstep: 'payment'
+      actualstep: 'location'
     }))
   }
 
@@ -45,7 +45,7 @@ const Location = connect(state => ({
     props.dispatch(Actions.geoGetAddressToLocation(value))
   }
 
-  return <div 
+  return <div
     className={`
       Step
       Location
@@ -56,36 +56,30 @@ const Location = connect(state => ({
       <Form>
 
         <div className="Field Name">
-          <Form.Item
-            label="Tu nombre"
-          >
+          <Form.Item>
             <Input
               id="name" 
-              placeholder="Nombre y Apellidos" 
+              placeholder="Tu nombre y apellidos" 
               size="large"
             />
           </Form.Item>
         </div>
 
         <div className="Field Tel">
-          <Form.Item
-            label="Tu teléfono"
-          >
+          <Form.Item>
             <Input
               id="tel" 
-              placeholder="000 00 00 00" 
+              placeholder="Tu teléfono" 
               size="large"
             />
           </Form.Item>
         </div>
 
         <div className="Field Mail">
-          <Form.Item
-            label="O tu email"
-          >
+          <Form.Item>
             <Input
               id="mail" 
-              placeholder="mail@dominio.com" 
+              placeholder=" o tu mail" 
               size="large"
             />
           </Form.Item>
@@ -93,7 +87,6 @@ const Location = connect(state => ({
 
         <div className="Field Location">
           <Form.Item
-            label="Donde estás?"
             hasFeedback          
             validateStatus={ props.geo.apistatus == 'ready' ? 'error' : 'validating'}
           >
@@ -105,7 +98,7 @@ const Location = connect(state => ({
             >
               <Input 
                 size="large" 
-                placeholder="Buscamos tu dirección..."
+                placeholder="Tu dirección"
               />
             </AutoComplete>
           </Form.Item>          
@@ -121,9 +114,7 @@ const Location = connect(state => ({
         </div>
 
         <div className="Field WhenSelect">
-          <Form.Item
-            label="Cuando lo quieres?"
-          >
+          <Form.Item>
             <Select
               defaultValue="lap"
             >
@@ -142,9 +133,7 @@ const Location = connect(state => ({
         </div>
 
         <div className="Field WhenPicker">
-          <Form.Item
-            label="&nbsp;"
-          >
+          <Form.Item>
             <DatePicker
               mode="time"
               placeholder="A que hora?"
@@ -154,11 +143,9 @@ const Location = connect(state => ({
         </div>
 
         <div className="Field Comments">
-          <Form.Item
-            label="Comentarios?"
-          >
+          <Form.Item>
             <TextArea 
-              placeholder="Detalles de la entrega" 
+              placeholder="Comentarios?" 
               allowClear 
             />
           </Form.Item>

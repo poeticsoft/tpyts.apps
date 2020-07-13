@@ -1,11 +1,12 @@
 import React from 'react'
+import { groupBy } from 'lodash'
 import { connect } from 'react-redux'
 import {
   Button
 } from 'antd'
 import * as Actions from 'rdx/actions'
 import * as Icons from '@ant-design/icons'
-import Pedir from '../common/pedir'
+import PedirQuitar from '../common/pedirquitar'
 
 const OrderService = connect(state => ({
   services: state.wp.slotbyid.services,
@@ -36,15 +37,9 @@ const OrderService = connect(state => ({
         backgroundImage: 'url(' + service.thumbnail + ')'
       }}
     />
-    <Button 
-      className="Cancel"
-      shape="circle"
-      icon={ <Icons.CloseOutlined /> }
-      onClick={ cancel }
-    />
     <div className="Data">
       <div className="Title">{ service.post_title }</div>      
-      <Pedir 
+      <PedirQuitar 
         serviceid={ props.serviceid }
         dispatch={ props.dispatch }
       /> 
@@ -56,7 +51,7 @@ const Order = connect(state => ({
   services: state.wp.slotbyid.services,
   order: state.ui.order,
   cart: state.ui.cart
-}))(props => {  
+}))(props => { 
 
   const goWhere = e => {
 
@@ -74,12 +69,7 @@ const Order = connect(state => ({
   >
     <div className="Content">        
       {
-        Object.keys(props.order.services)
-        .map((key, index) => <OrderService
-          key={ key }
-          serviceid={ key }
-          quantity={ props.order.services[key] }
-        />)
+        
       }
     </div>
     <div className="TotalOrder">
@@ -88,16 +78,16 @@ const Order = connect(state => ({
       </div>
       <div className="Number">
         {          
-          Object.keys(props.order.services)
-          .reduce((count, key) => {
+          props.order.services
+          .reduce((count, service) => {
 
-            const price = props.services[key].servicebasic.price ?
-              parseFloat(props.services[key].servicebasic.price.replace(',', '.'))
+            const price = props.services[service.serviceid].servicebasic.price ?
+              parseFloat(props.services[service.serviceid].servicebasic.price.replace(',', '.'))
               :
               0
 
             return count + (
-              props.order.services[key]
+              props.order.services[service.serviceid]
               *
               price
             )
