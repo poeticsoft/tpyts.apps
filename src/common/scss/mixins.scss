@@ -1,6 +1,6 @@
 @mixin boxshadow() {
 
-  box-shadow: 0 0 8px $color-dark; 
+  box-shadow: 0 0 4px $color-shadows; 
 }
 
 @mixin boxglow() {

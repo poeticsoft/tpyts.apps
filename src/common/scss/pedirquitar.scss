@@ -1,15 +1,21 @@
-.PedirQuitar {
+.PedirQuitar {  
+
+  button,
+  > span { 
+    display: inline-block;
+    vertical-align: middle;
+  }
 
   button {
 
-    padding: 0 $space * 1.5 0 $space;
     @include boxshadow();
+  }
 
-    span {
+  > span {
 
-      margin-left: 0 !important;
-      font-family: "BebasNeue-Regular";
-      font-size: 120%;
-    }
+    margin: 0 $space;
+    font-family: "BebasNeue-Bold";
+    font-size: 160%;      
+    color: $color-green;
   }
 }

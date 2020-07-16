@@ -10,24 +10,32 @@ const PedirQuitar = connect(state => ({
   orderservices: state.ui.order.services
 }))(props => { 
 
+  console.log(props)
+
   const inc = e => {    
 
     e.stopPropagation()
 
-    // props.dispatch(Actions.uiPrepareServiceForOrder(props.serviceid))
+    props.dispatch(Actions.uiPrepareServiceForOrder(props.serviceid))
   }
   
   return <div className="PedirQuitar">          
     <Button 
       shape="circle"
-      onClick={ inc }
+      onClick={ e => inc(e, -1) }
     >
       <Icons.MinusOutlined />
     </Button>   
-    <span>{ 0 }</span> 
+    <span>
+      { 
+        props.orderservices
+        .filter(service => service.serviceid == props.serviceid )
+        .length
+      }
+    </span> 
     <Button 
       shape="circle"
-      onClick={ inc }
+      onClick={ e => inc(e, 1) }
     >
       <Icons.PlusOutlined />
     </Button>

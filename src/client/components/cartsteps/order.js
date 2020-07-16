@@ -1,5 +1,6 @@
-import React from 'react'
-import { groupBy } from 'lodash'
+import React, {
+  useState
+} from 'react'
 import { connect } from 'react-redux'
 import {
   Button
@@ -8,28 +9,94 @@ import * as Actions from 'rdx/actions'
 import * as Icons from '@ant-design/icons'
 import PedirQuitar from '../common/pedirquitar'
 
-const OrderService = connect(state => ({
+const TopingsServices = connect(state => ({
+  toppings: state.wp.slotbyid.toppings
+}))( props => {
+
+  return <div 
+    className="ToppingsServices"
+  >
+    {
+      props.group
+      .map((service, index) => <div
+        className="ToppingsService"
+        key={ index }
+      >
+        {
+          service.complements.length ?
+          <div 
+            className="Toppings"
+          >
+            Toppings
+          </div> 
+          :
+          <></>
+        }
+        <div className="AddTopping">
+          <div className="Text">
+            {
+              service.complements.length ?
+              'Más complementos?'
+              :
+              'Complementos?'
+            }
+          </div>       
+          <Button 
+            shape="circle"
+            onClick={ props.showtoppings }
+          >
+            <Icons.UnorderedListOutlined />
+          </Button>
+        </div>
+      </div>)
+    }
+    {
+      true &&
+      <div className="ToppingList">
+        <div className="ListTitle">
+          Complementos
+        </div>
+        <div className="List">
+          {
+            props.toppingsids
+            .map((toppingid, index) => <div
+              className="ToppingInfo"
+              key={ index }
+            >
+              <div className="ToppingTitle">{ props.toppings[toppingid].post_title }</div>
+              <div className="ToppingPrice">
+                <span className="Number">
+                  { props.toppings[toppingid].toppingbasic.price }
+                </span>
+                <span className="Currency">
+                  €
+                </span>
+              </div>
+            </div>)
+          }
+        </div>
+      </div>
+    }
+  </div>
+})
+
+const ServicesGroup = connect(state => ({
   services: state.wp.slotbyid.services,
-  cart: state.ui.cart,
-  order: state.ui.order
+  toppings: state.wp.slotbyid.toppings
 }))(props => {
 
   const service = props.services[props.serviceid]
-  const price = service.servicebasic.price ?
-    parseFloat(service.servicebasic.price.replace(',', '.'))
-    :
-    0
-  const total = price * props.quantity
+  const toppingsids = service.servicebasic.toppings &&
+                      service.servicebasic.toppings.split('|')
 
-  const cancel = e => {
+  const showToppings = e => {
 
-    e.stopPropagation()
-
-    // props.dispatch(Actions.uiCancelOrderService(props.serviceid))
   }
 
   return <div 
-    className="OrderService"
+    className={`
+      ServicesGroup
+    `}
   >
     <div 
       className="Image"
@@ -37,21 +104,58 @@ const OrderService = connect(state => ({
         backgroundImage: 'url(' + service.thumbnail + ')'
       }}
     />
+    {
+      toppingsids &&
+      toppingsids.length &&
+      <div className="Quantity">
+        { props.group.length}
+      </div>
+    }
     <div className="Data">
-      <div className="Title">{ service.post_title }</div>      
-      <PedirQuitar 
-        serviceid={ props.serviceid }
-        dispatch={ props.dispatch }
-      /> 
-    </div>
+      <div className="Title">{ service.post_title }</div> 
+      {
+        toppingsids ?
+        <div className="SelectToppings">
+          Puedes seleccionar complementos para cada ración
+        </div>
+        :
+        <PedirQuitar 
+          serviceid={ props.serviceid }
+          dispatch={ props.dispatch }
+        /> 
+      }
+    </div>  
+    {
+      toppingsids ?         
+      <TopingsServices
+        group={ props.group }
+        showtoppings={ showToppings }
+        toppingsids={ toppingsids }
+      />
+      :
+      <></>
+    }
   </div>
 })
 
 const Order = connect(state => ({
   services: state.wp.slotbyid.services,
+  cart: state.ui.cart,
   order: state.ui.order,
-  cart: state.ui.cart
 }))(props => { 
+
+  const orderServiceGroups = props.order.services
+  .reduce((groups, service, index) => {
+
+    const serviceid = service.serviceid
+    service.index = index
+    groups[serviceid] ? 
+      groups[serviceid].push(service)
+      :
+      groups[serviceid] = [service]
+
+    return groups
+  }, {});
 
   const goWhere = e => {
 
@@ -69,7 +173,12 @@ const Order = connect(state => ({
   >
     <div className="Content">        
       {
-        
+        Object.keys(orderServiceGroups)
+        .map(key => <ServicesGroup
+          key={ key }
+          serviceid={ key }
+          group={ orderServiceGroups[key] }
+        />)
       }
     </div>
     <div className="TotalOrder">

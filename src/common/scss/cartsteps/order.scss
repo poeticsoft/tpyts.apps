@@ -2,7 +2,7 @@
 
   .Content { 
 
-    .OrderService {
+    .ServicesGroup {
 
       $imagesize: $space * 10;
       position: relative;
@@ -10,17 +10,14 @@
       border-radius: $space * 2 + 2 0 $space * 2 + 2 0;
       background-color: $color-yellow-light;
       @include boxshadow();
-
-      .Image,
-      .Data {
-
-        display: inline-block;
-        vertical-align: top;
-      }
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      flex-wrap: wrap;
 
       .Image {
         
-        width: $imagesize;
+        flex-basis: $imagesize;
         height: $imagesize;
         background-color: $color-yellow;
         background-repeat: no-repeat;
@@ -29,17 +26,29 @@
         position: relative;
       }
 
-      .Cancel {
+      .Quantity {
+
+        $size: $space * 4;
 
         position: absolute;
         top: $space / 2;
         left: $space / 2;
+        width: $size;
+        height: $size;
+        background-color: $color-light-transparent;
+        border-radius: 50%;
+        line-height: $size;
+        text-align: center;
+        font-family: "BebasNeue-Bold";
+        font-size: 140%;
+        color: $color-green;
       }
 
       .Data {      
 
-        width: calc(100% - #{ $imagesize });
+        flex-basis: calc(100% - #{ $imagesize });
         padding: $space;
+        position: relative;
       
         .Title {
 
@@ -48,21 +57,121 @@
           line-height: 100%;     
         }
 
-        .Quantity {
+        .PedirQuitar {
 
           position: absolute;
           right: $space / 2;
           bottom: $space / 2 - 1;
+        }
 
-          .Number {
-            
-            color: $color-green;
+        .SelectToppings {
+
+          font-family: 'Roboto-Regular';
+          font-size: 80%;
+          line-height: 100%;
+          position: absolute;
+          left: $space;
+          bottom: $space;
+        }      
+      }
+
+      .ToppingsServices {
+
+        flex-basis: 100%;
+
+        .ToppingsService {
+
+          padding: $space;
+
+          .AddTopping {
+
+            text-align: right;
+
+            .Text,
+            button {
+
+              display: inline-block;
+              vertical-align: middle;
+            }
+
+            .Text {
+
+              margin: 0 $space / 2 0 0;
+            }
+          }
+        }
+
+        .ToppingsService {
+
+          border: dotted $color-dark;
+          border-width: 1px 0 0 0;
+
+          &:first-child {
+
+            border-style: solid;
+            border-color: $color-green;
+          }
+        }
+
+        .ToppingList {
+
+          position: absolute;            
+          top: 50%; 
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 240px;
+          background-color: $color-light;
+          z-index: 0;
+          border: solid 1px $color-medium;
+          border-radius: $space/ 2;
+          padding: 0 $space $space;
+          @include boxshadow();
+        
+          .ListTitle {
+        
+            text-align: left;
+            padding: $space / 2 0;
+            font-family: 'Roboto-Bold';
+          }
+        
+          .List {
+          
+            .ToppingInfo {
+        
+              display: flex;
+              align-items: center;
+              font-size: 110%;
+              padding: $space / 2 $space;
+              border: solid 1px $color-medium;
+              border-radius: $space / 2;
+              @include boxshadow();
+              background-color: $color-yellow-light;
+        
+              .ToppingTitle {
+        
+                flex: 0 0 80%; 
+                font-family: "BebasNeue-Regular";
+                text-align: left;
+              }
+        
+              .ToppingPrice {
+        
+                flex: 0 0 20%;
+                text-align: right;
+                font-family: "BebasNeue-Bold";
+              }
+            }
+
+            .ToppingInfo + .ToppingInfo {
+
+              margin: $space 0 0 0;
+            }
           }
         }
       }
     }
 
-    .OrderService + .OrderService {
+    .ServicesGroup + .ServicesGroup {
 
       margin: $space 0 0 0;
     }

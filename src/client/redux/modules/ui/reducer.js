@@ -8,7 +8,8 @@ import * as Actions from './actions'
 
 const initialState = {  
   message: {},
-  window:{},
+  window:{}, 
+  showcase: 'stores',
   stores: {
     storesactive: []
   },
@@ -57,13 +58,6 @@ const initialState = {
         icon: <Icons.EuroOutlined />,
         valid: false
       }
-    },
-    card: {
-      cvc: '',
-      expiry: '',
-      focus: '',
-      name: '',
-      number: '',
     }
   },
   order: {
@@ -71,30 +65,38 @@ const initialState = {
     /*
       {
         serviceid: id,
+        index: index in list
         quantity: 1, // for process with/out complements
         complementos: [
           complementoid
         ]
       }
     */
-    location: {
-      name: null,
-      tel: null,
-      mail: null,
-      address: null,
-      location: {
-        status: null, // null, searching, ok, ko
-        lat: null,
-        lng: null
-      },
-      when: null,
-      time: null, 
-      comments: null
-    },
-    payment: {},
     errors: {}
+  },    
+  location: {
+    name: null,
+    tel: null,
+    mail: null,
+    address: null,
+    location: {
+      status: null, // null, searching, ok, ko
+      lat: null,
+      lng: null
+    },
+    when: null,
+    time: null, 
+    comments: null
   },
-  showcase: 'stores',
+  payment: {
+    card: {
+      cvc: '',
+      expiry: '',
+      focus: '',
+      name: '',
+      number: '',
+    }
+  }, 
   search: {
     status: 'hidden',
     text: '',

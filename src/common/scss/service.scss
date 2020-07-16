@@ -213,7 +213,7 @@ $lineservicehexcerpt: $space * 2;
 
           .ToppingList {
 
-            position: absolute;
+            position: absolute;            
             top: 50%; 
             right: $space * 3.5;
             transform: translateY(-50%);
@@ -224,33 +224,33 @@ $lineservicehexcerpt: $space * 2;
             border-radius: $space/ 2;
             padding: $space $space * 1.5 $space $space;
             @include boxshadow();
-
+          
             .ListTitle {
-
+          
               text-align: left;
               padding: $space / 2 0;
             }
-
+          
             .List {
             
               .ToppingInfo {
-
+          
                 display: flex;
                 align-items: center;
-                font-size: 140%;
+                font-size: 110%;
                 padding: $space / 2 0;
                 border: dotted $color-medium;
                 border-width: 1px 0 0 0;
-      
+          
                 .ToppingTitle {
-        
+          
                   flex: 0 0 80%; 
                   font-family: "BebasNeue-Regular";
                   text-align: left;
                 }
-
+          
                 .ToppingPrice {
-        
+          
                   flex: 0 0 20%;
                   text-align: right;
                   font-family: "BebasNeue-Bold";

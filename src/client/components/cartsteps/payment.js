@@ -14,7 +14,8 @@ import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
 
 const Payment = connect(state => ({
-  cart: state.ui.cart
+  cart: state.ui.cart,
+  payment: state.ui.payment
 }))(props => {    
 
   const goBack = e => {
@@ -69,11 +70,11 @@ const Payment = connect(state => ({
     <div className="Content">
       <div className="Card">
         <Cards
-          number={ props.cart.card.number }
-          name={ props.cart.card.name }
-          expiry={ props.cart.card.expiry }
-          cvc={ props.cart.card.cvc }
-          focused={ props.cart.card.focus }
+          number={ props.payment.card.number }
+          name={ props.payment.card.name }
+          expiry={ props.payment.card.expiry }
+          cvc={ props.payment.card.cvc }
+          focused={ props.payment.card.focus }
           preview={ false }
         />      
       </div>
@@ -88,7 +89,7 @@ const Payment = connect(state => ({
                 placeholder="Número Tarjeta" 
                 size="large"
                 required  
-                value={ props.cart.card.number }
+                value={ props.payment.card.number }
                 onChange={ handleInputChange }
                 onFocus={ handleInputFocus }
               />
@@ -102,7 +103,7 @@ const Payment = connect(state => ({
                 placeholder="Nombre titular" 
                 size="large"
                 required 
-                value={ props.cart.card.name } 
+                value={ props.payment.card.name } 
                 onChange={ handleInputChange }
                 onFocus={ handleInputFocus }
               />
@@ -117,7 +118,7 @@ const Payment = connect(state => ({
                 placeholder="Valida hasta" 
                 size="large"
                 required 
-                value={ props.cart.card.expiry } 
+                value={ props.payment.card.expiry } 
                 onChange={ handleInputChange }
                 onFocus={ handleInputFocus }
               />
@@ -132,7 +133,7 @@ const Payment = connect(state => ({
                 placeholder="CVC" 
                 size="large"
                 required 
-                value={ props.cart.card.cvc } 
+                value={ props.payment.card.cvc } 
                 onChange={ handleInputChange }
                 onFocus={ handleInputFocus }
               />
