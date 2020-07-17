@@ -111,69 +111,76 @@
             border-style: solid;
             border-color: $color-green;
           }
-        }
-
-        .ToppingList {
-
-          position: absolute;            
-          top: 50%; 
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 240px;
-          background-color: $color-light;
-          z-index: 0;
-          border: solid 1px $color-medium;
-          border-radius: $space/ 2;
-          padding: 0 $space $space;
-          @include boxshadow();
-        
-          .ListTitle {
-        
-            text-align: left;
-            padding: $space / 2 0;
-            font-family: 'Roboto-Bold';
-          }
-        
-          .List {
-          
-            .ToppingInfo {
-        
-              display: flex;
-              align-items: center;
-              font-size: 110%;
-              padding: $space / 2 $space;
-              border: solid 1px $color-medium;
-              border-radius: $space / 2;
-              @include boxshadow();
-              background-color: $color-yellow-light;
-        
-              .ToppingTitle {
-        
-                flex: 0 0 80%; 
-                font-family: "BebasNeue-Regular";
-                text-align: left;
-              }
-        
-              .ToppingPrice {
-        
-                flex: 0 0 20%;
-                text-align: right;
-                font-family: "BebasNeue-Bold";
-              }
-            }
-
-            .ToppingInfo + .ToppingInfo {
-
-              margin: $space 0 0 0;
-            }
-          }
-        }
+        }        
       }
     }
 
     .ServicesGroup + .ServicesGroup {
 
       margin: $space 0 0 0;
+    }
+  }
+
+  .ToppingList {
+
+    @include absolutebox();
+    bottom: $space * 5;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    .Wrapper {
+
+      position: absolute;            
+      top: 50%; 
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 240px;
+      background-color: $color-light;
+      z-index: 0;
+      border: solid 1px $color-medium;
+      border-radius: $space/ 2;
+      padding: 0 $space $space;
+      @include boxshadow();
+  
+      .ListTitle {
+    
+        text-align: left;
+        padding: $space / 2 0;
+        font-family: 'Roboto-Bold';
+      }
+    
+      .List {
+      
+        .ToppingInfo {
+    
+          display: flex;
+          align-items: center;
+          font-size: 110%;
+          padding: $space / 2 $space;
+          border: solid 1px $color-medium;
+          border-radius: $space / 2;
+          @include boxshadow();
+          background-color: $color-yellow-light;
+    
+          .ToppingTitle {
+    
+            flex: 0 0 80%; 
+            font-family: "BebasNeue-Regular";
+            text-align: left;
+          }
+    
+          .ToppingPrice {
+    
+            flex: 0 0 20%;
+            text-align: right;
+            font-family: "BebasNeue-Bold";
+          }
+        }
+
+        .ToppingInfo + .ToppingInfo {
+
+          margin: $space 0 0 0;
+        }
+      }
     }
   }
   

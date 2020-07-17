@@ -62,16 +62,10 @@ const initialState = {
   },
   order: {
     services: [],
-    /*
-      {
-        serviceid: id,
-        index: index in list
-        quantity: 1, // for process with/out complements
-        complementos: [
-          complementoid
-        ]
-      }
-    */
+    toppings: {
+      visible: false,
+      list: []
+    },
     errors: {}
   },    
   location: {
@@ -213,6 +207,15 @@ const reducers = {
 
     return newState
   },
+  
+  [Actions.UI_CART_TOPPINGS_LIST_STATUS]: (state, action) => immutableUpdate(
+    state,
+    { 
+      order: {
+        toppings: action.payload.data
+      }
+    }
+  ), 
   
   [Actions.UI_SET_CART_STATUS]: (state, action) => immutableUpdate(
     state,

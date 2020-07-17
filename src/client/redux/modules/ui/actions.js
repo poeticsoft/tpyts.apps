@@ -194,6 +194,14 @@ export const uiCloseCart = () => (dispatch, getState) => {
   }, 500)
 }
 
+export const UI_CART_TOPPINGS_LIST_STATUS = 'UI_CART_TOPPINGS_LIST_STATUS'
+export const uiCartToppingsListStatus = data => ({
+  type: UI_CART_TOPPINGS_LIST_STATUS,
+  payload: {
+    data: data
+  }
+})
+
 export const UI_SET_CART_STATUS = 'UI_SET_CART_STATUS'
 export const uiSetCartStatus = status => ({
   type: UI_SET_CART_STATUS,
