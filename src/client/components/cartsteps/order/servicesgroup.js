@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PedirQuitar from '../common/pedirquitar'
+import PedirQuitar from '../../common/pedirquitar'
 import { TopingsServices } from './toppingsservices'
 
 export const ServicesGroup = connect(state => ({
@@ -11,14 +11,6 @@ export const ServicesGroup = connect(state => ({
   const service = props.services[props.serviceid]
   const toppingsids = service.servicebasic.toppings &&
                       service.servicebasic.toppings.split('|')
-
-  const showToppings = e => {
-
-    props.dispatch(Actions.uiCartToppingsListStatus({
-      visible: true,
-      list: toppingsids
-    }))
-  }
 
   return <div 
     className={`
@@ -56,8 +48,6 @@ export const ServicesGroup = connect(state => ({
       toppingsids ?         
       <TopingsServices
         group={ props.group }
-        showtoppings={ showToppings }
-        toppingsids={ toppingsids }
       />
       :
       <></>

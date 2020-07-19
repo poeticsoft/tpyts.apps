@@ -8,7 +8,7 @@ import {
 import * as Icons from '@ant-design/icons'
 
 const NotFound = connect(state => ({
-  search: state.ui.search
+  search: state.search
 }))(props => {
 
   return <div
@@ -20,7 +20,7 @@ const NotFound = connect(state => ({
 })
 
 const Search = connect(state => ({
-  search: state.ui.search,
+  search: state.search,
   services: state.wp.slotbyid.services
 }))(props => { 
 

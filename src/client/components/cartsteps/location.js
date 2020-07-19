@@ -18,19 +18,19 @@ const { TextArea } = Input;
 
 const Location = connect(state => ({
   geo: state.geo,
-  cart: state.ui.cart
+  cart: state.cart
 }))(props => {   
 
   const goBack = e => {
 
-    props.dispatch(Actions.uiSetCartStatus({
+    props.dispatch(Actions.cartSetStatus({
       actualstep: 'order'
     }))
   }
 
   const goWhere = e => {
 
-    props.dispatch(Actions.uiSetCartStatus({
+    props.dispatch(Actions.cartSetStatus({
       actualstep: 'location'
     }))
   }

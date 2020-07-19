@@ -14,20 +14,20 @@ import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
 
 const Payment = connect(state => ({
-  cart: state.ui.cart,
-  payment: state.ui.payment
+  cart: state.cart,
+  payment: state.payment
 }))(props => {    
 
   const goBack = e => {
 
-    props.dispatch(Actions.uiSetCartStatus({
+    props.dispatch(Actions.cartSetStatus({
       actualstep: 'location'
     }))
   }
 
   const handleInputFocus = e => {
 
-    props.dispatch(Actions.uiSetCardData({ focus: e.target.name }))
+    props.dispatch(Actions.paymentSetCardData({ focus: e.target.name }))
   }
 
   const handleInputChange = ({ target }) => {
@@ -45,19 +45,17 @@ const Payment = connect(state => ({
       target.value = CartUtils.formatCVC(target.value);
     }
 
-    console.log(target.value)
-
-    props.dispatch(Actions.uiSetCardData({ [target.name]: target.value }))
+    props.dispatch(Actions.paymentSetCardData({ [target.name]: target.value }))
   };
 
   const onCancel = e => {
 
-    props.dispatch(Actions.uiCartCancel())
+    // ??
   }
 
   const onPay = e => {
 
-    props.dispatch(Actions.uiCartPay())
+    props.dispatch(Actions.paymentPay())
   }
   
   return <div 

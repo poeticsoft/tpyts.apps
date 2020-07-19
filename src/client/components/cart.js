@@ -12,8 +12,8 @@ import * as Actions from 'rdx/actions'
 
 const Cart = connect(state => ({
   services: state.wp.slotbyid.services,
-  cart: state.ui.cart,
-  order: state.ui.order
+  cart: state.cart,
+  order: state.order
 }))(props => { 
 
   const toggleCart = e => {
@@ -21,17 +21,17 @@ const Cart = connect(state => ({
     e.stopPropagation()
 
     props.cart.openstate != 'wrapper' &&    
-    props.dispatch(Actions.uiOpenCart())
+    props.dispatch(Actions.cartOpen())
 
     props.cart.openstate != 'hidden' &&    
-    props.dispatch(Actions.uiCloseCart())
+    props.dispatch(Actions.cartClose())
   }
 
   const selectStep = (e, key) => {
 
     e.stopPropagation()
 
-    props.dispatch(Actions.uiSetCartStatus({
+    props.dispatch(Actions.cartSetStatus({
       actualstep: key 
     }))
   }

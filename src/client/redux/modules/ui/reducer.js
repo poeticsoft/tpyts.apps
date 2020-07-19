@@ -1,9 +1,4 @@
-import React from 'react'
 import immutableUpdate from 'immutable-update'
-import Order from 'comps/cartsteps/order'
-import Location from 'comps/cartsteps/location'
-import Payment from 'comps/cartsteps/payment'
-import * as Icons from '@ant-design/icons'
 import * as Actions from './actions'
 
 const initialState = {  
@@ -32,69 +27,6 @@ const initialState = {
   serviceinfo: {
     active: true,
     serviceid: null
-  },
-  cart: {
-    openstate: 'hidden',
-    actualstep: 'order',
-    steps: {
-      'order': {        
-        index: 0,
-        name: 'Pedido',
-        comp: Order,
-        icon: <Icons.UnorderedListOutlined />,
-        valid: true
-      },
-      'location': {
-        index: 1,
-        name: 'Donde?',
-        comp: Location,
-        icon: <Icons.EnvironmentOutlined />,
-        valid: false
-      },
-      'payment': {
-        index: 2,
-        name: 'Pago',
-        comp: Payment,
-        icon: <Icons.EuroOutlined />,
-        valid: false
-      }
-    }
-  },
-  order: {
-    services: [],
-    toppings: {
-      visible: false,
-      list: []
-    },
-    errors: {}
-  },    
-  location: {
-    name: null,
-    tel: null,
-    mail: null,
-    address: null,
-    location: {
-      status: null, // null, searching, ok, ko
-      lat: null,
-      lng: null
-    },
-    when: null,
-    time: null, 
-    comments: null
-  },
-  payment: {
-    card: {
-      cvc: '',
-      expiry: '',
-      focus: '',
-      name: '',
-      number: '',
-    }
-  }, 
-  search: {
-    status: 'hidden',
-    text: '',
-    results: []
   },
   terms: {
     status: 'hidden'
@@ -166,90 +98,7 @@ const reducers = {
     { 
       showcase: action.payload.showcase
     }
-  ),
-
-  [Actions.UI_SET_SEARCH_STATUS]: (state, action) => immutableUpdate(
-    state,
-    { 
-      search: action.payload.status
-    }
-  ),
-
-  [Actions.UI_ADD_SERVICE_TO_ORDER]: (state, action) => {
-
-    const services = immutableUpdate(
-      [],
-      state.order.services
-    )
-
-    services.push(action.payload.data)
-    
-    return immutableUpdate(
-      state,
-      { 
-        order: {
-          services: services
-        }
-      }
-    )
-  },
-
-  [Actions.UI_REMOVE_SERVICE_FROM_ORDER]: (state, action) => {
-
-    const newState = immutableUpdate(
-      state,
-      {}
-    ) 
-
-    console.log(newState.order.services[action.payload.serviceid])
-
-    delete newState.order.services[action.payload.serviceid]
-
-    return newState
-  },
-  
-  [Actions.UI_CART_TOPPINGS_LIST_STATUS]: (state, action) => immutableUpdate(
-    state,
-    { 
-      order: {
-        toppings: action.payload.data
-      }
-    }
-  ), 
-  
-  [Actions.UI_SET_CART_STATUS]: (state, action) => immutableUpdate(
-    state,
-    { 
-      cart: action.payload.status
-    }
-  ), 
-  
-  [Actions.UI_SET_ORDER_LOCATION]: (state, action) => immutableUpdate(
-    state,
-    { 
-      order: {
-        location: action.payload.location
-      }
-    }
-  ),  
-  
-  [Actions.UI_SET_ORDER_LOCATION_ERROR]: (state, action) => immutableUpdate(
-    state,
-    { 
-      order: {
-        location: action.payload.location
-      }
-    }
-  ), 
-  
-  [Actions.UI_SET_CARD_DATA]: (state, action) => { console.log(action.payload.data); return immutableUpdate(
-    state,
-    { 
-      cart: {
-        card: action.payload.data
-      }
-    }
-  ) }, 
+  )
 } 
 
 const reducer = (state = initialState, action) => reducers[action.type] ? 

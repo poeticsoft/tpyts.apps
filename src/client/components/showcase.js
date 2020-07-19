@@ -6,7 +6,7 @@ import Terms from './showcases/terms'
 
 const Showcase = connect(state => ({
   showcase: state.ui.showcase,
-  search: state.ui.search
+  search: state.search
 }))(props => {
 
   return <div 

@@ -16,7 +16,7 @@ const PedirQuitar = connect(state => ({
 
     e.stopPropagation()
 
-    props.dispatch(Actions.uiPrepareServiceForOrder(props.serviceid))
+    props.dispatch(Actions.orderPrepareService(props.serviceid))
   }
   
   return <div className="PedirQuitar">          
