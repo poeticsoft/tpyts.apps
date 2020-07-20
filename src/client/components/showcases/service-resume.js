@@ -63,6 +63,7 @@ const ServiceResume = connect(state => ({
             {
               (
                 props.servicebasic.toppings &&
+                props.servicebasic.toppings != '0' &&
                 props.servicebasic.toppings.split('|').length
               ) ?
                 <div className="HaveVariations">

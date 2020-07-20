@@ -33,7 +33,12 @@ const initialState = {
   } 
 }
 
-const reducers = { 
+const reducers = {  
+  
+  [Actions.UI_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
+    state,
+    action.payload.data
+  ),
   
   [Actions.UI_SHOW_MESSAGE]: (state, action) => {
 
@@ -57,11 +62,6 @@ const reducers = {
     state,
     { message: null }
   ),
-  
-  [Actions.UI_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
-    state,
-    action.payload.state
-  ), 
   
   [Actions.UI_SET_STORES_ACTIVE]: (state, action) => immutableUpdate(
     state,

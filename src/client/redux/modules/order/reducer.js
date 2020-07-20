@@ -3,10 +3,16 @@ import * as Actions from './actions'
 
 const initialState = { 
   services: [],
-  toppingsserviceid: null    
+  toppingsserviceid: null,
+  confirmremoveindex: null
 } 
 
 const reducers = {  
+  
+  [Actions.ORDER_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
+    state,
+    action.payload.data
+  ),
 
   [Actions.ORDER_ADD_SERVICE]: (state, action) => {
 
@@ -25,6 +31,16 @@ const reducers = {
     )
   },
 
+  [Actions.ORDER_TRY_REMOVE_SERVICE]: (state, action) => {
+    
+    return immutableUpdate(
+      state,
+      { 
+        confirmremoveindex: action.payload.index
+      }
+    )
+  },
+
   [Actions.ORDER_REMOVE_SERVICE]: (state, action) => {
 
     let services = immutableUpdate(
@@ -32,12 +48,13 @@ const reducers = {
       state.services
     )
 
-    services = services.splice(action.payload.index, 1)
+    services.splice(action.payload.index, 1)
     
     return immutableUpdate(
       state,
       { 
-        services: services
+        services: services,
+        confirmremoveindex: null
       }
     )
   },
@@ -91,8 +108,7 @@ const reducers = {
     )
 
     const toppingindex = services[action.payload.serviceindex].toppings.indexOf(action.payload.toppingid)
-    const servicetoppings = services[action.payload.serviceindex].toppings.splice(toppingindex, 1)
-    services[action.payload.serviceindex].toppings = servicetoppings
+    services[action.payload.serviceindex].toppings.splice(toppingindex, 1)
     
     return immutableUpdate(
       state,

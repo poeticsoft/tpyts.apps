@@ -1,5 +1,13 @@
 import * as Actions from 'rdx/actions'
 
+export const CART_SET_INITIAL_STATE = 'CART_SET_INITIAL_STATE'
+export const cartSetInitialState = data => ({
+  type: CART_SET_INITIAL_STATE,
+  payload: {
+    data: data
+  }
+})
+
 export const cartOpen = () => (dispatch, getState) => { 
 
   dispatch(Actions.cartSetStatus({
@@ -15,7 +23,7 @@ export const cartOpen = () => (dispatch, getState) => {
     setTimeout(() => {
 
       dispatch(Actions.cartSetStatus({
-        openstate: 'visibles'
+        openstate: 'visible'
       }))
     }, 500)
   }, 500)

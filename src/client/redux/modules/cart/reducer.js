@@ -36,6 +36,11 @@ const initialState = {
 
 const reducers = { 
   
+  [Actions.CART_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
+    state,
+    action.payload.data
+  ),
+  
   [Actions.CART_SET_STATUS]: (state, action) => immutableUpdate(
     state,
     action.payload.status

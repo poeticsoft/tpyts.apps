@@ -1,5 +1,13 @@
 import * as Actions from 'rdx/actions'
 
+export const LOCATION_SET_INITIAL_STATE = 'LOCATION_SET_INITIAL_STATE'
+export const locationSetInitialState = data => ({
+  type: LOCATION_SET_INITIAL_STATE,
+  payload: {
+    data: data
+  }
+})
+
 export const LOCATION_SET = 'LOCATION_SET'
 export const locationSet = location => ({
   type: LOCATION_SET,

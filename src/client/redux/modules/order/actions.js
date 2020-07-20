@@ -1,7 +1,15 @@
 import * as Actions from 'rdx/actions'
 
+export const ORDER_SET_INITIAL_STATE = 'ORDER_SET_INITIAL_STATE'
+export const orderSetInitialState = data => ({
+  type: ORDER_SET_INITIAL_STATE,
+  payload: {
+    data: data
+  }
+})
+
 export const orderPrepareService = serviceid => (dispatch, getState) => {
-  
+
   const state = getState()
   const serviceHasComplements = state.wp.slotbyid.services[serviceid].servicebasic.toppings
   const newOrderService = {
@@ -17,6 +25,14 @@ export const orderAddService = data => ({
   type: ORDER_ADD_SERVICE,
   payload: {
     data: data
+  }
+})
+
+export const ORDER_TRY_REMOVE_SERVICE = 'ORDER_TRY_REMOVE_SERVICE'
+export const orderTryRemoveService = index => ({
+  type: ORDER_TRY_REMOVE_SERVICE,
+  payload: {
+    index: index
   }
 })
 

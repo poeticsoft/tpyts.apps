@@ -1,6 +1,14 @@
 import store from 'rdx/store'
 import * as Actions from 'rdx/actions'
 
+const savedslots = {
+  'ui',
+  'cart',
+  'order',
+  'location',
+  'wp'
+}
+
 const saveState = (mod, data) => {
 
   try {
@@ -47,6 +55,7 @@ const loadState = (mod) => {
 export const initSavedState = () => { 
 
   const savedUIState = loadState('UI')
+
   savedUIState !== null &&
   store.dispatch(Actions.uiSetInitialState(savedUIState))
 

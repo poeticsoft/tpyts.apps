@@ -228,7 +228,7 @@ $lineservicehexcerpt: $space * 2;
             .ListTitle {
           
               text-align: left;
-              padding: $space / 2 0;
+              padding: 0 0 $space 0;
             }
           
             .List {
@@ -241,6 +241,11 @@ $lineservicehexcerpt: $space * 2;
                 padding: $space / 2 0;
                 border: dotted $color-medium;
                 border-width: 1px 0 0 0;
+
+                &:last-child {
+
+                  border-width: 1px 0;
+                }
           
                 .ToppingTitle {
           

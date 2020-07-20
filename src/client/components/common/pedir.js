@@ -6,11 +6,9 @@ import {
 import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
 
-const Pedir = connect(state => ({
-  orderservices: state.ui.order.services
-}))(props => { 
+const Pedir = props => { 
 
-  const inc = e => {    
+  const add = e => {    
 
     e.stopPropagation()
 
@@ -20,12 +18,12 @@ const Pedir = connect(state => ({
   return <div className="Pedir">       
     <Button 
       shape="round"
-      onClick={ inc }
+      onClick={ add }
     >
       <Icons.PlusOutlined />
       <span>1</span>
     </Button>
   </div>
-})
+}
 
 export default Pedir

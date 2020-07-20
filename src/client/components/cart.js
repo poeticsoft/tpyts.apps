@@ -10,6 +10,13 @@ import * as Actions from 'rdx/actions'
 
 // https://parzibyte.me/blog/en/2019/10/13/a-plugin-for-printing-thermal-printers-from-browser/
 
+const closeButtonIcons = {
+  hidden: <Icons.ShoppingCartOutlined />,
+  header: <Icons.SmileOutlined />,
+  wrapper: <Icons.SmileOutlined />,
+  visible: <Icons.CloseOutlined />
+}
+
 const Cart = connect(state => ({
   services: state.wp.slotbyid.services,
   cart: state.cart,
@@ -86,14 +93,14 @@ const Cart = connect(state => ({
     </div>
     <div className="OpenCart">
       <Button
-        icon={ <Icons.ShoppingCartOutlined /> }
+        icon={ closeButtonIcons[props.cart.openstate] }
         shape="circle"
         size="large"
         onClick={ toggleCart }
-        disabled={ !props.order.services.length }
       />
       <div className="Count">
-        { props.order.services.length } / {          
+        { 
+          props.order.services.length } / {          
           props.order.services
           .reduce((count, service) => {
 

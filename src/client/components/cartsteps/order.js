@@ -34,6 +34,11 @@ const Order = connect(state => ({
       actualstep: 'location'
     }))
   }
+
+  const closeCart = e => props.dispatch(Actions.cartClose())
+
+  const removeService = (e, index) => props.dispatch(Actions.orderRemoveService(index))
+  const cancelRemoveService = e => props.dispatch(Actions.orderTryRemoveService(null))
   
   return <div 
     className={`
@@ -44,14 +49,51 @@ const Order = connect(state => ({
   >
     <div className="Content">        
       {
+        Object.keys(orderServiceGroups).length ?
         Object.keys(orderServiceGroups)
         .map(key => <ServicesGroup
           key={ key }
           serviceid={ key }
           group={ orderServiceGroups[key] }
         />)
+        :
+        <div className="NoServices">
+          <div className="Text">
+            Nada seleccionado
+          </div>
+          <Button
+            shape="round"
+            onClick={ closeCart }
+          >
+            Cerrar
+          </Button>
+        </div>        
       }
-    </div>    
+    </div>     
+    {
+      props.order.confirmremoveindex != null ?
+      <div className="ConfirmRemove">
+        <div className="Text">
+          Cancelamos la ración?
+        </div>
+        <div className="Options">
+          <Button
+            shape="round"
+            onClick={ e => removeService(e, props.order.confirmremoveindex) }
+          >
+            Si
+          </Button>
+          <Button
+            shape="round"
+            onClick={ cancelRemoveService }
+          >
+            No
+          </Button>
+        </div>
+      </div>
+      :
+      <></>
+    }   
     {
       props.order.toppingsserviceid &&
       <ToppingsList />
@@ -83,14 +125,23 @@ const Order = connect(state => ({
       </div>
     </div>
     <div className="Next">
-      <div className="Text">
-        Donde lo llevamos?
-      </div>
-      <Button 
-        shape="circle"
-        icon={ <Icons.RightOutlined /> }
-        onClick={ goWhere }
-      />
+      {
+        (
+          props.order.services &&
+          props.order.services.length
+        ) ? <>
+          <div className="Text">
+            Donde lo llevamos?
+          </div>
+          <Button 
+            shape="circle"
+            icon={ <Icons.RightOutlined /> }
+            onClick={ goWhere }
+          />
+        </>
+        :
+        <></>
+      }      
     </div>
   </div>
 })

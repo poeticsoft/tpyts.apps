@@ -23,7 +23,6 @@ if (document.readyState === 'loading') {
 
 window.clearLocalStorage = () => {
 
-  localStorage.removeItem('TPYTS_UI_State')
-  localStorage.removeItem('TPYTS_WP_State')
+  localStorage.removeItem('TPYTS_States')
   window.location.reload()
 }

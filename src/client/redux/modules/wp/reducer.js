@@ -42,7 +42,7 @@ const reducers = {
   
   [Actions.WP_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
     state,
-    action.payload.state
+    action.payload.data
   ),
 
   [Actions.WP_UPDATE_STATUS]: (state, action) => {

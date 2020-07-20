@@ -18,6 +18,11 @@ const initialState = {
 
 const reducers = {   
   
+  [Actions.LOCATION_SET_INITIAL_STATE]: (state, action) => immutableUpdate(
+    state,
+    action.payload.data
+  ),
+  
   [Actions.LOCATION_SET]: (state, action) => immutableUpdate(
     state,
     action.payload.location

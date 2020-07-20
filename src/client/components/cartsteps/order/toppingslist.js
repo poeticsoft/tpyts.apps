@@ -7,13 +7,15 @@ import * as Actions from 'rdx/actions'
 import * as Icons from '@ant-design/icons'
 
 export const ToppingsList = connect(state => ({
+  services: state.wp.slotbyid.services,
   toppings: state.wp.slotbyid.toppings,
-  order: state.ui.order
+  order: state.order
 }))(props => {
 
+  const serviceToppingIds = props.services[props.order.toppingsserviceid].servicebasic.toppings.split('|')
   const close = e => {
 
-    
+    props.dispatch(Actions.orderServiceToppingsList(null))
   }
 
   return <div className="ToppingList">
@@ -25,15 +27,15 @@ export const ToppingsList = connect(state => ({
         <Button 
           className="CloseList"
           shape="circle"
-          icon={ <Icons.CheckOutlined /> }
+          icon={ <Icons.CloseOutlined /> }
           onClick={ close }
         />
       </div>
       <div className="List">
         {
-          props.order.toppings.list
+          serviceToppingIds
           .map((toppingid, index) => <div
-            className="ToppingInfo"
+            className="Topping"
             key={ index }
           >
             <div className="ToppingTitle">{ props.toppings[toppingid].post_title }</div>
@@ -44,7 +46,13 @@ export const ToppingsList = connect(state => ({
               <span className="Currency">
                 €
               </span>
-            </div>
+            </div>            
+            <Button 
+              className="AddTopping"
+              shape="circle"
+              icon={ <Icons.CheckOutlined /> }
+              onClick={ close }
+            />
           </div>)
         }
       </div>

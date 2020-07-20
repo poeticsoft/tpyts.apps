@@ -26,24 +26,6 @@
         position: relative;
       }
 
-      .Quantity {
-
-        $size: $space * 4;
-
-        position: absolute;
-        top: $space / 2;
-        left: $space / 2;
-        width: $size;
-        height: $size;
-        background-color: $color-light-transparent;
-        border-radius: 50%;
-        line-height: $size;
-        text-align: center;
-        font-family: "BebasNeue-Bold";
-        font-size: 140%;
-        color: $color-green;
-      }
-
       .Data {      
 
         flex-basis: calc(100% - #{ $imagesize });
@@ -55,6 +37,13 @@
           font-family: "BebasNeue-Bold";
           font-size: 150%;
           line-height: 100%;     
+        }
+
+        .Pedir {
+
+          position: absolute;
+          right: $space / 2;
+          bottom: $space / 2 - 1;
         }
 
         .PedirQuitar {
@@ -75,13 +64,100 @@
         }      
       }
 
+      .Services {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: $space / 2 $space $space / 2 $space * 2;;
+        border: solid $color-green;
+        border-width: 1px 0 0 0;
+
+        .Quantity {
+
+          flex-basis: calc(100% - #{ $space * 7 });
+          font-family: "BebasNeue-Bold";
+          display: flex;
+          align-items: center;
+
+          .Number {
+
+            font-size: 160%;
+            color: $color-green;
+            margin: 0 $space 0 0;
+          }
+
+          .Text {
+
+            font-size: 120%;
+          }
+        }
+
+        .Pedir {
+
+          flex-basis: $space * 7;
+          flex-basis: 52px;
+          text-align: right; 
+        }
+      }
+
       .ToppingsServices {
 
         flex-basis: 100%;
 
         .ToppingsService {
 
-          padding: $space;
+          border: solid $color-green;
+          border-width: 1px 0 0 0;
+          padding: $space / 2 $space;
+
+          .Tools {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: $space / 2 0;
+
+            .RemoveService {
+
+              flex-basis: $space * 4.5;
+            }
+
+            .ShowToppings {
+
+              flex-basis: calc(100% - #{ $space * 4.5 });
+
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+
+              .Text {
+
+                margin: 0 $space / 2 0 0;
+              }
+            }
+          }
+
+          .Toppings {
+
+            padding: 0 0 0  $space * 5;
+
+            .Topping {
+
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              padding: $space / 2 0;
+              border: dotted $color-dark;
+              border-width: 1px 0 0 0;
+
+              .Title {
+
+                margin: 0 $space / 2 0 0;
+              }
+            }
+          }
 
           .AddTopping {
 
@@ -99,25 +175,38 @@
               margin: 0 $space / 2 0 0;
             }
           }
-        }
-
-        .ToppingsService {
-
-          border: dotted $color-dark;
-          border-width: 1px 0 0 0;
-
-          &:first-child {
-
-            border-style: solid;
-            border-color: $color-green;
-          }
-        }        
+        }    
       }
     }
 
     .ServicesGroup + .ServicesGroup {
 
       margin: $space 0 0 0;
+    }   
+  } 
+
+  .NoServices,
+  .ConfirmRemove {
+
+    @include absolutebox();
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-yellow-transparent;
+
+    .Text {
+
+      font-family: "BebasNeue-Bold";
+      font-size: 120%;
+    }
+
+    .Options {
+
+      button + button {
+
+        margin: 0 0 0 $space / 2;
+      }
     }
   }
 
@@ -150,7 +239,7 @@
     
       .List {
       
-        .ToppingInfo {
+        .Topping {
     
           display: flex;
           align-items: center;
@@ -163,20 +252,27 @@
     
           .ToppingTitle {
     
-            flex: 0 0 80%; 
+            flex-basis: calc(80% - #{ $space * 4 }); 
             font-family: "BebasNeue-Regular";
             text-align: left;
           }
     
           .ToppingPrice {
     
-            flex: 0 0 20%;
+            flex-basis: 20%;
             text-align: right;
             font-family: "BebasNeue-Bold";
+            padding: 0 $space 0 0;
+            font-size: 130%;
+          }
+
+          .AddTopping {
+
+            flex-basis: $space * 4;
           }
         }
 
-        .ToppingInfo + .ToppingInfo {
+        .Topping + .Topping {
 
           margin: $space 0 0 0;
         }

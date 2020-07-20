@@ -1,4 +1,25 @@
 import * as Actions from 'rdx/actions'
+import { localstorageslots } from 'rdx/localstorage'
+
+export const uiSetInitialStates = states => (dispatch, getState) => {
+
+  Object.keys(localstorageslots)
+  .forEach(slot => {
+
+    const action = Actions[slot + 'SetInitialState']
+    const data = states[slot]
+
+    dispatch(action(data))
+  })
+}
+
+export const UI_SET_INITIAL_STATE = 'UI_SET_INITIAL_STATE'
+export const uiSetInitialState = data => ({
+  type: UI_SET_INITIAL_STATE,
+  payload: {
+    data: data
+  }
+})
 
 export const uiSetMessage = data => (dispatch, getState) => { 
 
@@ -34,14 +55,6 @@ export const uiHideMessage = message => ({
   type: UI_HIDE_MESSAGE,
   payload: {
     message: message
-  }
-})
-
-export const UI_SET_INITIAL_STATE = 'UI_SET_INITIAL_STATE'
-export const uiSetInitialState = state => ({
-  type: UI_SET_INITIAL_STATE,
-  payload: {
-    state: state
   }
 })
 

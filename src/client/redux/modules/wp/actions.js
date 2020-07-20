@@ -1,10 +1,10 @@
 import * as Actions from 'rdx/actions'
 
 export const WP_SET_INITIAL_STATE = 'WP_SET_INITIAL_STATE'
-export const wpSetInitialState = state => ({
+export const wpSetInitialState = data => ({
   type: WP_SET_INITIAL_STATE,
   payload: {
-    state: state
+    data: data
   }
 })
 

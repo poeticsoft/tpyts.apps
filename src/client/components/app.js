@@ -4,7 +4,7 @@ import React, {
 import { debounce } from 'lodash'
 import { Provider } from 'react-redux'
 import store from 'rdx/store'
-import { initSavedState } from 'utils/localstorage'
+import { initSavedState } from 'rdx/localstorage'
 import Message from 'common/components/message'
 import 'antd/dist/antd.less'
 import Showcase from './showcase'

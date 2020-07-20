@@ -7,22 +7,25 @@ import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
 
 const PedirQuitar = connect(state => ({
-  orderservices: state.ui.order.services
-}))(props => { 
+  orderservices: state.order.services
+}))(props => {
 
-  console.log(props)
+  const add = e => props.dispatch(Actions.orderPrepareService(props.serviceid))
 
-  const inc = e => {    
+  const remove = e => {
 
-    e.stopPropagation()
+    const orderservice = props.orderservices
+    .find(
+      orderservice => parseInt(orderservice.serviceid) == parseInt(props.serviceid)
+    )
 
-    props.dispatch(Actions.orderPrepareService(props.serviceid))
+    props.dispatch(Actions.orderTryRemoveService(orderservice.index))
   }
   
   return <div className="PedirQuitar">          
     <Button 
       shape="circle"
-      onClick={ e => inc(e, -1) }
+      onClick={ remove }
     >
       <Icons.MinusOutlined />
     </Button>   
@@ -35,7 +38,7 @@ const PedirQuitar = connect(state => ({
     </span> 
     <Button 
       shape="circle"
-      onClick={ e => inc(e, 1) }
+      onClick={ add }
     >
       <Icons.PlusOutlined />
     </Button>

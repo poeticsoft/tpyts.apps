@@ -5,8 +5,6 @@ const LiveReloadPlugin = require('webpack-livereload-plugin');
 const PolyfillInjectorPlugin = require('webpack-polyfill-injector');
 const EventHooksPlugin = require('event-hooks-webpack-plugin');
 
-process.env.NODE_ENV = 'development';
-
 let mode, app, block
 
 module.exports = env => {

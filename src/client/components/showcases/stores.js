@@ -123,7 +123,7 @@ const Stores = connect(state => ({
   storesactive: state.ui.stores.storesactive,
   stores: state.wp.slot.stores,
   services: state.wp.slot.services
-}))(props => {  
+}))(props => { 
 
   const onChange = data => {
 

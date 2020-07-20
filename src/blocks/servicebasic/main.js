@@ -104,7 +104,7 @@ const edit = ({attributes, setAttributes}) => {
             }
             onChange={ value => setAttributes({
               ...attributes,
-              toppings: value.join('|')
+              toppings: value.filter(topping => topping != '0').join('|')
             })}
           />
         </div>               

@@ -4,7 +4,6 @@ import React, {
 import { connect } from 'react-redux'
 import Pedir from '../../client/components/common/pedir'
 import Highlighter from 'react-highlight-words'
-import VisibilitySensor from 'react-visibility-sensor'
 import { Button } from 'antd'
 import * as Icons from '@ant-design/icons'
 
@@ -14,48 +13,47 @@ const Service = connect(state => ({
   toppings: state.wp.slotbyid.toppings
 }))(props => {
 
-  const [ visible, setVisible ] = useState(false) 
   const [ toppingsVisible, setToppingsVisible ] = useState(false)
+
+  const closeToppings = e => {
+
+    toppingsVisible &&
+    setToppingsVisible(false)
+  }
   
   return <div className="ServiceWrapper">
-    <div className="Service"> 
-      <VisibilitySensor 
-        onChange={ setVisible }
-        partialVisibility
-      > 
-        <div className="Show">
+    <div
+      className="Service"
+      onClick={ closeToppings }
+    >
+      <div className="Show">
+        <div
+          className="Image"
+          style={{
+            backgroundImage: 'url(' + props.fullsize + ')'
+          }}
+        />
+        <div className="Product">
           {
-            visible &&
-            <div
-              className="Image"
-              style={{
-                backgroundImage: 'url(' + props.fullsize + ')'
-              }}
+            props.showcase == 'search' ?
+            <Highlighter
+              className="Title"
+              highlightClassName="SearchHighlight"
+              searchWords={ props.search.text.split(' ') }
+              autoEscape={ true }
+              textToHighlight={ props.post_title }
             />
+            :
+            <div className="Title">
+              { props.post_title }
+            </div>
           }
-          <div className="Product">
-            {
-              props.showcase == 'search' ?
-              <Highlighter
-                className="Title"
-                highlightClassName="SearchHighlight"
-                searchWords={ props.search.text.split(' ') }
-                autoEscape={ true }
-                textToHighlight={ props.post_title }
-              />
-              :
-              <div className="Title">
-                { props.post_title }
-              </div>
-            }
-          </div>
-          <div className="Price">
-            <span className="Number">{ props.servicebasic.price || 0 }</span>
-            <span className="Currency">€</span>
-          </div> 
-        </div>        
-      </VisibilitySensor>  
-                     
+        </div>
+        <div className="Price">
+          <span className="Number">{ props.servicebasic.price || 0 }</span>
+          <span className="Currency">€</span>
+        </div> 
+      </div>       
       <div className="Stock">
         <span className="Text">Quedan</span>
         <span className="Number">30</span>
@@ -103,6 +101,7 @@ const Service = connect(state => ({
         {
           (
             props.servicebasic.toppings &&
+            props.servicebasic.toppings != '0' &&
             props.servicebasic.toppings.split('|').length
           ) ?
             <div className="Toppings">
