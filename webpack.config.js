@@ -80,8 +80,11 @@ module.exports = env => {
     new MiniCssExtractPlugin({
       filename: app == 'theme' ? 
         'style.css'
-        :
-        'main.css'
+        :        
+        app == 'block' ?
+          'main.css'
+          :
+          app + '.css'
     }),
     new LiveReloadPlugin({
       protocol: 'http',
@@ -114,41 +117,73 @@ module.exports = env => {
 
             if(fs.existsSync(jsfile)) fs.unlinkSync(jsfile)
           }  
-        }          
+        } 
       }
     })
   ]  
-    
-  plugins.push(new PolyfillInjectorPlugin({
-    singleFile: true,
-    polyfills: [
-      'Array.prototype.fill',
-      'Array.prototype.find',
-      'Array.prototype.findIndex',
-      'String.prototype.startsWith',
-      'String.prototype.includes',
-      'Array.from',
-      'Object.entries',
-      'Object.values',
-      'Object.assign', 
-      'fetch',
-      'Promise',
-    ]
-  }))
+  
+  if(app != 'block' && app != 'theme') {
+
+    plugins.push(new PolyfillInjectorPlugin({
+      singleFile: true,
+      polyfills: [
+        'Array.prototype.fill',
+        'Array.prototype.find',
+        'Array.prototype.findIndex',
+        'String.prototype.startsWith',
+        'String.prototype.includes',
+        'Array.from',
+        'Object.entries',
+        'Object.values',
+        'Object.assign', 
+        'fetch',
+        'Promise',
+      ]
+    }))
+  }
+
+  const mainjs = (
+    app == 'block' 
+    || 
+    app == 'theme'
+  ) ? 
+  './src/' +  srcpath + '/main.js'
+  :
+  './src/' +  srcpath + '/' + app + '.js'  
+
+  const maincss = (
+    app == 'block' 
+    || 
+    app == 'theme'
+  ) ? 
+  './src/' +  srcpath + '/main.scss'
+  :
+  './src/' +  srcpath + '/' + app + '.scss'
 
   const entrymodules = [
-    `./src/${ srcpath }/main.js`,
-    `./src/${ 
-      (
-        app == 'block' 
-        || 
-        app == 'theme'
-      ) ? 
-      srcpath
-      :
-      'common/scss' 
-    }/main.scss`
+    mainjs,
+    maincss
   ]
+
+  const entry = (
+    app == 'block' 
+    || 
+    app == 'theme'
+  ) ? 
+  entrymodules
+  :
+  {
+    [(
+      app == 'block' 
+      || 
+      app == 'theme'
+    ) ? 
+    'main'
+    :
+    app]: `webpack-polyfill-injector?${JSON.stringify({
+      modules: entrymodules
+    })}!`
+  }
 
   console.log(app)
   console.log(wmode)
@@ -156,21 +191,17 @@ module.exports = env => {
   console.log(devtool)
   console.log(srcpath)
   console.log(destpath)
-  console.log(entrymodules)
+  console.log(entry)
 
   return {
     context: __dirname,
     mode: wmode,
     devtool: devtool,
-    entry: {
-      ['main']: `webpack-polyfill-injector?${JSON.stringify({
-        modules: entrymodules
-      })}!`
-    },
+    entry: entry,
     output: {
       path: destpath,
       publicPath: '/',
-      filename: app == 'block' ? 'main.js' : `${ app }.js`
+      filename: '[name].js'
     },
     module: {
       rules: [

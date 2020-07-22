@@ -64,7 +64,7 @@ const edit = ({attributes, setAttributes}) => {
              }
             onChange={ value => setAttributes({
               ...attributes,
-              store: value
+              store: value != 0 ? value : null
             })}
           />
         </div>  

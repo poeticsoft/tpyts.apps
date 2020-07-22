@@ -18,6 +18,8 @@ export const ToppingsList = connect(state => ({
     props.dispatch(Actions.orderServiceToppingsList(null))
   }
 
+  console.log(serviceToppingIds)
+
   return <div className="ToppingList">
     <div className="Wrapper">
       <div className="Choose">

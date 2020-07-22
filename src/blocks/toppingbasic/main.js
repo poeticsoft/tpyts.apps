@@ -14,7 +14,7 @@ const {
 } = wp.element
 
 const edit = ({attributes, setAttributes}) => {
-
+  
   const [ stores, setStores ] = useState([])
   const [ allergens, setAllergens ] = useState([])
   
