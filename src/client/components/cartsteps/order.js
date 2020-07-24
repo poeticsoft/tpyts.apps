@@ -95,7 +95,11 @@ const Order = connect(state => ({
       <></>
     }   
     {
-      props.order.toppingsserviceid &&
+      (
+        props.order.toppingsserviceindex
+        || 
+        props.order.toppingsserviceindex == 0
+      ) &&
       <ToppingsList />
     }
     <div className="TotalOrder">
@@ -111,12 +115,22 @@ const Order = connect(state => ({
               parseFloat(props.services[service.serviceid].servicebasic.price.replace(',', '.'))
               :
               0
+            
+            service.toppings &&
+            service.toppings &&
+            service.toppings
+            .forEach(toppingid => {
+              
+              const toppingprice = props.toppings[toppingid].toppingbasic.price ?
+                parseFloat(props.toppings[toppingid].toppingbasic.price.replace(',', '.'))
+                :
+                0
+              
+              count += toppingprice              
+            })
 
-            return count + (
-              props.order.services[service.serviceid]
-              *
-              price
-            )
+            return count + price
+
           }, 0).toFixed(2).replace('.', ',')
         }
       </div>

@@ -3,7 +3,7 @@ import * as Actions from './actions'
 
 const initialState = { 
   services: [],
-  toppingsserviceid: null,
+  toppingsserviceindex: null,
   confirmremoveindex: null
 } 
 
@@ -62,7 +62,7 @@ const reducers = {
   [Actions.ORDER_SERVICE_TOPPINGS_LIST]: (state, action) => immutableUpdate(
     state,
     { 
-      toppingsserviceid: action.payload.serviceid
+      toppingsserviceindex: action.payload.serviceindex
     }
   ),
 
@@ -73,7 +73,7 @@ const reducers = {
       state.services
     )
 
-    services[action.payload.serviceindex].toppings.push(action.payload.toppingid)
+    services[state.toppingsserviceindex].toppings.push(action.payload.toppingid)
     
     return immutableUpdate(
       state,
@@ -83,23 +83,6 @@ const reducers = {
     )
   },
 
-  [Actions.ORDER_SERVICE_ADD_TOPPING]: (state, action) => {
-
-    let services = immutableUpdate(
-      [],
-      state.services
-    )
-
-    services[action.payload.serviceindex].toppings.push(action.payload.toppingid)
-    
-    return immutableUpdate(
-      state,
-      { 
-        services: services
-      }
-    )
-  }  ,
-
   [Actions.ORDER_SERVICE_REMOVE_TOPPING]: (state, action) => {
 
     let services = immutableUpdate(
@@ -107,8 +90,8 @@ const reducers = {
       state.services
     )
 
-    const toppingindex = services[action.payload.serviceindex].toppings.indexOf(action.payload.toppingid)
-    services[action.payload.serviceindex].toppings.splice(toppingindex, 1)
+    const toppingindex = services[action.payload.data.serviceindex].toppings.indexOf(action.payload.data.toppingid)
+    services[action.payload.data.serviceindex].toppings.splice(toppingindex, 1)
     
     return immutableUpdate(
       state,

@@ -29,22 +29,28 @@
       padding: $space;
       bottom: auto;
 
+      .Tools,
       .Text {
 
-        font-family: "BebasNeue-Bold";
-        font-size: 180%;
-        float: left;
-        padding: 0 0 0 $space;
+        display: inline-block;
+        vertical-align: middle;
       }
 
       .Tools {
 
-        float: right;
+        margin-top: -$space;
 
         button {
 
           @include boxshadow();
         }
+      }
+
+      .Text {
+
+        font-family: "BebasNeue-Bold";
+        font-size: 180%;
+        padding: 0 0 0 $space;
       }
     }
 

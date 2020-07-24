@@ -3,6 +3,7 @@
   $cartheadersize: $space * 5;
   $cartstepssize: $space * 6;
   $cartwidth: $space * 35;
+  $cartwidthbig: $space * 50;
   $cartclose: $space * 7;
   @include absolutebox();
   z-index: 4;
@@ -29,6 +30,11 @@
     .Wrapper {      
 
       width: $cartwidth;
+
+      @media (min-width: 500px) {             
+
+        width: $cartwidthbig;
+      }
     }
   }
 
@@ -39,6 +45,11 @@
       width: $cartwidth;
       height: calc(100% - #{$space * 7});
       border-radius: 0 0 $space * 2.8 $space * 2.8;
+
+      @media (min-width: 500px) {             
+
+        width: $cartwidthbig;
+      }
     }
   } 
 
@@ -49,6 +60,11 @@
       width: $cartwidth;
       height: calc(100% - #{$space * 7});
       border-radius: 0 0 $space * 2.8 $space * 2.8;
+
+      @media (min-width: 500px) {             
+
+        width: $cartwidthbig;
+      }
 
       .Header .Title,
       .Steps,

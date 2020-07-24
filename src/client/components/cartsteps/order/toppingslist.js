@@ -11,20 +11,25 @@ export const ToppingsList = connect(state => ({
   toppings: state.wp.slotbyid.toppings,
   order: state.order
 }))(props => {
+  
+  const orderservice = props.order.services[props.order.toppingsserviceindex]
+  const serviceToppingIds = props.services[orderservice.serviceid].servicebasic.toppings.split('|')
 
-  const serviceToppingIds = props.services[props.order.toppingsserviceid].servicebasic.toppings.split('|')
   const close = e => {
 
     props.dispatch(Actions.orderServiceToppingsList(null))
   }
 
-  console.log(serviceToppingIds)
+  const addTopping = (e, toppingid) => {
+
+    props.dispatch(Actions.orderServiceAddTopping(toppingid))
+  }
 
   return <div className="ToppingList">
     <div className="Wrapper">
       <div className="Choose">
         <div className="ListTitle">
-          Elige complememtos
+          Elige complementos
         </div>
         <Button 
           className="CloseList"
@@ -36,6 +41,7 @@ export const ToppingsList = connect(state => ({
       <div className="List">
         {
           serviceToppingIds
+          .filter(toppingid => !orderservice.toppings.includes(toppingid))
           .map((toppingid, index) => <div
             className="Topping"
             key={ index }
@@ -53,7 +59,7 @@ export const ToppingsList = connect(state => ({
               className="AddTopping"
               shape="circle"
               icon={ <Icons.CheckOutlined /> }
-              onClick={ close }
+              onClick={ e => addTopping(e, toppingid) }
             />
           </div>)
         }

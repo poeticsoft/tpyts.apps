@@ -1,5 +1,7 @@
 import React, {
-  Fragment
+  Fragment,
+  useState,
+  useEffect
 } from 'react'
 import { connect } from 'react-redux'
 import {
@@ -19,9 +21,41 @@ const closeButtonIcons = {
 
 const Cart = connect(state => ({
   services: state.wp.slotbyid.services,
+  toppings: state.wp.slotbyid.toppings,
   cart: state.cart,
   order: state.order
 }))(props => { 
+
+  useEffect(() => {
+
+    if(
+      props.order.services &&
+      props.order.services.length
+    ) {
+
+      props.dispatch(Actions.cartSetStatus({
+        steps: {
+          location: {
+            valid: true
+          }
+        }
+      }))
+
+    } else {
+
+      props.dispatch(Actions.cartSetStatus({
+        steps: {
+          location: {
+            valid: false
+          },
+          payment: {
+            valid: false
+          }
+        }
+      }))
+    }
+
+  }, [props.order.services])
 
   const toggleCart = e => {
 
@@ -69,10 +103,7 @@ const Cart = connect(state => ({
               shape="round"
               type={ props.cart.actualstep == key ? 'primary' : '' }
               onClick={ e => selectStep(e, key)}
-              disabled={ 
-                index > 0 &&
-                !props.cart.steps[stepKeys[index - 1]].valid 
-              }
+              disabled={ !props.cart.steps[key].valid }
             >
               { props.cart.steps[key].name }
             </Button>
@@ -107,7 +138,20 @@ const Cart = connect(state => ({
             const price = props.services[service.serviceid].servicebasic.price ?
               parseFloat(props.services[service.serviceid].servicebasic.price.replace(',', '.'))
               :
-              0
+              0             
+            
+            service.toppings &&
+            service.toppings &&
+            service.toppings
+            .forEach(toppingid => {
+              
+              const toppingprice = props.toppings[toppingid].toppingbasic.price ?
+                parseFloat(props.toppings[toppingid].toppingbasic.price.replace(',', '.'))
+                :
+                0
+              
+              count += toppingprice              
+            })
 
             return count + price
             

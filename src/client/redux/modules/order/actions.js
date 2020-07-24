@@ -45,18 +45,18 @@ export const orderRemoveService = index => ({
 })
 
 export const ORDER_SERVICE_TOPPINGS_LIST = 'ORDER_SERVICE_TOPPINGS_LIST'
-export const orderServiceToppingsList = serviceid => ({
+export const orderServiceToppingsList = serviceindex => ({
   type: ORDER_SERVICE_TOPPINGS_LIST,
   payload: {
-    serviceid: serviceid
+    serviceindex: serviceindex
   }
 })
 
 export const ORDER_SERVICE_ADD_TOPPING = 'ORDER_SERVICE_ADD_TOPPING'
-export const orderServiceAddTopping = data => ({
+export const orderServiceAddTopping = toppingid => ({
   type: ORDER_SERVICE_ADD_TOPPING,
   payload: {
-    data: data
+    toppingid: toppingid
   }
 })
 

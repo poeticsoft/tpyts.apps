@@ -1,25 +1,31 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {
   Button
 } from 'antd'
 import * as Actions from 'rdx/actions'
 import * as Icons from '@ant-design/icons'
 
-export const TopingsServices = props => {
+export const TopingsServices = connect(state => ({
+  toppings: state.wp.slotbyid.toppings
+}))(props => {
   
   const removeService = (e, index) => {
 
     props.dispatch(Actions.orderTryRemoveService(index))
   }
 
-  const removeTopping = (e, serviceid, toppingid) => {
+  const removeTopping = (e, serviceindex, toppingid) => {
 
-    
+    props.dispatch(Actions.orderServiceRemoveTopping({
+      serviceindex: serviceindex,
+      toppingid: toppingid
+    }))
   }
 
-  const showToppings = (e, serviceid) => {
+  const showToppings = (e, serviceindex) => {
 
-    props.dispatch(Actions.orderServiceToppingsList(serviceid))
+    props.dispatch(Actions.orderServiceToppingsList(serviceindex))
   }
 
   return <div 
@@ -51,7 +57,7 @@ export const TopingsServices = props => {
             </div>       
             <Button 
               shape="circle"
-              onClick={ e => showToppings(e, service.serviceid ) }
+              onClick={ e => showToppings(e, service.index ) }
             >
               <Icons.UnorderedListOutlined />
             </Button>
@@ -67,11 +73,16 @@ export const TopingsServices = props => {
           >
             {
               service.toppings
-              .map((toppingid, index) => <div className="Topping">
-                <div className="Title">Topping title</div>                     
+              .map((toppingid, index) => <div
+                key={ index }
+                className="Topping"
+              >
+                <div className="Title">
+                  { props.toppings[toppingid].post_title }
+                </div>                     
                 <Button 
                   shape="circle"
-                  onClick={ removeTopping }
+                  onClick={ e => removeTopping(e, service.index, toppingid) }
                 >
                   <Icons.CloseOutlined />
                 </Button>
@@ -84,4 +95,4 @@ export const TopingsServices = props => {
       </div>)
     }
   </div>
-}
+})

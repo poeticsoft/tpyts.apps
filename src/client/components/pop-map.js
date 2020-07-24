@@ -44,16 +44,16 @@ const PopMap = connect(state => ({
   >
     <div className="Wrapper">
       <div className="Header">
-        <div className="Text">
-          { props.map.data.title }
-        </div>
         <div className="Tools">
           <Button
             shape="circle"
             icon={ <Icons.CheckOutlined /> } 
             onClick={ closeMap }
           />
-        </div>        
+        </div>     
+        <div className="Text">
+          { props.map.data.title }
+        </div>   
       </div>
       <div className="Google">      
         <GoogleMapReact

@@ -87,7 +87,11 @@ const edit = ({attributes, setAttributes}) => {
           <SelectControl
             label={ __('Complementos', 'tpyts') }
             multiple
-            value={ attributes.toppings && attributes.toppings.split('|') }
+            value={ 
+              attributes.toppings && 
+              attributes.toppings.split('|')
+              .filter(topping => topping != '0')
+            }
             options={ 
               [
                 {

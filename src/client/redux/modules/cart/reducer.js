@@ -10,21 +10,21 @@ const initialState = {
   openstate: 'hidden',
   actualstep: 'order',
   steps: {
-    'order': {        
+    order: {        
       index: 0,
       name: 'Pedido',
       comp: Order,
       icon: <Icons.UnorderedListOutlined />,
       valid: true
     },
-    'location': {
+    location: {
       index: 1,
       name: 'Donde?',
       comp: Location,
       icon: <Icons.EnvironmentOutlined />,
       valid: false
     },
-    'payment': {
+    payment: {
       index: 2,
       name: 'Pago',
       comp: Payment,
