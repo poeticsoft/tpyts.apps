@@ -2,10 +2,10 @@
 
   @include absolutebox();
   background-color: $color-dark-transparent;
-  z-index: 3;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 
   .Wrapper {
 

@@ -1,14 +1,19 @@
-import React from 'react'
-import { debounce } from 'lodash'
+import React, {
+  useEffect,
+  useState
+} from 'react'
+import { 
+  debounce, 
+  times
+} from 'lodash'
 import { connect } from 'react-redux'
 import { 
   Form, 
   Input, 
-  DatePicker,
+  TimePicker,
   Select, 
   AutoComplete,  
-  Button,
-  Tooltip
+  Button
 } from 'antd';
 import * as Icons from '@ant-design/icons'
 import * as Actions from 'rdx/actions'
@@ -18,8 +23,20 @@ const { TextArea } = Input;
 
 const Location = connect(state => ({
   geo: state.geo,
-  cart: state.cart
+  cart: state.cart,
+  location: state.location
 }))(props => {   
+
+  const [ form ] = Form.useForm()
+  const [ valid, setValid ] = useState()
+
+  const startHour = 9
+  const endHour = 22
+  const nowHour = new Date().getHours()
+  const invalidHours = times(24)
+    .filter(hour => (hour < startHour || hour > endHour))
+  const todayInvalidHours = times(24)
+    .filter(hour => (hour <= nowHour || hour < startHour || hour > endHour))
 
   const goBack = e => {
 
@@ -28,22 +45,131 @@ const Location = connect(state => ({
     }))
   }
 
-  const goWhere = e => {
+  const goPayment = e => {
 
     props.dispatch(Actions.cartSetStatus({
-      actualstep: 'location'
+      actualstep: 'payment'
     }))
   }
 
-  const handleChange = value => {
+  const onChangeAddress = debounce(value => {    
 
-    if(value.length > 4) { props.dispatch(Actions.geoAutocompleteAddress(value)) }
+    if(value.length > 4) { 
+
+      props.dispatch(Actions.geoSetStatus({
+        predictionsstatus: 'validating'
+      }))
+
+      props.dispatch(Actions.geoAutocompleteAddress(value)) 
+
+      form.validateFields()
+    }
+  }, 500);
+
+  const onSelectAddress = value => {
+
+    props.dispatch(Actions.geoSetStatus({
+      predictionsstatus: 'success'
+    }))
+
+    props.dispatch(Actions.geoGetAddressToLocation())
   }
 
-  const onSelect = value => {
+  const checkLocation = () => {
 
-    props.dispatch(Actions.geoGetAddressToLocation(value))
+    props.dispatch(Actions.uiSetMapState({
+      active: true,
+      location: {
+        lat: parseFloat(props.location.addresslocation.lat),
+        lng: parseFloat(props.location.addresslocation.lng)
+      },
+      zoom: 17,
+      data: {
+        title: props.location.form.address
+      },
+      type: 'location'
+    }))
+  }  
+
+  const valuesChange = (changedValues, allValues) => {
+
+    props.dispatch(Actions.locationSet({ form: changedValues }))
+
+    form.validateFields()
   }
+
+  const whenChange = value => {
+
+    props.dispatch(Actions.locationSet({ extra: { when: value } }))
+
+    form.validateFields()
+  }
+
+  const timeChange = (moment, string) => {
+
+    props.dispatch(Actions.locationSet({ extra: { time: moment } }))
+
+    form.validateFields()
+  }
+
+  const commentsChange = value => {
+
+    props.dispatch(Actions.locationSet({ extra: { comments: value } }))
+
+    form.validateFields()
+  }
+
+  useEffect(() => {
+
+    form.validateFields()
+    .then(result => {
+
+      const valid = (
+        props.location.extra.when != null &&
+        (
+          props.location.extra.when == 'lap'
+          ||
+          (
+            props.location.extra.when != 'lap' &&
+            props.location.extra.time != null
+          )
+        ) 
+      )
+
+      props.dispatch(Actions.locationSet({
+        valid: valid
+      }))
+
+      props.dispatch(Actions.cartSetStatus({
+        steps: {
+          location: {
+            valid: valid
+          }
+        }
+      }))
+    })  
+    .catch(error => {
+      
+      props.dispatch(Actions.locationSet({
+        valid: false
+      }))
+
+      props.dispatch(Actions.cartSetStatus({
+        steps: {
+          location: {
+            valid: false
+          }
+        }
+      }))
+    })
+
+  }, [
+    props.location.form.name,
+    props.location.form.tel,
+    props.location.form.address,
+    props.location.extra.when,
+    props.location.extra.time
+  ])
 
   return <div
     className={`
@@ -53,103 +179,171 @@ const Location = connect(state => ({
     `}
   >
     <div className="Content">
-      <Form>
+
+      <Form
+        form={ form }
+        onValuesChange={ valuesChange }
+        fields={ 
+          Object.keys(props.location.form)
+          .filter(key => key != 'geo')
+          .map(key => ({
+            name: [key],
+            value: props.location.form[key]
+          }))
+        }
+      >
 
         <div className="Field Name">
-          <Form.Item>
-            <Input
-              id="name" 
-              placeholder="Tu nombre y apellidos" 
-              size="large"
+          <Form.Item
+            name="name"
+            rules={
+              [
+                { 
+                  required: true,
+                  message: 'Necesitamos un nombre para dirigirnos a ti!' 
+                }
+              ]
+            }
+          >
+            <Input 
+              placeholder="Tu nombre y apellidos"
             />
           </Form.Item>
         </div>
 
         <div className="Field Tel">
-          <Form.Item>
-            <Input
-              id="tel" 
-              placeholder="Tu teléfono" 
-              size="large"
-            />
-          </Form.Item>
-        </div>
-
-        <div className="Field Mail">
-          <Form.Item>
-            <Input
-              id="mail" 
-              placeholder=" o tu mail" 
-              size="large"
-            />
-          </Form.Item>
-        </div>
-
-        <div className="Field Location">
           <Form.Item
+            name="tel"
+            rules={
+              [
+                {
+                  required: true,
+                  len: 9,
+                  message: 'Necesitamos un teléfono válido!',
+                }
+              ]
+            } 
+          >
+            <Input
+              placeholder="Tu teléfono" 
+              addonBefore="+34" 
+            />
+          </Form.Item>
+        </div>
+
+        <div className="Field Location">          
+          <Form.Item
+            name="address"
             hasFeedback          
-            validateStatus={ props.geo.apistatus == 'ready' ? 'error' : 'validating'}
+            validateStatus={ props.geo.predictionsstatus }
+            rules={
+              [
+                {
+                  required: true,
+                  message: 'Necesitamos la dirección de entrega!',
+                }
+              ]
+            } 
           >
             <AutoComplete
               options={ props.geo.autocompletepredictions }
-              onSelect={ onSelect }
-              onBlur={ e => onSelect(e.target.value) }
-              onChange={ debounce(handleChange, 100) }
+              onSelect={ onSelectAddress }
             >
               <Input 
-                size="large" 
-                placeholder="Tu dirección"
+                placeholder="Dirección de entrega"
+                onChange={({ target: { value } }) => onChangeAddress(value)}
               />
             </AutoComplete>
-          </Form.Item>          
-          <div className="Check">
-            <Button 
-              shape="round"
-              icon={ <Icons.EnvironmentOutlined /> }
-              disabled
-            >
-              Comprueba tu localización
-            </Button>
+          </Form.Item> 
+          
+          <div
+            className="GeoLocation"
+          >            
+            {
+              props.location.addresstolocationstatus == 'ok' ?
+                <div className="CheckLocation">
+                  <Button 
+                    shape="round"
+                    icon={ <Icons.EnvironmentOutlined /> }
+                    onClick={ checkLocation }
+                  >
+                    Comprueba tu localización
+                  </Button>
+                </div>
+                :
+                props.location.addresstolocationstatus == 'searching' ?
+                  <div 
+                    className="SearchingLocation"
+                  >
+                    Buscando tu localización en el mapa
+                  </div>
+                  :
+                  <div 
+                    className="NoLocation"
+                  >
+                    No hemos encontrado tu localización en el mapa
+                  </div>
+            }
           </div>
         </div>
 
         <div className="Field WhenSelect">
-          <Form.Item>
-            <Select
-              defaultValue="lap"
-            >
-              <Option value="lap">Lo antes posible</Option>
-              <Option value="et" disabled>
-                <Tooltip
-                  title="(no disponible)"
-                  trigger="click"
-                >
-                  Para esta tarde
-                </Tooltip>
-              </Option>
-              <Option value="mnn">Para mañana</Option>
-            </Select>
-          </Form.Item>
+          <div className="ant-row ant-form-item">
+            <div className="ant-col ant-form-item-control">
+              <Select          
+                value={ props.location.extra.when }
+                onChange={ whenChange }
+                placeholder="Cuando lo quieres?"
+              >
+                <Option value="lap">Lo antes posible</Option>
+                <Option value="h">Hoy</Option>
+                <Option value="mnn">Mañana</Option>
+              </Select>
+            </div>
+          </div>
         </div>
 
         <div className="Field WhenPicker">
-          <Form.Item>
-            <DatePicker
-              mode="time"
-              placeholder="A que hora?"
-              disabled
-            />
-          </Form.Item>
+          <div className="ant-row ant-form-item">
+            <div className="ant-col ant-form-item-control">
+              <TimePicker
+                className="WhenTime"
+                mode="time"
+                placeholder="Hora?"
+                minuteStep={ 15 }
+                showNow={ false }
+                disabled={                  
+                  !props.location.extra.when
+                  ||
+                  props.location.extra.when == 'lap'
+                }
+                value={ props.location.extra.time }
+                onChange={ timeChange }
+                disabledHours={ () => {
+                  
+                  if(props.location.extra.when == 'h') { return todayInvalidHours }
+                  if(props.location.extra.when == 'mnn') { return invalidHours }
+                  return []
+                }}
+                hideDisabledOptions={ true }
+              />
+            </div>
+          </div>
         </div>
 
         <div className="Field Comments">
-          <Form.Item>
-            <TextArea 
-              placeholder="Comentarios?" 
-              allowClear 
-            />
-          </Form.Item>
+          <div className="ant-row ant-form-item">
+            <div className="ant-col ant-form-item-control">
+              <TextArea 
+                placeholder="Comentarios?" 
+                allowClear 
+                value={ props.location.extra.comments }
+                onChange={ commentsChange }
+              />
+            </div>
+          </div>
         </div>
+        
       </Form>
     </div>
     <div className="Next">
@@ -159,14 +353,21 @@ const Location = connect(state => ({
         icon={ <Icons.LeftOutlined /> }
         onClick={ goBack }
       />
-      <div className="Text">
-        Lo quiero!
-      </div>
-      <Button 
-        shape="circle"
-        icon={ <Icons.RightOutlined /> }
-        onClick={ goWhere }
-      />
+      {
+        props.location.valid ?
+        <>
+          <div className="Text">
+            Lo quiero!
+          </div>
+          <Button 
+            shape="circle"
+            icon={ <Icons.RightOutlined /> }
+            onClick={ goPayment }
+          />
+        </>
+        :
+        <></>
+      }
     </div>
   </div>
 })

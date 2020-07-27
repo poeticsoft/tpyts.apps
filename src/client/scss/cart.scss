@@ -6,8 +6,8 @@
   $cartwidthbig: $space * 50;
   $cartclose: $space * 7;
   @include absolutebox();
-  z-index: 4;
   background-color: $color-dark-transparent;
+  z-index: 2;
 
   transition-property: bottom;
   transition-duration: 0.5s;
@@ -58,7 +58,7 @@
     .Wrapper {            
 
       width: $cartwidth;
-      height: calc(100% - #{$space * 7});
+      height: calc(100% - #{$space * 9.5});
       border-radius: 0 0 $space * 2.8 $space * 2.8;
 
       @media (min-width: 500px) {             

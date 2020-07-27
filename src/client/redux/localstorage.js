@@ -15,7 +15,11 @@ export const localstorageslots = {
   order: [
     'services'
   ],
-  location: 'all',
+  location: [
+    'form',
+    'addresstolocationstatus',
+    'addresslocation'
+  ],
   wp: [
     'slot',
     'slotbyid'

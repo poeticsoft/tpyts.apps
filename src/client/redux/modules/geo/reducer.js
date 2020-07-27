@@ -2,33 +2,32 @@ import immutableUpdate from 'immutable-update'
 import * as Actions from './actions'
 
 const initialState = {
-  apistatus: 'ready', // ready loading error
+  predictionsstatus: null,  // validating, warning, success, error
   autocompletepredictions: [],
-  addresslocation: {}
+  geolocation: {
+    lat: null,
+    lng: null
+  }
 }
 
 const reducers = {   
   
-  [Actions.GEO_SET_API_STATUS]: (state, action) => immutableUpdate(
+  [Actions.GEO_SET_STATUS]: (state, action) => immutableUpdate(
     state,
-    { 
-      apistatus: action.payload.status
-    }
+    { ...action.payload.data }
   ),
   
   [Actions.GEO_SET_AUTOCOMPLETE_PREDICTIONS]: (state, action) => immutableUpdate(
     state,
     { 
-      apistatus: 'ready',
       autocompletepredictions: action.payload.results
     }
   ),
   
-  [Actions.GEO_SET_ADDRESS_LOCATION]: (state, action) => immutableUpdate(
+  [Actions.GEO_SET_LOCATION]: (state, action) => immutableUpdate(
     state,
     { 
-      apistatus: 'ready',
-      addresslocation: action.payload.location
+      geolocation: action.payload.location
     }
   )
 } 

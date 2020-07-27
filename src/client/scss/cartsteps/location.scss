@@ -11,28 +11,44 @@
         margin-bottom: $gap;
       }
 
-      &.Tel,
-      &.Mail {
+      .GeoLocation {
 
-        display: inline-block;
-        width: calc(50% - #{$gap / 2})
-      }
+        margin-bottom: $space;
+        min-height: $space * 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      &.Mail {
+        .SearchingLocation,
+        .NoLocation {
 
-        margin: 0 0 0 $gap;
+          font-size: 80%;
+          line-height: 100%;
+        }
+
+        .NoLocation {
+
+          color: $color-error;
+          font-family: "Roboto-Bold";
+        }
       }
 
       &.WhenSelect,
       &.WhenPicker {
 
         display: inline-block;
-        width: calc(50% - #{$gap / 2});
+        vertical-align: top;
+      }
+
+      &.WhenSelect {
+
+        width: calc(60% - #{$gap / 2});
       }
 
       &.WhenPicker {
 
         margin: 0 0 0 $gap;
+        width: calc(40% - #{$gap / 2});
       }
     }
 

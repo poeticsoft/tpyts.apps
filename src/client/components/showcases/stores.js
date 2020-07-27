@@ -29,7 +29,8 @@ const StoreCover = props => {
       zoom: 17,
       data: {
         title: props.post_title
-      }
+      },
+      type: 'store'
     }))
   }  
 

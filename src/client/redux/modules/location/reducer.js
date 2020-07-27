@@ -2,18 +2,22 @@ import immutableUpdate from 'immutable-update'
 import * as Actions from './actions'
 
 const initialState = {
-  name: null,
-  tel: null,
-  mail: null,
-  address: null,
-  location: {
-    status: null, // null, searching, ok, ko
+  valid: false,
+  form: {    
+    name: null,
+    tel: null,
+    address: null
+  },
+  extra: {
+    when: null,
+    time: null, 
+    comments: null
+  },
+  addresstolocationstatus: null, // null, searching, ok, ko
+  addresslocation: {
     lat: null,
     lng: null
-  },
-  when: null,
-  time: null, 
-  comments: null
+  }
 }
 
 const reducers = {   

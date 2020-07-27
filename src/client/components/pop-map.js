@@ -8,9 +8,13 @@ import {
 } from 'antd'
 import * as Icons from '@ant-design/icons'
 
-const Target = props => <div className="Target">
-  <Icons.ShopOutlined />
-</div>;
+const Target = props => {
+
+  return <div className="Target">
+    { props.type == 'store' && <Icons.ShopOutlined /> }
+    { props.type == 'location' && <Icons.EnvironmentOutlined /> }
+  </div>
+}
 
 const PopMap = connect(state => ({ 
   map: state.ui.map
@@ -67,6 +71,7 @@ const PopMap = connect(state => ({
             lat={ props.map.location.lat }
             lng={ props.map.location.lng }
             name={ props.map.data.title }
+            type={ props.map.type }
           />
         </GoogleMapReact>
       </div>

@@ -1,9 +1,11 @@
 import * as Actions from 'rdx/actions'
 import { GMaps } from 'utils/config'
 
-export const geoAutocompleteAddress = address => (dispatch, getState) => {
+export const geoAutocompleteAddress = address => (dispatch, getState) => {  
 
-  dispatch(Actions.geoSetApiStatus('loading'))
+  dispatch(Actions.geoSetStatus({
+    predictionsstatus: 'validating'
+  }))
 
   const fetchConfig = {
     method: 'POST',
@@ -28,20 +30,32 @@ export const geoAutocompleteAddress = address => (dispatch, getState) => {
 
       const predictions = json.predictions.map(prediction => ({ value: prediction.description }))
       
-      dispatch(Actions.geoSetAutocompletePredictions(predictions))
+      dispatch(Actions.geoSetStatus({
+        predictionsstatus: 'warning',
+        autocompletepredictions: [{ value: address }]
+          .concat(
+            predictions
+            .filter(prediction => prediction.value != address)
+          )
+      }))
     })
   })
   .catch(error => {
 
-    console.log(error)
+    dispatch(Actions.geoSetStatus({
+      predictionsstatus: 'error'
+    }))
   })
 }
 
-export const geoGetAddressToLocation = address => (dispatch, getState) => {
+export const geoGetAddressToLocation = () => (dispatch, getState) => {
 
-  dispatch(Actions.geoSetApiStatus('loading'))
+  const state = getState()
+  const address = state.location.form.address     
 
-  console.log(address)
+  dispatch(Actions.locationSet({
+    addresstolocationstatus: 'searching'
+  }))
 
   const fetchConfig = {
     method: 'POST',
@@ -64,22 +78,39 @@ export const geoGetAddressToLocation = address => (dispatch, getState) => {
     response.json()
     .then(json => {
 
-      const location = json.results[0].geometry.location
-      
-      dispatch(Actions.geoSetAddressLocation(location))
+      if(json.results.length) {
+
+        const location = json.results[0].geometry.location 
+
+        dispatch(Actions.locationSet({
+          addresslocation: location
+        }))     
+
+        dispatch(Actions.locationSet({
+          addresstolocationstatus: 'ok'
+        }))
+
+      } else {    
+
+        dispatch(Actions.locationSet({
+          addresstolocationstatus: 'ko'
+        }))        
+      }
     })
   })
-  .catch(error => {
+  .catch(error => {     
 
-    console.log(error)
+    dispatch(Actions.geoSetStatus({
+      addresstolocationstatus: 'ko'
+    }))
   })
 }
 
-export const GEO_SET_API_STATUS = 'GEO_SET_API_STATUS'
-export const geoSetApiStatus = status => ({
-  type: GEO_SET_API_STATUS,
+export const GEO_SET_STATUS = 'GEO_SET_STATUS'
+export const geoSetStatus = data => ({
+  type: GEO_SET_STATUS,
   payload: {
-    status: status
+    data: data
   }
 })
 

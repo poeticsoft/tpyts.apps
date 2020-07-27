@@ -2,7 +2,7 @@
 
   @include absolutebox();
   background-color: $color-dark-transparent;
-  z-index: 1;
+  z-index: 5;
   
   .Wrapper {
 
@@ -38,8 +38,6 @@
 
       .Tools {
 
-        margin-top: -$space;
-
         button {
 
           @include boxshadow();
@@ -49,8 +47,10 @@
       .Text {
 
         font-family: "BebasNeue-Bold";
-        font-size: 180%;
+        font-size: 110%;
         padding: 0 0 0 $space;
+        width: calc(100% - #{ $space * 4});
+        @include ellipsis();
       }
     }
 

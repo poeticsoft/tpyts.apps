@@ -36,11 +36,11 @@ const App = props => {
   
   return <Provider store={ store }>
     <Showcase />
-    <PopMap />
-    <PopGallery />
     <PopService />
     <Cart />
     <Tools />
+    <PopGallery />
+    <PopMap />
     <Splash />
     <Message />
   </Provider>

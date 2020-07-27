@@ -36,6 +36,13 @@
 
           $gap: $space * 2;
 
+          .Go,
+          .Cancel {
+
+            display: inline-block;
+            vertical-align: middle;;
+          }
+
           .Go {
 
             width: calc(100% - #{$gap + 40px}); // circle button

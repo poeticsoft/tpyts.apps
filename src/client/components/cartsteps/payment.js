@@ -84,8 +84,7 @@ const Payment = connect(state => ({
                 type="tel"
                 pattern="[\d| ]{16,22}"
                 name="number"
-                placeholder="Número Tarjeta" 
-                size="large"
+                placeholder="Número Tarjeta"
                 required  
                 value={ props.payment.card.number }
                 onChange={ handleInputChange }
@@ -98,8 +97,7 @@ const Payment = connect(state => ({
               <Input
                 type="text"
                 name="name"
-                placeholder="Nombre titular" 
-                size="large"
+                placeholder="Nombre titular"
                 required 
                 value={ props.payment.card.name } 
                 onChange={ handleInputChange }
@@ -113,8 +111,7 @@ const Payment = connect(state => ({
                 type="tel"
                 pattern="\d\d/\d\d"
                 name="expiry"
-                placeholder="Valida hasta" 
-                size="large"
+                placeholder="Valida hasta"
                 required 
                 value={ props.payment.card.expiry } 
                 onChange={ handleInputChange }
@@ -128,8 +125,7 @@ const Payment = connect(state => ({
                 type="tel"
                 pattern="\d{3,4}"
                 name="cvc"
-                placeholder="CVC" 
-                size="large"
+                placeholder="CVC"
                 required 
                 value={ props.payment.card.cvc } 
                 onChange={ handleInputChange }
@@ -140,7 +136,6 @@ const Payment = connect(state => ({
           <div className="Field Pay">  
             <Button
               className="Go"
-              size="large"
               type="primary"
               shape="round"
               icon={ <Icons.EuroOutlined /> }
@@ -150,7 +145,6 @@ const Payment = connect(state => ({
             </Button>          
             <Button
               className="Cancel"
-              size="large"
               type="primary"
               shape="circle"
               icon={ <Icons.CloseCircleOutlined /> }
